@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default function NavBar(props) {
 
     return (
-        <div><p>Soy el NavBar/p></div>
+        <div><p>Soy el NavBar</p></div>
 
     );
 }

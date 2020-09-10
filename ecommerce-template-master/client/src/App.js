@@ -4,18 +4,22 @@ import './App.css';
 import { Route } from "react-router-dom";
 import Input from './components/Input_Prueba/Input'
 import HomeUser from './components/Input_Prueba/HomeUser';
+import NavBar from './components/Input_Prueba/NavBar';
+import MiPerfil from './components/Input_Prueba/MiPerfil';
+import Modulo from './components/Input_Prueba/Modulo';
+import Admin from './components/Input_Prueba/Admin';
+import Info from './components/Input_Prueba/Info';
+import MiEquipo from './components/Input_Prueba/MiEquipo';
 
 function App() {
   return (
     <div className="App">
-
-      <Route exact path="/">
-        <Input />
-      </Route>
-
-      {/* -- Sin el Login el Usuario no va a poder hacer NADA-- */}
       <Route path="/">
         <NavBar />
+      </Route>
+      {/* -- Sin el Login el Usuario no va a poder hacer NADA-- */}
+      <Route exact path="/">
+        <Input />
       </Route>
       {/* Mas adelante vamos a poner el HomeUser en path="/" */}
       <Route exact path="/HomeUser">
