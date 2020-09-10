@@ -34,17 +34,12 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Usuario,Cohorte, Grupo, Instructores, Pm, Notas, Alumno } = sequelize.models;
 
 // Aca vendrian las relaciones
-Usuario.hasMany(Alumno);
-/* Usuario.belongsToMany(Grupo, { through : "PM" });
-Grupo.belongsToMany(Usuario, { through : "PM" }); */
-Pm.hasOne(Grupo);
-Grupo.belongsTo(Pm);
-Alumno.belongsTo(Usuario);
-Cohorte.hasMany(Alumno);
-Alumno.belongsTo(Cohorte);
+Usuario.belongsTo(Cohorte);
+Cohorte.hasMany(Usuario);
+Usuario.belongsTo(Grupo);
+Grupo.hasMany(Usuario);
 Cohorte.hasMany(Grupo);
 Grupo.belongsTo(Cohorte);
-Instructores.hasMany(Cohorte);
 Cohorte.belongsTo(Instructores);
 Usuario.hasMany (Notas);
 Notas.belongsTo (Usuario);
