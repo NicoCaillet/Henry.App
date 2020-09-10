@@ -32,20 +32,25 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 const { Usuario, Alumno, Cohorte, Grupo, Instructores, Pm } = sequelize.models;
-
+Grupo.getGrupo = function(pm){
+  this.findOne({
+    attributes:["id"],
+    where: {
+      "$usuario.id$" : pm
+    },
+    includes:{
+      model: Usuario,
+      as : "usuario"
+    }
+  })
+}
 // Aca vendrian las relaciones
-Usuario.hasMany(Alumno);
-/* Usuario.belongsToMany(Grupo, { through : "PM" });
-Grupo.belongsToMany(Usuario, { through : "PM" }); */
-Pm.hasOne(Grupo);
-Grupo.belongsTo(Pm);
-Alumno.belongsTo(Usuario);
-Cohorte.hasMany(Alumno);
-Alumno.belongsTo(Cohorte);
+Usuario.belongsTo(Cohorte);
+Cohorte.hasMany(Usuario);
+Usuario.belongsTo(Grupo);
+Grupo.hasMany(Usuario);
 Cohorte.hasMany(Grupo);
 Grupo.belongsTo(Cohorte);
-Instructores.hasMany(Cohorte);
-Cohorte.belongsTo(Instructores);
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
