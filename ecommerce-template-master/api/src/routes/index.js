@@ -4,6 +4,7 @@ const alumnosRouter = require('./alumnos.js');
 const gruposRouter = require('./grupos.js');
 const cohortesRouter = require('./cohortes.js');
 
+const registroRouter = require ('./Registro.js')
 
 const router = Router();
 
