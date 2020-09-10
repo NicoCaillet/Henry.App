@@ -2,6 +2,7 @@ const { Router } = require('express');
 // import all routers;
 
 const registroRouter = require ('./Registro.js')
+const procesoRouter = require ('./Proceso.js')
 
 const router = Router();
 
@@ -9,4 +10,5 @@ const router = Router();
 // i.e: router.use('/auth', authRouter);
 // router.use('/auth', authRouter);
 router.use ('/user', registroRouter);
+router.use ('/proceso', procesoRouter);
 module.exports = router;

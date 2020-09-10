@@ -3,7 +3,7 @@ const {Usuario} = require ('../db.js')
 
 //crear usuario
 server.post('/', (req, res) => {
-		const {email, password,apellido,nombre,rol,proceso} = req.body;
+		const {email, password,apellido,nombre,rol,proceso, active} = req.body;
 		Usuario.create({
 			email,
 			nombre,
@@ -11,6 +11,7 @@ server.post('/', (req, res) => {
 			password,
 			rol,
 			proceso,
+			active
         }).then(user => res.status(201).send(user))
         .catch (err => res.send(err));
 });
@@ -52,7 +53,19 @@ server.put('/:id', (req, res) => {
 		});
 });
 //borra usuario
-server.delete('/:id', (req, res) => {
+server.put('/:id/delete', (req,res)=>{
+	const id= req.params.id
+	Usuario.update({
+		active: false
+	}, {where:{
+		id: id
+	}}).then(response=>{
+		res.send(response)
+	}).catch(response=>{
+		res.send(response)
+	})
+})
+/* server.delete('/:id', (req, res) => {
 	Usuario.findOne({
 		where: {
 			id: req.params.id,
@@ -72,6 +85,6 @@ server.delete('/:id', (req, res) => {
 		.catch(err => {
 			console.log(err);
 		});
-});
+}); */
 
 module.exports = server;
