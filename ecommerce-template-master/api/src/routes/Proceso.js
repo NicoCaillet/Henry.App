@@ -33,3 +33,7 @@ server.put('/:id/rol', (req, res, next) => {
         res.status(200).send(usuario);
     }).catch(next);
 });
+
+
+
+module.exports = server;
