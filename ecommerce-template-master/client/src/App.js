@@ -11,6 +11,7 @@ import Modulo from './components/Modulos/Modulo';
 import Admin from './components/Admin/Admin';
 import Info from './components/Tabla_info_Admin/Info';
 import MiEquipo from './components/Mi_equipo/MiEquipo';
+import Registrarse from './components/Registrarse/Registrarse';
 
 
 const theme = createMuiTheme({
@@ -43,6 +44,9 @@ function App() {
         </Route>
         <Route exact path="/MiPerfil">
           <MiPerfil />
+        </Route>
+        <Route path="/Registrarse">
+          <Registrarse />
         </Route>
         <Route exact path="/Modulo/:id">
           <Modulo />
