@@ -3,13 +3,13 @@ import logo from './logo.svg';
 import './App.css';
 import { Route } from "react-router-dom";
 import Input from './components/Input_Prueba/Input'
-import HomeUser from './components/Input_Prueba/HomeUser';
-import NavBar from './components/Input_Prueba/NavBar';
-import MiPerfil from './components/Input_Prueba/MiPerfil';
-import Modulo from './components/Input_Prueba/Modulo';
-import Admin from './components/Input_Prueba/Admin';
-import Info from './components/Input_Prueba/Info';
-import MiEquipo from './components/Input_Prueba/MiEquipo';
+import HomeUser from './components/Home/HomeUser';
+import NavBar from './components/Navbar/NavBar';
+import MiPerfil from './components/Mi_perfil/MiPerfil';
+import Modulo from './components/Modulos/Modulo';
+import Admin from './components/Admin/Admin';
+import Info from './components/Tabla_info_Admin/Info';
+import MiEquipo from './components/Mi_equipo/MiEquipo';
 
 function App() {
   return (

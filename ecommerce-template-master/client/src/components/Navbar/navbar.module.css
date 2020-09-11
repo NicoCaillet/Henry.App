@@ -1,0 +1,16 @@
+.color {
+    background-color: black;
+    height: 60px;
+
+}
+
+.letras  {
+    color: black;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.amarillo{
+   
+    color: rgb(255, 255, 1);
+}
