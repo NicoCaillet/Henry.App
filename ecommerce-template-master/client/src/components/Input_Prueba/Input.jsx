@@ -55,6 +55,10 @@ function Copyright() {
 export default function Input(){
     const classes = useStyles();
 
+    const handleInput = function(e){
+      e.preventDefault()
+    }
+
     return(
         <div>
            <div className={s.container}>
@@ -95,8 +99,9 @@ export default function Input(){
                         fullWidth
                         variant="contained"
                         color="primary"
-                        className={classes.submit}
-                    >
+                        className={s.amarillo + " " + classes.submit + " " + s.color}
+                        onClick={handleInput}
+                    > 
                      Registrarse
                     </Button>
           
