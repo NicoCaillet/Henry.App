@@ -1,4 +1,5 @@
 import React from 'react';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import logo from './logo.svg';
 import './App.css';
 import { Route } from "react-router-dom";
@@ -11,40 +12,56 @@ import Admin from './components/Admin/Admin';
 import Info from './components/Tabla_info_Admin/Info';
 import MiEquipo from './components/Mi_equipo/MiEquipo';
 
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: 'rgb(255 255 1)',
+    },
+    secondary: {
+      main: 'rgb(0 0 0)',
+    }
+  }
+});
+
 function App() {
   return (
-    <div className="App">
-      <Route path="/">
-        <NavBar />
-      </Route>
-      {/* -- Sin el Login el Usuario no va a poder hacer NADA-- */}
-      <Route exact path="/">
-        <Input />
-      </Route>
-      {/* Mas adelante vamos a poner el HomeUser en path="/" */}
-      <Route exact path="/HomeUser">
-        <HomeUser />
-      </Route>
-      <Route exact path="/MiPerfil">
-        <MiPerfil />
-      </Route>
-      <Route exact path="/Modulo/:id">
-        <Modulo />
-      </Route>
-      <Route exact path="/Admin">
-        <Admin />
-      </Route>
-      <Route exact path="/data">
-        {/* Va a mostrar la informacion de todos los alumnos. Va a tener filtros por cohortes y pm */}
-        <Info /> {/* Buscar nombre adecuado */}
-      </Route>
-      <Route exact path="/MiEquipo">
-        <MiEquipo />
-      </Route >
-      <Route exact path='/modulo:id'>
-        <Modulo />
-      </Route>
 
+    <div className="App">
+      <ThemeProvider theme={theme}>
+
+        <Route path="/">
+          <NavBar />
+        </Route>
+        {/* -- Sin el Login el Usuario no va a poder hacer NADA-- */}
+        <Route exact path="/">
+          <Input />
+        </Route>
+        {/* Mas adelante vamos a poner el HomeUser en path="/" */}
+        <Route exact path="/HomeUser">
+          <HomeUser />
+        </Route>
+        <Route exact path="/MiPerfil">
+          <MiPerfil />
+        </Route>
+        <Route exact path="/Modulo/:id">
+          <Modulo />
+        </Route>
+        <Route exact path="/Admin">
+          <Admin />
+        </Route>
+        <Route exact path="/data">
+          {/* Va a mostrar la informacion de todos los alumnos. Va a tener filtros por cohortes y pm */}
+          <Info /> {/* Buscar nombre adecuado */}
+        </Route>
+        <Route exact path="/MiEquipo">
+          <MiEquipo />
+        </Route >
+        <Route exact path='/modulo:id'>
+          <Modulo />
+        </Route>
+
+      </ThemeProvider>
     </div>
   );
 }
