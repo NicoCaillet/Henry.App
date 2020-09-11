@@ -40,6 +40,9 @@ function App() {
       </Route>
       <Route exact path="/MiEquipo">
         <MiEquipo />
+      </Route >
+      <Route exact path='/modulo:id'>
+        <Modulo />
       </Route>
 
     </div>
