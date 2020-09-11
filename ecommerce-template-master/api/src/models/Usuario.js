@@ -32,7 +32,8 @@ module.exports = (sequelize) => {
         },
         //proceso de carrera
         proceso: {
-            type : DataTypes.ENUM ('1', '2','3','4'),
+            type : DataTypes.INTEGER,
+            defaultValues : 1,
             allowNull: false,
         },
         provider: {
@@ -44,5 +45,10 @@ module.exports = (sequelize) => {
         salt : {
             type: DataTypes.STRING
         },
+        active: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValues: true
+        }
     })
 }
