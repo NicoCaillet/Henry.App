@@ -12,6 +12,8 @@ import Admin from './components/Admin/Admin';
 import Info from './components/Tabla_info_Admin/Info';
 import MiEquipo from './components/Mi_equipo/MiEquipo';
 import Registrarse from './components/Registrarse/Registrarse';
+import { connect } from 'react-redux';
+import { pruebaRedux } from './store/actions/actionTest';
 
 
 const theme = createMuiTheme({
@@ -25,7 +27,7 @@ const theme = createMuiTheme({
   }
 });
 
-function App() {
+function App(props) {
   return (
 
     <div className="App">
@@ -70,4 +72,15 @@ function App() {
   );
 }
 
-export default App;
+//REDUX INSTALADO STORE DE PRUEBA Y ACTION DE PRUEBA
+const mapStateToProps = ({ test }) => ({
+  test
+})
+
+const mapDispatchToProps = dispatch => ({
+  pruebaRedux: prueba => dispatch(pruebaRedux(prueba))
+
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
+
