@@ -47,6 +47,7 @@ export default makeStyles((theme) => ({
         bottom: 0,
         backgroundSize: 'cover',
         backgroundPosition: 'center 100%',
+        borderRadius: '30px'
     },
     imageBackdrop: {
         // Este es el fondo negro de la imagen
@@ -58,6 +59,7 @@ export default makeStyles((theme) => ({
         backgroundColor: theme.palette.common.black,
         opacity: 0.4,
         transition: theme.transitions.create('opacity'),
+        borderRadius: '30px'
     },
     imageTitle: {
         position: 'relative',
