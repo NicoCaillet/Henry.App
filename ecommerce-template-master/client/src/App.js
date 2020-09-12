@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Route } from "react-router-dom";
 import Input from './components/Input_Prueba/Input'
-import HomeUser from './components/Home/HomeUser';
+import Home from './components/Home/Home';
 import NavBar from './components/Navbar/NavBar';
 import MiPerfil from './components/Mi_perfil/MiPerfil';
 import Modulo from './components/Modulos/Modulo';
@@ -39,8 +39,8 @@ function App() {
           <Input />
         </Route>
         {/* Mas adelante vamos a poner el HomeUser en path="/" */}
-        <Route exact path="/HomeUser">
-          <HomeUser />
+        <Route exact path="/Home">
+          <Home />
         </Route>
         <Route exact path="/MiPerfil">
           <MiPerfil />
