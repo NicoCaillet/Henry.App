@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import imagen from "../../images/check.png";
-//import axios from 'axios';
+import axios from 'axios';
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -54,9 +54,8 @@ export default function Registrarse() {
     const [helperText, setHelperText] = useState('');
 
     const [field, setField] = useState({
-        first_name: "",
-        last_name: "",
-        adress: "",
+        nombre: "",
+        apellido: "",
         email: "",
         password: ""
     });
@@ -69,7 +68,7 @@ export default function Registrarse() {
     }
 
     // CONECTAR BACK CON FRONT 
-    /* const submitUser = function (e) {
+    const submitUser = function (e) {
         e.preventDefault()
 
         if (field.password !== field.repassword) {
@@ -77,9 +76,8 @@ export default function Registrarse() {
         }
 
         axios.post('http://localhost:3006/user', {
-            first_name: field.first_name,
-            last_name: field.last_name,
-            adress: field.adress,
+            nombre: field.nombre,
+            apellido: field.apellido,
             email: field.email,
             password: field.password,
             active: true
@@ -93,10 +91,11 @@ export default function Registrarse() {
                     setHelperText('')
                 }
             }).catch(err => {
-                setHelperText(err)
+                //console.log(err.response)
+                //setHelperText(err.response)
             })
     }
- */
+
     return (
         <div>
             <div className={s.container}>
@@ -108,11 +107,11 @@ export default function Registrarse() {
                         <Typography component="h1" variant="h5">
                             Registrarse
                     </Typography>
-                        <form className={classes.form} noValidate>
+                        <form className={classes.form} noValidate onSubmit={submitUser}>
                             <TextField
                                 type='text'
-                                value={field.first_name}
-                                name="first_name"
+                                value={field.nombre}
+                                name="nombre"
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -124,12 +123,12 @@ export default function Registrarse() {
                             <TextField
                                 type="text"
                                 variant="outlined"
-                                value={field.last_name}
+                                value={field.apellido}
                                 required
                                 fullWidth
                                 id="lastName"
                                 label="Apellido"
-                                name="last_name"
+                                name="apellido"
                                 onChange={handleChange}
                             />
                             <TextField

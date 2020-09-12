@@ -1,21 +1,75 @@
 const server = require('express').Router();
 const {Usuario} = require ('../db.js')
-
+const passport = require('passport');
+const crypto = require("crypto");
 //crear usuario
-server.post('/', (req, res) => {
+//http://localhost:3006/user/
+server.post('/', async(req, res, next) => {
+
+		/* 
 		const {email, password,apellido,nombre,rol,proceso, active} = req.body;
 		Usuario.create({
 			email,
 			nombre,
 			apellido,
 			password,
-			rol,
-			proceso,
+			rol: "alumno",
+			proceso: "1",
 			active
         }).then(user => res.status(201).send(user))
-        .catch (err => res.send(err));
+		.catch (err => next(err)); 
+		*/
+		const salt = crypto.randomBytes(64).toString("hex");
+		try {
+			const {email, password,apellido,nombre,rol,proceso, active} = req.body;
+			const passwordHash = crypto.pbkdf2Sync(password, salt, 10000, 64, "sha512").toString("base64");
+			 const user = await Usuario.create({
+				email,
+				nombre,
+				apellido,
+				password: passwordHash,
+				rol: "alumno",
+				proceso: "1",
+				salt,
+				active
+			});
+			 if (user) {
+				passport.authenticate("local", function (err, user, info) {
+					if (err) {
+						return next(err);
+					}
+					if (!user) {
+						return res.status(401).json({ status: "error", message: info.message });
+					}
+					req.login(user, function (err) {
+						if (err) {
+							return next(err);
+						}
+						return res.json({ status: "ok", user: req.user, isAuth: req.isAuthenticated() });
+					});
+				})(req, res, next);
+			}
+		} catch (err) {
+			console.log({ err });
+			return res.status(500).json({ status: "error", message: "Error, el email ya existe.", input: "email", err });
+		}
 });
-
+server.post("/login", async (req, res, next) =>{
+	passport.authenticate("local", function (err, user, info) {
+		if (err) {
+			return next(err);
+		}
+		if (!user) {
+			return res.status(401).json({ status: "error", message: info.message, input: info.input });
+		}
+		req.login(user, function (err) {
+			if (err) {
+				return next(err);
+			}
+			return res.json({ status: "ok", user, isAuth: req.isAuthenticated() });
+		});
+	})(req, res, next);
+});
 //actualiza el rol de un usuario
 server.put('/:id/rol', (req, res, next) => {
     const { id } = req.params;
