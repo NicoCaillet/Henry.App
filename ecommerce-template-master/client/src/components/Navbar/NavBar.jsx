@@ -60,10 +60,11 @@ export default function ButtonAppBar() {
            <img src={imagen} alt="" className={s.imagen}/> 
            <h6 className={s.titulosnav}> Tu equipo </h6>
                       
-          </Typography>
           
+           </Typography>
+           
          {auth && (
-            <div  className={s.user + ""}>
+            <div  className={s.user}>
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -91,6 +92,7 @@ export default function ButtonAppBar() {
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
+                
               </Menu>
             </div>
           )}

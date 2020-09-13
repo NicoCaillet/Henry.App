@@ -49,6 +49,11 @@ const useStyles = makeStyles((theme) => ({
 export default function Input() {
   const classes = useStyles();
 
+  const handleInput = function(e){
+    e.preventDefault();
+    
+  }
+
   return (
     <div>
       <div className={s.container}>
