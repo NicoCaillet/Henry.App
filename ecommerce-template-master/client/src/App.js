@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Route } from "react-router-dom";
 import Input from './components/Input_Prueba/Input'
-import HomeUser from './components/Home/HomeUser';
+import Home from './components/Home/Home';
 import NavBar from './components/Navbar/NavBar';
 import MiPerfil from './components/Mi_perfil/MiPerfil';
 import Modulo from './components/Modulos/Modulo';
@@ -12,6 +12,8 @@ import Admin from './components/Admin/Admin';
 import Info from './components/Tabla_info_Admin/Info';
 import MiEquipo from './components/Mi_equipo/MiEquipo';
 import Registrarse from './components/Registrarse/Registrarse';
+import { connect } from 'react-redux';
+import { pruebaRedux } from './store/actions/actionTest';
 
 
 const theme = createMuiTheme({
@@ -25,7 +27,7 @@ const theme = createMuiTheme({
   }
 });
 
-function App() {
+function App(props) {
   return (
 
     <div className="App">
@@ -39,8 +41,8 @@ function App() {
           <Input />
         </Route>
         {/* Mas adelante vamos a poner el HomeUser en path="/" */}
-        <Route exact path="/HomeUser">
-          <HomeUser />
+        <Route exact path="/Home">
+          <Home />
         </Route>
         <Route exact path="/MiPerfil">
           <MiPerfil />
@@ -70,4 +72,15 @@ function App() {
   );
 }
 
-export default App;
+//REDUX INSTALADO STORE DE PRUEBA Y ACTION DE PRUEBA
+const mapStateToProps = ({ test }) => ({
+  test
+})
+
+const mapDispatchToProps = dispatch => ({
+  pruebaRedux: prueba => dispatch(pruebaRedux(prueba))
+
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
+

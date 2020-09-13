@@ -1,10 +1,113 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
+import { TextField, Popover, Grid, Container, Card, CardMedia, CardActions, CardHeader, Typography, Divider, IconButton } from '@material-ui/core';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import EditIcon from '@material-ui/icons/Edit';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import useStyles from './MiPerfil.styles';
 
+const perfil = {
+
+    nombre: 'Manuel',
+    apellido: 'Barna Ferres',
+    foto: 'https://www.soyhenry.com/static/MANU-800a7fffdc31e8be6dddc7a9b573f5f9.png',
+    edad: '30',
+    localidad: 'Buenos Aires',
+    email: 'manu@gmail.com',
+    rol: 'Estudiante',
+    password: '123123',
+
+
+
+}
 export default function MiPerfil(props) {
+    const classes = useStyles();
+
+    // PopOver del email
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
+    /////
 
     return (
-        <div><p>Soy Mi Perfil</p></div>
+        <Container className={classes.contenedor} >
+            <Grid className={classes.contenedor} container>
+
+                {/* ACA EMPIEZA LA TARJETA */}
+                <Grid item xs={10} sm={10} md={6} >
+                    <div className={classes.div1}>
+                        <Grid item xs={10} sm={10} md={6} lg={6}>
+                            <Card className={classes.card}>
+                                <CardHeader
+                                    action={<IconButton aria-label="settings">
+                                        <MoreVertIcon /></IconButton>}
+                                    title={perfil.nombre + ' ' + perfil.apellido}
+                                />
+                                <CardMedia className={classes.media}
+                                    image={perfil.foto}
+                                >
+                                </CardMedia>
+                                <CardActions disableSpacing>
+                                    <Typography color="textSecondary">
+                                        {perfil.rol}
+                                    </Typography>
+                                    <Divider variant="middle" orientation="vertical" flexItem />
+                                    <IconButton color='secondary' aria-label="email" onClick={handleClick}>
+                                        <MailOutlineIcon />
+                                    </IconButton>
+                                    <Popover
+                                        id={id}
+                                        open={open}
+                                        anchorEl={anchorEl}
+                                        onClose={handleClose}
+                                        anchorOrigin={{
+                                            vertical: 'bottom',
+                                            horizontal: 'center',
+                                        }}
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'center',
+                                        }}
+                                    >
+                                        <Typography className={classes.typography}> {perfil.email} </Typography>
+                                    </Popover>
+                                </CardActions>
+                            </Card>
+                        </Grid>
+                    </div>
+                </Grid>
+
+
+                {/* ACA EMPIEZA LA DESCRIPCION DE PERFIL */}
+                <Grid item xs={10} sm={10} md={4}>
+                    <div className={classes.div2}>
+                        <Card className={classes.card2}>
+                            <TextField value={perfil.nombre} label="Nombre" name="nombre" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                            <TextField value={perfil.apellido} label="Apellido" name="apellido" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                            <TextField value={perfil.edad} label="Edad" name="edad" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                            <TextField value={perfil.localidad} label="Localidad" name="localidad" autoFocus margin="dense" color='secondary' type="text" fullWidth />
+                            <TextField value={perfil.email} label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                            <TextField value={perfil.rol} label="Rol" name="rol" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                            <IconButton color='secondary' aria-label="editar" >
+                                <EditIcon />
+                            </IconButton>
+                            <IconButton color='secondary' aria-label="cambiar password" >
+                                <VpnKeyIcon />
+                            </IconButton>
+                        </Card>
+                    </div>
+                </Grid>
+            </Grid>
+        </Container >
 
     );
 }
