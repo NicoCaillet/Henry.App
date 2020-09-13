@@ -15,11 +15,11 @@ server.post ('/:id/proceso', (req,res,next) => {
     }).then(res=>{
         if(nota>7 && autor == 'checkpoint'){
             Usuario.increment(['proceso'], { by: 1, where: { id: id, proceso : {[Op.lt]: 4}}});
-        }
+        } 
     }).then(response=>{
         res.send(response)
     }).catch(err=>{res.send(err)})
-})
+}) 
 //actualiza el rol de un usuario
 server.put('/:id/rol', (req, res, next) => {
     const { id } = req.params;
@@ -33,3 +33,5 @@ server.put('/:id/rol', (req, res, next) => {
         res.status(200).send(usuario);
     }).catch(next);
 });
+
+module.exports = server;
