@@ -63,7 +63,7 @@ export default function ButtonAppBar() {
           </Typography>
           
          {auth && (
-            <div  className={s.user}>
+            <div  className={s.user + ""}>
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
