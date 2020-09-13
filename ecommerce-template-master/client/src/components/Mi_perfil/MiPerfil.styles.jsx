@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
     contenedor: {
-        paddingTop: '35px',
         display: 'flex',
         justifyContent: 'center',
     },
@@ -10,34 +9,33 @@ export default makeStyles((theme) => ({
         height: '500px',
         display: 'flex',
         justifyContent: 'center',
-
+        paddingTop: '40px',
+        margin: 'auto',
     },
     div2: {
-        backgroundColor: 'green',
         height: '500px',
         display: 'flex',
         justifyContent: 'center',
-
+        flexDirection: 'column'
     },
-    //////////////////////
     card: {
         borderRadius: '20px',
+    },
+    card2: {
+        borderRadius: '20px',
+        padding: '25px',
+        paddingTop: '0px',
+        borderStyle: 'solid',
+        border: '2px'
+
     },
     media: {
         height: 0,
         paddingTop: '100%', // 16:9
     },
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
+    //  Pop Over
+    typography: {
+        padding: theme.spacing(2),
     },
-    expandOpen: {
-        transform: 'rotate(180deg)',
-    },
-    avatar: {
-        backgroundColor: ' red[500]',
-    },
+    /////////
 }));
