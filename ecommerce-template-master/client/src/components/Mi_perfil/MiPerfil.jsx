@@ -17,10 +17,10 @@ const perfil = {
     email: 'manu@gmail.com',
     rol: 'Estudiante',
     password: '123123',
-
-
-
 }
+
+
+
 export default function MiPerfil(props) {
     const classes = useStyles();
 
