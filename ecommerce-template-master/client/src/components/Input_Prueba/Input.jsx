@@ -16,6 +16,8 @@ import Container from '@material-ui/core/Container';
 import imagen from "../../images/check.png"
 import { useState } from 'react';
 import Axios from 'axios';
+import { connect } from 'react-redux'
+import { setUser } from '../../store/actions/user'
 
 function Copyright() {
   return (
@@ -49,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-export default function Input() {
+function Input(props) {
   const [fields, setFields] = useState({
     email: "",
     password: "",
@@ -65,7 +67,7 @@ export default function Input() {
   const handleInput = function(e){
     e.preventDefault();
     Axios.post("http://localhost:3006/user/login", fields,{ withCredentials: true })
-      .then(res => console.log(res.data))
+      .then(res => props.setUser(res.data.user))
       .catch(err => console.log(err.response));
   }
   return (
@@ -134,3 +136,9 @@ export default function Input() {
     </div>
   )
 }
+
+const mapDispatchToProps = dispatch => ({
+  setUser: user => dispatch(setUser(user))
+})
+
+export default connect(null, mapDispatchToProps)(Input)

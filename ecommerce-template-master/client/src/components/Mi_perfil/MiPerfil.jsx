@@ -6,6 +6,7 @@ import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import useStyles from './MiPerfil.styles';
 import Axios from 'axios';
+import { connect } from 'react-redux'
 
 const perfil = {
 
@@ -21,7 +22,7 @@ const perfil = {
 
 
 
-export default function MiPerfil(props) {
+function MiPerfil(props) {
     const classes = useStyles();
 
     // PopOver del email
@@ -56,7 +57,7 @@ export default function MiPerfil(props) {
                                 <CardHeader
                                     action={<IconButton aria-label="settings">
                                         <MoreVertIcon /></IconButton>}
-                                    title={perfil.nombre + ' ' + perfil.apellido}
+                                    title={props.user.user.nombre + ' ' + props.user.user.apellido}
                                 />
                                 <CardMedia className={classes.media}
                                     image={perfil.foto}
@@ -64,7 +65,7 @@ export default function MiPerfil(props) {
                                 </CardMedia>
                                 <CardActions disableSpacing>
                                     <Typography color="textSecondary">
-                                        {perfil.rol}
+                                        {props.user.user.rol}
                                     </Typography>
                                     <Divider variant="middle" orientation="vertical" flexItem />
                                     <IconButton color='secondary' aria-label="email" onClick={handleClick}>
@@ -97,12 +98,12 @@ export default function MiPerfil(props) {
                 <Grid item xs={10} sm={10} md={4}>
                     <div className={classes.div2}>
                         <Card className={classes.card2}>
-                            <TextField value={perfil.nombre} label="Nombre" name="nombre" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                            <TextField value={perfil.apellido} label="Apellido" name="apellido" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                            <TextField value={props.user.user.nombre} label="Nombre" name="nombre" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                            <TextField value={props.user.user.apellido} label="Apellido" name="apellido" autoFocus margin="dense" type="text" color='secondary' fullWidth />
                             <TextField value={perfil.edad} label="Edad" name="edad" autoFocus margin="dense" type="text" color='secondary' fullWidth />
                             <TextField value={perfil.localidad} label="Localidad" name="localidad" autoFocus margin="dense" color='secondary' type="text" fullWidth />
-                            <TextField value={perfil.email} label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                            <TextField value={perfil.rol} label="Rol" name="rol" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                            <TextField value={props.user.user.email} label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                            <TextField value={props.user.user.rol} label="Rol" name="rol" autoFocus margin="dense" type="text" color='secondary' fullWidth />
                             <IconButton color='secondary' aria-label="editar" >
                                 <EditIcon />
                             </IconButton>
@@ -117,3 +118,9 @@ export default function MiPerfil(props) {
 
     );
 }
+
+const mapStateToProps = ({ user }) => ({
+    user
+  })
+    
+export default connect(mapStateToProps, null)(MiPerfil)
