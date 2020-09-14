@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import imagen from "../../images/check.png"
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -26,13 +27,6 @@ function Copyright() {
     </Typography>
   );
 }
-
-
-
-
-
-
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -54,6 +48,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Input() {
   const classes = useStyles();
+
+  const handleInput = function(e){
+    e.preventDefault();
+    
+  }
 
   return (
     <div>
@@ -89,15 +88,27 @@ export default function Input() {
                   id="password"
                   autoComplete="current-password"
                 />
-
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                >
-                  Ingresar
+                    <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    />
+          
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={s.amarillo + " " + classes.submit + " " + s.color}
+                        onClick={handleInput}
+                    > 
+                     Ingresar
                     </Button>
 
               </form>
