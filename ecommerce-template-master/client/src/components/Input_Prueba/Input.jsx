@@ -14,6 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import imagen from "../../images/check.png"
+import { useState } from 'react';
+import Axios from 'axios';
 
 function Copyright() {
   return (
@@ -27,6 +29,7 @@ function Copyright() {
     </Typography>
   );
 }
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -47,17 +50,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function Input() {
+  const [fields, setFields] = useState({
+    email: "",
+    password: "",
+  });
   const classes = useStyles();
 
+  const handleChange = (e)=>{
+    setFields({
+      ...fields,
+      [e.target.id]: e.target.value
+    });
+  }
   const handleInput = function(e){
     e.preventDefault();
-    
+    Axios.post("http://localhost:3006/user/login", fields,{ withCredentials: true })
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err.response));
   }
-
   return (
     <div>
       <div className={s.container}>
-        <form>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
@@ -65,7 +78,7 @@ export default function Input() {
               <Typography component="h1" variant="h5">
                 Ingresar
                     </Typography>
-              <form className={classes.form} noValidate>
+              <form className={classes.form} noValidate onChange={(e) => handleChange(e)}>
                 <TextField
                   variant="outlined"
                   margin="normal"
@@ -88,7 +101,7 @@ export default function Input() {
                   id="password"
                   autoComplete="current-password"
                 />
-                    <TextField
+                    {/* <TextField
                     variant="outlined"
                     margin="normal"
                     required
@@ -98,7 +111,7 @@ export default function Input() {
                     type="password"
                     id="password"
                     autoComplete="current-password"
-                    />
+                    /> */}
           
                     <Button
                         type="submit"
@@ -117,8 +130,6 @@ export default function Input() {
               <Copyright />
             </Box>
           </Container>
-
-        </form>
       </div>
     </div>
   )

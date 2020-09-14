@@ -5,6 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import useStyles from './MiPerfil.styles';
+import Axios from 'axios';
 
 const perfil = {
 
@@ -24,6 +25,11 @@ export default function MiPerfil(props) {
     const classes = useStyles();
 
     // PopOver del email
+    useEffect(()=>{
+        Axios.get("http://localhost:3006/user/me", { withCredentials:true })
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err));
+    },[])
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
