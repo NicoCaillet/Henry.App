@@ -18,10 +18,35 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
-
+const crypto = require('crypto');
+const db = require('./src/db.js');
+const init = require('./init.js');
+function createPromise(model, value){
+  return new Promise((res, rej) =>{
+    model.create(value)
+      .then(instance => res(instance))
+      .catch(err => rej(err));
+  })
+}
+async function initial(){
+  const promises = {};
+  for(let model in init){
+    promises[model] = init[model].map(e => {
+      if(model === "Grupo"){
+        e.nombre = `web_ft${e.cohorteId}_(nombre del pm)`;
+      }
+      if(model === "Usuario"){
+        e.salt = crypto.randomBytes(64).toString("hex");
+        e.password = crypto.pbkdf2Sync(e.password, e.salt, 10000, 64, "sha512").toString("base64");
+      }
+      return createPromise(db[model],e);
+    });
+    await Promise.all(promises[model]);
+  }
+}
 // Syncing all the models at once.
-conn.sync({ force: false }).then(() => {
+db.conn.sync({ force: true }).then(async () => {
+  await initial();
   server.listen(3006, () => {
     console.log('%s listening at 3006'); // eslint-disable-line no-console
   });

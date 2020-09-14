@@ -34,7 +34,7 @@ module.exports = (sequelize) => {
         proceso: {
             type : DataTypes.INTEGER,
             defaultValues : 1,
-            allowNull: false,
+            allowNull: true,
         },
         provider: {
             type: DataTypes.STRING,
