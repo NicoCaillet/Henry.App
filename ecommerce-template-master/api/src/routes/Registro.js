@@ -119,26 +119,9 @@ server.put('/:id/delete', (req,res)=>{
 		res.send(response)
 	})
 })
-/* server.delete('/:id', (req, res) => {
-	Usuario.findOne({
-		where: {
-			id: req.params.id,
-		},
-	})
-		.then(user => {
-			if (!user) {
-				res.send('Usuario inexistente');
-			} else {
-				//if (req.params.id == req.user.id) {
-					//req.logout();
-				//}
-				user.destroy();
-				res.status(200).send(user);
-			}
-		})
-		.catch(err => {
-			console.log(err);
-		});
-}); */
+server.get("/me", (req, res, next) =>{
+	if(!req.user) return res.sendStatus(401);
+	res.json(req.user);
+})
 
 module.exports = server;
