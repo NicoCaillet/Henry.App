@@ -7,11 +7,11 @@ import Title from "./componentes/title"
 
 // Funcionalidad de redux ya puesta para andar (No estan las rutas hechas todavia.)
 
-useEffect(() => {
-    // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
-    
-    props.pruebaRedux()
-}, [])
+// useEffect(() => {
+//     // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
+
+//     props.pruebaRedux()
+// }, [])
 
 const student = [
     {
