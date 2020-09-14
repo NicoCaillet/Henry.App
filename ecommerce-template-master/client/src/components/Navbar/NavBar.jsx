@@ -58,7 +58,7 @@ export default function ButtonAppBar() {
           </IconButton>
           <Typography variant="h6" className={classes.title + " " + s.letras}>
            <Link to="/Home"> <img src={imagen} alt="" className={s.imagen}/> </Link> 
-           <Link to="/miEquipo"> 
+           <Link to="/miEquipo" className={s.nolink}> 
             <h6 className={s.titulosnav}> Tu equipo </h6>
            </Link>
                       
@@ -92,7 +92,7 @@ export default function ButtonAppBar() {
                 open={open}
                 onClose={handleClose}
               >
-                <Link to="miPerfil"><MenuItem className={s.nolink} onClick={handleClose}>Mi Perfil</MenuItem></Link>
+                <Link to="miPerfil" className={s.nolink}><MenuItem  onClick={handleClose}>Mi Perfil</MenuItem></Link>
                 <MenuItem onClick={handleClose}> LogOut</MenuItem>
                 
               </Menu>
