@@ -13,6 +13,8 @@
 
 .titulosnav{
     color: white;
+    text-decoration: none;
+    
     
 }
 .imagen{
@@ -56,4 +58,7 @@
       color: yellow;
   }
  
+  .nolink{
+      text-decoration: none;
+  }
   

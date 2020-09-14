@@ -57,16 +57,18 @@ export default function ButtonAppBar() {
             <MenuIcon className={s.amarillo}/>
           </IconButton>
           <Typography variant="h6" className={classes.title + " " + s.letras}>
-           <img src={imagen} alt="" className={s.imagen}/> 
-           <h6 className={s.titulosnav}> Tu equipo </h6>
+           <Link to="/Home"> <img src={imagen} alt="" className={s.imagen}/> </Link> 
+           <Link to="/miEquipo"> 
+            <h6 className={s.titulosnav}> Tu equipo </h6>
+           </Link>
                       
           
            </Typography>
-           
+
          {auth && (
             <div  className={s.user}>
               <IconButton
-                aria-label="account of current user"
+                aria-label="account  of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleMenu}
@@ -90,8 +92,8 @@ export default function ButtonAppBar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <Link to="miPerfil"><MenuItem className={s.nolink} onClick={handleClose}>Mi Perfil</MenuItem></Link>
+                <MenuItem onClick={handleClose}> LogOut</MenuItem>
                 
               </Menu>
             </div>
