@@ -10,7 +10,6 @@ export const setUser = (user) => {
         payload: user
     }
 }
-
 export const putUser = ({nombre, apellido, email, localidad, edad, id}) => {
     
     return (dispatch) => {
@@ -23,9 +22,9 @@ export const putUser = ({nombre, apellido, email, localidad, edad, id}) => {
             edad: edad
         }, {withCredentials:true})
         .then(res => {
-        dispatch({
+         dispatch({
             type: UserActionTypes.PUT_USER,
-            usuario: res.user,
+            payload: res.data,
             });
         })
         .catch (err => console.log(err));
