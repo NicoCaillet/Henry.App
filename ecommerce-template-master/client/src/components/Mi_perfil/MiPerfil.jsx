@@ -156,17 +156,20 @@ export default function MiPerfil(props) {
                                 <Dialog open={openEdit} onClose={handleCloseEdit} TransitionComponent={Transition} keepMounted aria-labelledby="alert-dialog-slide-title" aria-describedby="alert-dialog-slide-description">
                                     <DialogTitle id="form-dialog-title">Modificar mi perfil</DialogTitle>
                                     <DialogContent>
-                                        <TextField onChange ={handleSubmit} /* value= {user.nombre} */  label="Nombre" name="nombre" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                                        <TextField  onChange ={handleSubmit} /* value= {user.apellido} */ label="Apellido" name="apellido" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                                        <TextField  onChange ={handleSubmit} /* value= {user.edad} */ label="Edad" name="edad" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                                        <TextField  onChange ={handleSubmit}/* value= {user.localidad} */ label="Localidad" name="localidad" autoFocus margin="dense" color='secondary' type="text" fullWidth />
-                                        <TextField  onChange ={handleSubmit} /* value= {user.email} */ label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                        <TextField  onChange ={handleSubmit} value= {putUsuario.nombre}  label="Nombre" name="nombre" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                        <TextField  onChange ={handleSubmit} value= {putUsuario.apellido} label="Apellido" name="apellido" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                        <TextField  onChange ={handleSubmit} value= {putUsuario.edad} label="Edad" name="edad" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                        <TextField  onChange ={handleSubmit} value= {putUsuario.localidad} label="Localidad" name="localidad" autoFocus margin="dense" color='secondary' type="text" fullWidth />
+                                        <TextField  onChange ={handleSubmit} value= {putUsuario.email} label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth />
                                     </DialogContent>
                                     <DialogActions>
                                         <Button onClick={handleCloseEdit} color="secondary">
                                             Cancelar
                                     </Button>
-                                        <Button  onClick={()=>{handleCloseEdit(); dispatch(putUser(putUsuario));}} color="secondary">
+                                        <Button  onClick={()=>{
+                                            handleCloseEdit(); 
+                                            dispatch(putUser(putUsuario));
+                                            }} color="secondary">
                                             Modificar
                                     </Button>
                                     </DialogActions>
