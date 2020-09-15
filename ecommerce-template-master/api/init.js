@@ -3,14 +3,17 @@ module.exports = {
         {
             id: 1,
             fecha: Date.now(),
+            nombre: "Webft-03"
         },
         {
             id: 2,
             fecha: Date.now(),
+            nombre: "Webft-04"
         },
         {
             id: 3,
             fecha: Date.now(),
+            nombre: "Webft-05"
         },
     ],
     Grupo:[

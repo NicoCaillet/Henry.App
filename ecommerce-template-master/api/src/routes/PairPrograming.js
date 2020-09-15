@@ -10,6 +10,7 @@ server.post("/grupo", (req, res, next) =>{
     }).then(pair => res.json(pair))
         .catch(err => next(err));
 });
+
 server.get("/", (req, res, next) =>{
 
     Pair.findOne({
