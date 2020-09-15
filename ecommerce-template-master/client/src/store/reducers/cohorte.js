@@ -1,13 +1,13 @@
-import { UserActionTypes } from '../actions/cohorte.js';
+import { CohorteActionTypes } from '../actions/cohorte.js';
 
 
 const initialState = {
     cohorte: ''
 };
 
-export const userReducer = (state = initialState, action) => {
+export const cohorteReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UserActionTypes.SET_COHORTE:
+        case CohorteActionTypes.SET_COHORTE:
             return {
                 ...state,
                 cohorte: action.payload,

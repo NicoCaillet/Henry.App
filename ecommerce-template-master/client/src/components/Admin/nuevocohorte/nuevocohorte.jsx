@@ -8,62 +8,56 @@ import { setCohorte } from '../../../store/actions/cohorte.js'
 import { useSelector, useDispatch } from "react-redux";
 
 function NuevoCohorte(props) {
-const [cohorte, setCohorte] = useState("")
+  const [cohorteA, setCohorteA] = useState('')
 
-const handleInputChange = (e) => {
+  const handleInputChange = (e) => {
     e.preventDefault();
-
-    setCohorte({
-      ...cohorte,
-      [e.target.name]: e.target.value,
-    });
-    
-    
+    setCohorteA(
+      e.target.value
+    );
   };
 
-  
 
-    return (
-        <div className={s.admin} >
-            <div className={s.aside}>
-                <h3> Crear nuevo cohorte</h3>
-                <div> 
-                 <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  label="Numero de cohorte"
-                  fullWidth
-                  type="text"
-                  id="numero"
-                  name="numero"
-                  value={cohorte}
-                  onChange={handleInputChange}
-                  autoFocus />
+  return (
+    <div className={s.admin} >
+      <div className={s.aside}>
+        <h3> Crear nuevo cohorte</h3>
+        <div>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            label="Numero de cohorte"
+            fullWidth
+            type="text"
+            name="alumnos"
+            value={cohorteA}
+            onChange={handleInputChange}
+            autoFocus />
 
-                <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                onClick={setCohorte}> 
-                Agregar cohorte
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={() => props.setCohorte(cohorteA)}>
+            Agregar cohorte
                 </Button>
 
-                    
-                </div> 
-            </div>
-        </div>
 
-    );
+        </div>
+      </div>
+    </div>
+
+  );
 }
 
 const mapStateToProps = ({ cohorte }) => ({
-    cohorte,
+  cohorte,
 })
 
 const mapDispatchToProps = dispatch => ({
-    setCohorte: cohorte => dispatch(setCohorte(cohorte))
-  })
-  
+  setCohorte: cohorte => dispatch(setCohorte(cohorte))
+})
+
 export default connect(mapStateToProps, mapDispatchToProps)(NuevoCohorte)
