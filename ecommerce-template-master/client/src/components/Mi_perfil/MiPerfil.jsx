@@ -8,7 +8,9 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import useStyles from './MiPerfil.styles';
 import Trayectoria from './Trayectoria'
 import Axios from 'axios';
-import { connect } from 'react-redux'
+import { connect, useSelector, useDispatch } from 'react-redux'
+import {putUser}  from "../../store/actions/user"
+
 
 
 const perfil = {
@@ -28,8 +30,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 
-function MiPerfil(props) {
-
+export default function MiPerfil(props) {
+    const user = useSelector((state) => state.user.user);
+    const dispatch = useDispatch()
     const classes = useStyles();
 
     // PopOver del email
@@ -47,7 +50,10 @@ function MiPerfil(props) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    //actualiza usuario
+    const  [putUsuario, setPutUsuario] = useState(user)
 
+    //
     const open = Boolean(anchorEl);
     const mail = open ? 'simple-popover' : undefined;
     /////
@@ -62,7 +68,14 @@ function MiPerfil(props) {
     const handleCloseEdit = () => {
         setOpenEdit(false);
     };
-
+    //handleSubmit
+    const handleSubmit = (e) => {
+        setPutUsuario({
+            ...putUsuario,
+            [e.target.name]: e.target.value,
+        })
+    }
+    //
     //
 
     /// Dialogo para modificar contraseña
@@ -91,7 +104,7 @@ function MiPerfil(props) {
                                     <CardHeader
                                         action={<IconButton aria-label="settings">
                                             <MoreVertIcon /></IconButton>}
-                                        title={props.user.user.nombre + ' ' + props.user.user.apellido}
+                                        title={user.nombre + ' ' + user.apellido}
                                     />
                                     <CardMedia className={classes.media}
                                         image={perfil.foto}
@@ -100,7 +113,7 @@ function MiPerfil(props) {
                                     </CardMedia>
                                     <CardActions disableSpacing>
                                         <Typography color="textSecondary">
-                                            {props.user.user.rol}
+                                            {user.rol}
                                         </Typography>
                                         <Divider variant="middle" orientation="vertical" flexItem />
                                         <IconButton color='secondary' aria-label="email" onClick={handleClickMail}>
@@ -120,7 +133,7 @@ function MiPerfil(props) {
                                                 horizontal: 'center',
                                             }}
                                         >
-                                            <Typography className={classes.typography}> {perfil.email} </Typography>
+                                            <Typography className={classes.typography}> {user.email} </Typography>
                                         </Popover>
                                     </CardActions>
                                 </Card>
@@ -131,29 +144,29 @@ function MiPerfil(props) {
                     <Grid item xs={10} sm={10} md={4}>
                         <div className={classes.div2}>
                             <Card className={classes.card2}>
-                                <TextField value={props.user.user.nombre} label="Nombre" name="nombre" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                                <TextField value={props.user.user.apellido} label="Apellido" name="apellido" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                                <TextField value={perfil.edad} label="Edad" name="edad" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                                <TextField value={perfil.localidad} label="Localidad" name="localidad" autoFocus margin="dense" color='secondary' type="text" fullWidth />
-                                <TextField value={props.user.user.email} label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                                <TextField value={props.user.user.rol} label="Rol" name="rol" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                <TextField value={user.nombre} label="Nombre" name="nombre" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                <TextField value={user.apellido} label="Apellido" name="apellido" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                <TextField value={user.edad} label="Edad" name="edad" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                <TextField value={user.localidad} label="Localidad" name="localidad" autoFocus margin="dense" color='secondary' type="text" fullWidth />
+                                <TextField value={user.email} label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                <TextField value={user.rol} label="Rol" name="rol" autoFocus margin="dense" type="text" color='secondary' fullWidth />
                                 <IconButton onClick={handleClickOpenEdit} color='secondary' aria-label="editar" >
                                     <EditIcon />
                                 </IconButton>
                                 <Dialog open={openEdit} onClose={handleCloseEdit} TransitionComponent={Transition} keepMounted aria-labelledby="alert-dialog-slide-title" aria-describedby="alert-dialog-slide-description">
                                     <DialogTitle id="form-dialog-title">Modificar mi perfil</DialogTitle>
                                     <DialogContent>
-                                        <TextField defaultValue={perfil.nombre} label="Nombre" name="nombre" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                                        <TextField defaultValue={perfil.apellido} label="Apellido" name="apellido" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                                        <TextField defaultValue={perfil.edad} label="Edad" name="edad" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                                        <TextField defaultValue={perfil.localidad} label="Localidad" name="localidad" autoFocus margin="dense" color='secondary' type="text" fullWidth />
-                                        <TextField defaultValue={perfil.email} label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                        <TextField onChange ={handleSubmit} /* value= {user.nombre} */  label="Nombre" name="nombre" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                        <TextField  onChange ={handleSubmit} /* value= {user.apellido} */ label="Apellido" name="apellido" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                        <TextField  onChange ={handleSubmit} /* value= {user.edad} */ label="Edad" name="edad" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                        <TextField  onChange ={handleSubmit}/* value= {user.localidad} */ label="Localidad" name="localidad" autoFocus margin="dense" color='secondary' type="text" fullWidth />
+                                        <TextField  onChange ={handleSubmit} /* value= {user.email} */ label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth />
                                     </DialogContent>
                                     <DialogActions>
                                         <Button onClick={handleCloseEdit} color="secondary">
                                             Cancelar
                                     </Button>
-                                        <Button onClick={handleCloseEdit} color="secondary">
+                                        <Button  onClick={()=>{handleCloseEdit(); dispatch(putUser(putUsuario));}} color="secondary">
                                             Modificar
                                     </Button>
                                     </DialogActions>
@@ -188,8 +201,4 @@ function MiPerfil(props) {
     );
 }
 
-const mapStateToProps = ({ user }) => ({
-    user
-})
 
-export default connect(mapStateToProps, null)(MiPerfil)
