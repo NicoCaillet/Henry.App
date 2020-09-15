@@ -21,25 +21,25 @@ const server = require('./src/app.js');
 const crypto = require('crypto');
 const db = require('./src/db.js');
 const init = require('./init.js');
-function createPromise(model, value){
-  return new Promise((res, rej) =>{
+function createPromise(model, value) {
+  return new Promise((res, rej) => {
     model.create(value)
       .then(instance => res(instance))
       .catch(err => rej(err));
   })
 }
-async function initial(){
+async function initial() {
   const promises = {};
-  for(let model in init){
+  for (let model in init) {
     promises[model] = init[model].map(e => {
-      if(model === "Grupo"){
+      if (model === "Grupo") {
         e.nombre = `web_ft${e.cohorteId}_(nombre del pm)`;
       }
-      if(model === "Usuario"){
+      if (model === "Usuario") {
         e.salt = crypto.randomBytes(64).toString("hex");
         e.password = crypto.pbkdf2Sync(e.password, e.salt, 10000, 64, "sha512").toString("base64");
       }
-      return createPromise(db[model],e);
+      return createPromise(db[model], e);
     });
     await Promise.all(promises[model]);
   }

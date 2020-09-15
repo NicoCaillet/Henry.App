@@ -1,32 +1,62 @@
 import React, { useState, useEffect } from 'react';
-import s from './grupo.module.css';
-import TextField from '@material-ui/core/TextField';
-import Estudiantes from './estudiante'
 import { Link } from 'react-router-dom'
+import s from "./grupoPm.module.css"
+import Nav from "./componentes/nav"
+import Student from "./componentes/student"
+import Title from "./componentes/title"
+import { connect } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 
-export default function Admin(props) {
+export default function grupoPm(props) {
+
+    const student = [
+        {
+            name: "Nicolas",
+            lastname: "Caillet Bois",
+            age: 18,
+            email: "nicolas@gmail.com"
+        },
+        {
+            name: "Franco",
+            lastname: "Bonnahon",
+            age: 18,
+            email: "franco@gmail.com"
+        },
+        {
+            name: "Gianni",
+            lastname: "Pisani",
+            age: 18,
+            email: "destroyer@gmail.com"
+        },
+        {
+            name: "Gianni",
+            lastname: "Pisani",
+            age: 18,
+            email: "destroyer@gmail.com"
+        },
+        {
+            name: "Gianni",
+            lastname: "Pisani",
+            age: 18,
+            email: "destroyer@gmail.com"
+        },
+        {
+            name: "Gianni",
+            lastname: "Pisani",
+            age: 18,
+            email: "destroyer@gmail.com"
+        },
+    ]
 
     return (
-        <div>
-            <div className={s.admin} >
-                <div className={s.aside}>
-                    <h3> Buscar estudiante</h3>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        label="Nombre y Apellido"
-                        fullWidth
-                        type="text"
-                        id="numero"
-                        name="numero"
-                        autoFocus />
-                </div>
-            </div>
-            <div>
-                <Estudiantes />
-            </div>
+        <div className={s.container}>
+            <Nav />
+            <Title />
+            <Student student={student} />
+            {student.map((student) => (
+                <Student
+                    student={student} />
+            ))}
         </div>
-
     );
 }
