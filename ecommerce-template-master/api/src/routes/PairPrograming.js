@@ -10,6 +10,7 @@ server.post("/grupo", (req, res, next) =>{
     }).then(pair => res.json(pair))
         .catch(err => next(err));
 });
+
 server.get("/", (req, res, next) =>{
 
     Pair.findOne({
@@ -18,7 +19,7 @@ server.get("/", (req, res, next) =>{
         },
         include:{
             model: Usuario,
-            as:"usuarios"
+            as: "usuarios"
         }
     }).then(pair => res.json(pair.usuarios))
         .catch(err => next(err));

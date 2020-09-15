@@ -1,10 +1,18 @@
+import axios from "axios";
+
 export const CohorteActionTypes = {
     SET_COHORTE: 'SET_COHORTE'
 }
 
-export const setCohorte = (cohorte) => {
-    return {
-        type: CohorteActionTypes.SET_COHORTE,
-        payload: cohorte
-    }
-}
+export const setCohorte = (data) => {
+    return (dispatch) => {
+      axios
+        .post(`http://localhost:3006/cohortes/nuevo`, data)
+        .then((cohorte) => {
+          dispatch({
+            type: CohorteActionTypes.SET_COHORTE,
+            cohorte: cohorte.data,
+          });
+        });
+    };
+  };

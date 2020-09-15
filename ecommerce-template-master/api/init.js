@@ -1,76 +1,76 @@
 module.exports = {
     Cohorte:[
         {
-            id: 1,
-            nombre: "webft03",
+            //id: 1,
             fecha: Date.now(),
+            nombre: "Webft-03"
         },
         {
-            id: 2,
-            nombre: "webft05",
+            //id: 2,
             fecha: Date.now(),
+            nombre: "Webft-04"
         },
         {
-            id: 3,
-            nombre: "webft04",
+            //id: 3,
             fecha: Date.now(),
+            nombre: "Webft-05"
         },
     ],
     Grupo:[
         {
-            id: 1,
+            //id: 1,
             cohorteId: 1,
         },
         {
-            id: 2,
+            //id: 2,
             cohorteId: 1,
         },
         {
-            id: 3,
+            //id: 3,
             cohorteId: 1,
         },
         {
-            id: 4,
+            //id: 4,
             cohorteId: 2,
         },
         {
-            id: 5,
+            //id: 5,
             cohorteId: 2,
         },
         {
-            id: 6,
+            //id: 6,
             cohorteId: 2,
         },
         {
-            id: 7,
+            //id: 7,
             cohorteId: 3,
         },
         {
-            id: 8,
+            //id: 8,
             cohorteId: 3,
         },
     ],
     Clase:[
         {
-            id:1,
+            //id:1,
             modulo: "m2",
             clase : "DOM - Selectores",
             link: "https://player.vimeo.com/video/412450156"
         },
         { 
-            id: 2,
+            //id: 2,
             modulo: "m2",
             clase: 'CSS Avanzado', 
             link: 'https://player.vimeo.com/video/412450067' 
         },
         { 
-            id: 3,
+            //id: 3,
             modulo: "m2",
             clase: 'ES6', 
             link: "https://player.vimeo.com/video/414741680" 
         },
         { 
-            id: 4, 
+            //id: 4, 
             clase: 'AJAX', 
             modulo: "m2",
             link: "https://player.vimeo.com/video/412449982" 
@@ -78,11 +78,11 @@ module.exports = {
     ],
     Pair:[
         {
-          id: 1,
+          //id: 1,
           alumnos: 6,
         },
         {
-            id: 2,
+            //id: 2,
             alumnos: 6,
         }
     ],

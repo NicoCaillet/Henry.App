@@ -133,8 +133,8 @@ function MiPerfil(props) {
                             <Card className={classes.card2}>
                                 <TextField value={props.user.user.nombre} label="Nombre" name="nombre" autoFocus margin="dense" type="text" color='secondary' fullWidth />
                                 <TextField value={props.user.user.apellido} label="Apellido" name="apellido" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                                <TextField value={perfil.edad} label="Edad" name="edad" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                                <TextField value={perfil.localidad} label="Localidad" name="localidad" autoFocus margin="dense" color='secondary' type="text" fullWidth />
+                                <TextField value={props.user.user.edad} label="Edad" name="edad" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                <TextField value={props.user.user.localidad} label="Localidad" name="localidad" autoFocus margin="dense" color='secondary' type="text" fullWidth />
                                 <TextField value={props.user.user.email} label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth />
                                 <TextField value={props.user.user.rol} label="Rol" name="rol" autoFocus margin="dense" type="text" color='secondary' fullWidth />
                                 <IconButton onClick={handleClickOpenEdit} color='secondary' aria-label="editar" >
