@@ -7,7 +7,8 @@ export const ppActionTypes = {
 export const getpp = () => {
     return (dispatch) => {
       axios.get(`http://localhost:3006/pair`, {withCredentials: true}).then((res) => {
-        dispatch({
+        console.log("getpp", res)
+       return dispatch({
           type: ppActionTypes.GET_PP,
           payload: res.data,
         });

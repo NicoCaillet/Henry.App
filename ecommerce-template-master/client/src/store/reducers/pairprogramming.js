@@ -2,15 +2,15 @@ import { ppActionTypes } from '../actions/pairprogramming.js';
 
 
 const initialState = {
-    pp: {}
+    equipo: {}
 };
 
-export const cohorteReducer = (state = initialState, action) => {
+export const pairProgramingReducer = (state = initialState, action) => {
     switch (action.type) {
         case ppActionTypes.GET_PP:
             return {
                 ...state,
-                pp: action.payload
+                equipo: action.payload
             }
         default:
             return state
