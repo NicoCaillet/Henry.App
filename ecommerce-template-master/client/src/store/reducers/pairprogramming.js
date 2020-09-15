@@ -2,7 +2,7 @@ import { ppActionTypes } from '../actions/pairprogramming.js';
 
 
 const initialState = {
-    equipo: {}
+    equipo: []
 };
 
 export const pairProgramingReducer = (state = initialState, action) => {

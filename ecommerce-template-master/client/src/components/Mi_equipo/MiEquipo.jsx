@@ -10,50 +10,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 // Funcionalidad de redux ya puesta para andar (No estan las rutas hechas todavia.)
 
-
-
-const student = [
-    {
-      name: "Nicolas",
-      lastname: "Caillet Bois",
-      age: 18,
-      email: "nicolas@gmail.com"
-    },
-    {
-      name: "Franco",
-      lastname: "Bonnahon",
-      age: 18,
-      email: "franco@gmail.com"
-    },
-    {
-      name: "Gianni",
-      lastname: "Pisani",
-      age: 18,
-      email: "destroyer@gmail.com"
-    },
-    {
-        name: "Gianni",
-        lastname: "Pisani",
-        age: 18,
-        email: "destroyer@gmail.com"
-      },
-      {
-        name: "Gianni",
-        lastname: "Pisani",
-        age: 18,
-        email: "destroyer@gmail.com"
-      },
-      {
-        name: "Gianni",
-        lastname: "Pisani",
-        age: 18,
-        email: "destroyer@gmail.com"
-      },
-  ]
-
 export default function MiEquipo(props) {
 
-  const pp = useSelector((state) => state.pp);
+  const pp = useSelector((state) => state.pairPrograming.equipo);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -71,10 +30,8 @@ console.log("PP: " + pp)
         <div className={s.container}>
         <Nav /> 
         <Title />
-        <Student student={student} />
-        {student.map((student) => (
-          <Student
-           student={student} />
+        {pp && pp.map((student) => (
+          <Student student={student} />
         ))}
         </div>
 
