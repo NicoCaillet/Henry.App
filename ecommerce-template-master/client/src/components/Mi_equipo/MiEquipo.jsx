@@ -4,6 +4,9 @@ import s from "./miequipo.module.css"
 import Nav from "./componentes/nav"
 import Student from "./componentes/student"
 import Title from "./componentes/title"
+import { connect } from 'react-redux'
+import { getpp } from '../../store/actions/pairprogramming.js'
+import { useSelector, useDispatch } from "react-redux";
 
 // Funcionalidad de redux ya puesta para andar (No estan las rutas hechas todavia.)
 
@@ -52,7 +55,7 @@ const student = [
       },
   ]
 
-export default function MiEquipo(props) {
+function MiEquipo(props) {
 
 
     return (
@@ -68,3 +71,13 @@ export default function MiEquipo(props) {
 
     );
 }
+
+const mapStateToProps = ({ pp }) => ({
+  pp,
+})
+
+const mapDispatchToProps = dispatch => ({
+  getpp: pp => dispatch(getpp(pp))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(MiEquipo)

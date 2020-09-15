@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
 import { setCohorte } from '../../../store/actions/cohorte.js'
 import { useSelector, useDispatch } from "react-redux";
-
+  
 function NuevoCohorte(props) {
   const [cohorteA, setCohorteA] = useState('')
 
@@ -27,7 +27,7 @@ function NuevoCohorte(props) {
             variant="outlined"
             margin="normal"
             required
-            label="Numero de cohorte"
+            label="Fecha de comienzo"
             fullWidth
             type="text"
             name="alumnos"
@@ -42,7 +42,7 @@ function NuevoCohorte(props) {
             color="primary"
             onClick={() => props.setCohorte(cohorteA)}>
             Agregar cohorte
-                </Button>
+          </Button>
 
 
         </div>

@@ -8,4 +8,5 @@ server.post("/nuevo", (req, res, next) =>{
     }).then(cohorte => res.json(cohorte))
         .catch(err => next(err));
 })
+
 module.exports = server;
