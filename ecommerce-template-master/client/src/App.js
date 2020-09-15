@@ -32,7 +32,6 @@ function App(props) {
 
     <div className="App">
       <ThemeProvider theme={theme}>
-
         <Route path="/">
           <NavBar />
         </Route>
