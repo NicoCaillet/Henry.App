@@ -6,7 +6,6 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const initialState = JSON.parse(localStorage.getItem("state"));
 const store = createStore(
     rootReducer,
-    initialState,
     composeEnhancers(applyMiddleware(
         thunk))
 );
