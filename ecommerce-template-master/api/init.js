@@ -2,14 +2,17 @@ module.exports = {
     Cohorte:[
         {
             id: 1,
+            nombre: "webft03",
             fecha: Date.now(),
         },
         {
             id: 2,
+            nombre: "webft05",
             fecha: Date.now(),
         },
         {
             id: 3,
+            nombre: "webft04",
             fecha: Date.now(),
         },
     ],
