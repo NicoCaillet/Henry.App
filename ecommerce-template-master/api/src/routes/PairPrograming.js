@@ -11,6 +11,7 @@ server.post("/grupo", (req, res, next) =>{
         .catch(err => next(err));
 });
 server.get("/", (req, res, next) =>{
+
     Pair.findOne({
         where:{
             id: req.user.pairId
