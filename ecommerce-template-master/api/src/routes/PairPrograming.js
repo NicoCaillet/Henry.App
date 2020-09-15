@@ -10,9 +10,10 @@ server.post("/grupo", (req, res, next) =>{
     }).then(pair => res.json(pair))
         .catch(err => next(err));
 });
-server.get("/:id", (req, res, next) =>{
-    Pair.findByPk(
-        req.user.pairId,
+server.get("/", (req, res, next) =>{
+    console.log(req.user),
+    Pair.findOne(
+        {where : {id: req.user.pairId}},
         {include : {model: Usuario, as  : "usuarios"}}
     ).then(pair => res.json(pair))
         .catch(err => next(err));

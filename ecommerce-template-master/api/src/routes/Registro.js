@@ -21,7 +21,7 @@ server.post('/', async(req, res, next) => {
 		*/
 		const salt = crypto.randomBytes(64).toString("hex");
 		try {
-			const {email, password,apellido,nombre,rol,proceso, active} = req.body;
+			const {email, password,apellido,nombre, rol,proceso, active, pairId, grupoId, cohorteId} = req.body;
 			const passwordHash = crypto.pbkdf2Sync(password, salt, 10000, 64, "sha512").toString("base64");
 			 const user = await Usuario.create({
 				email,
@@ -31,7 +31,10 @@ server.post('/', async(req, res, next) => {
 				rol: "alumno",
 				proceso: "1",
 				salt,
-				active
+				active,
+				pairId,
+				cohorteId,
+				grupoId
 			});
 			 if (user) {
 				passport.authenticate("local", function (err, user, info) {
