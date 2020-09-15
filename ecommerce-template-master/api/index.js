@@ -45,7 +45,7 @@ async function initial(){
   }
 }
 // Syncing all the models at once.
-db.conn.sync({ force: false }).then(async () => {
+db.conn.sync({ force: true }).then(async () => {
   await initial();
   server.listen(3006, () => {
     console.log('%s listening at 3006'); // eslint-disable-line no-console
