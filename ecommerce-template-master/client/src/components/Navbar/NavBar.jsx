@@ -53,15 +53,19 @@ export default function ButtonAppBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar className={s.color}>
-          <IconButton edge="start" className={classes.menuButton + " " + s.amarillo} aria-label="menu">
-            <MenuIcon className={s.amarillo}/>
-          </IconButton>
-          <Typography variant="h6" className={classes.title + " " + s.letras}>
+          
+          <Typography variant="h6" className={classes.title + " " + s.letras + " " + s.espacio}>
            <Link to="/Home"> <img src={imagen} alt="" className={s.imagen}/> </Link> 
-           <Link to="/miEquipo"> 
+           <div className={s.divs + " " + s.equipo}> 
+            <Link to="/miEquipo" className={s.nolink }> 
             <h6 className={s.titulosnav}> Tu equipo </h6>
-           </Link>
-                      
+            </Link>
+           </div> 
+           <div className={s.divs + " " + s.div}> 
+            <Link to="/Admin" className={s.nolink}> 
+            <h6 className={s.titulosnav + " " + s.espacio}> Administrar </h6>
+            </Link>
+           </div>         
           
            </Typography>
 
@@ -92,7 +96,7 @@ export default function ButtonAppBar() {
                 open={open}
                 onClose={handleClose}
               >
-                <Link to="miPerfil"><MenuItem className={s.nolink} onClick={handleClose}>Mi Perfil</MenuItem></Link>
+                <Link to="miPerfil" className={s.nolink}><MenuItem  onClick={handleClose}>Mi Perfil</MenuItem></Link>
                 <MenuItem onClick={handleClose}> LogOut</MenuItem>
                 
               </Menu>
