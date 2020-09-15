@@ -10,11 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 // Funcionalidad de redux ya puesta para andar (No estan las rutas hechas todavia.)
 
-// useEffect(() => {
-//     // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
 
-//     props.pruebaRedux()
-// }, [])
 
 const student = [
     {
@@ -55,7 +51,20 @@ const student = [
       },
   ]
 
-function MiEquipo(props) {
+export default function MiEquipo(props) {
+
+  const pp = useSelector((state) => state.pp);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
+    dispatch(getpp())
+    console.log("Tu vieja")
+    console.log(props)
+}, [])
+
+console.log("props afuera: " + JSON.stringify(props))
+console.log("PP: " + pp)
 
 
     return (
@@ -72,12 +81,3 @@ function MiEquipo(props) {
     );
 }
 
-const mapStateToProps = ({ pp }) => ({
-  pp,
-})
-
-const mapDispatchToProps = dispatch => ({
-  getpp: pp => dispatch(getpp(pp))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(MiEquipo)

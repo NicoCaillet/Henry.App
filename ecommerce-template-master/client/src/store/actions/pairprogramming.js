@@ -6,10 +6,10 @@ export const ppActionTypes = {
 
 export const getpp = () => {
     return (dispatch) => {
-      axios.get(`http://localhost:3000/pair/`).then((res) => {
+      axios.get(`http://localhost:3006/pair`, {withCredentials: true}).then((res) => {
         dispatch({
           type: ppActionTypes.GET_PP,
-          pp: res.data,
+          payload: res.data,
         });
       });
     };
