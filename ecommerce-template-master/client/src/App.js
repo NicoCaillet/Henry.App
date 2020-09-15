@@ -1,6 +1,5 @@
 import React from 'react';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import logo from './logo.svg';
 import './App.css';
 import { Route } from "react-router-dom";
 import Input from './components/Input_Prueba/Input'
@@ -14,8 +13,11 @@ import MiEquipo from './components/Mi_equipo/MiEquipo';
 import Registrarse from './components/Registrarse/Registrarse';
 import { connect } from 'react-redux';
 import { pruebaRedux } from './store/actions/actionTest';
-
-
+import store from './store/';
+store.subscribe(()=>{
+  const state = store.getState();
+  localStorage.setItem("state",JSON.stringify(state));
+})
 const theme = createMuiTheme({
   palette: {
     primary: {
