@@ -3,9 +3,25 @@ import { Link } from 'react-router-dom'
 import s from './nuevocohorte.module.css'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { connect } from 'react-redux'
+import { setCohorte } from '../../../store/actions/cohorte.js'
+import { useSelector, useDispatch } from "react-redux";
 
+function NuevoCohorte(props) {
+const [cohorte, setCohorte] = useState("")
 
-export default function NuevoCohorte(props) {
+const handleInputChange = (e) => {
+    e.preventDefault();
+
+    setCohorte({
+      ...cohorte,
+      [e.target.name]: e.target.value,
+    });
+    
+    
+  };
+
+  
 
     return (
         <div className={s.admin} >
@@ -18,14 +34,19 @@ export default function NuevoCohorte(props) {
                   required
                   label="Numero de cohorte"
                   fullWidth
+                  type="text"
                   id="numero"
                   name="numero"
+                  value={cohorte}
+                  onChange={handleInputChange}
                   autoFocus />
+
                 <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="primary"> 
+                color="primary"
+                onClick={setCohorte}> 
                 Agregar cohorte
                 </Button>
 
@@ -36,3 +57,13 @@ export default function NuevoCohorte(props) {
 
     );
 }
+
+const mapStateToProps = ({ cohorte }) => ({
+    cohorte,
+})
+
+const mapDispatchToProps = dispatch => ({
+    setCohorte: cohorte => dispatch(setCohorte(cohorte))
+  })
+  
+export default connect(mapStateToProps, mapDispatchToProps)(NuevoCohorte)

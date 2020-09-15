@@ -5,7 +5,7 @@ export default function Admin(props) {
 
     return (
         <div>
-            <p> Nuevo cohorte </p>
+            <p> Grupo de pp </p>
         
         </div>
 
