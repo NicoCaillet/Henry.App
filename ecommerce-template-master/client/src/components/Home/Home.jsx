@@ -34,7 +34,7 @@ export default function Home() {
                 {images.map((image) => (
                     <Grid item key={image} xs={8} sm={10} md={5}>
                         {/* OJO QUE EL LINK ESTA HARDCODEADO */}
-                        <Link style={{ textDecoration: 'none' }} to={`/modulo/1`/* /${id} */} >
+                        <Link style={{ textDecoration: 'none' }} to={`/modulo/${image.title}`} >
                             <ButtonBase key={image.title} className={classes.image} focusVisibleClassName={classes.focusVisible}>
                                 <span
                                     className={classes.imageSrc}
