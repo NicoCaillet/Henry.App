@@ -34,9 +34,11 @@ server.get("/pm/:pm", async(req, res, next) =>{
 });
 server.put("/cohorte/agregar", (req, res, next) => {
     Usuario.update({
-        where: req.body.usuarioId
-    },{
         cohorteId: req.body.cohorteId
+    }, {
+        where: {
+            id: req.body.usuarioId
+        }
     }).then(usuario => res.json(usuario))
         .catch(err => next(err));
 })

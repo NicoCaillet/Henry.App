@@ -128,9 +128,6 @@ module.exports = {
             password: "1234",
             email: "alumno2@henry.com",
             proceso : 1,
-            cohorteId: 1,
-            grupoId: 1,
-            pairId: 1,
         },
         {
             nombre: "Pm1",
