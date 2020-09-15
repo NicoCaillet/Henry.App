@@ -86,10 +86,10 @@ server.put('/:id/rol', (req, res, next) => {
         res.status(200).send(usuario);
     }).catch(next);
 });
-//actualiza informacion del usuario que no esta en el registro.
+//actualiza informacion del usuario
 server.put('/:id', (req, res) => {
 	var newEmail = req.body.email;
-	var {edad,localidad} = req.body;
+	var {edad,localidad,nombre, apellido} = req.body;
 	console.log(req.body);
 	Usuario.findOne({
 		where: {
@@ -98,11 +98,12 @@ server.put('/:id', (req, res) => {
 	})
 		.then(user => {
 			user.update({
+				nombre: nombre,
+				apellido: apellido,
 				email: newEmail,
 				localidad: localidad,
 				edad: edad,
 			});
-			//user.save();
 			res.status(200).send(user);
 		})
 		.catch(err => {
