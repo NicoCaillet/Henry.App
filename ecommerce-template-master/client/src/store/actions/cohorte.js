@@ -7,11 +7,15 @@ export const CohorteActionTypes = {
 export const setCohorte = (data) => {
     return (dispatch) => {
       axios
-        .post(`http://localhost:3006/cohortes/nuevo`, data)
+        .post(`http://localhost:3006/cohortes/nuevo`, {
+          fecha: data.fecha,
+          nombre: data.nombre
+        })
         .then((cohorte) => {
-          dispatch({
+          return dispatch({
             type: CohorteActionTypes.SET_COHORTE,
-            cohorte: cohorte.data,
+            payload: cohorte.data
+            
           });
         });
     };

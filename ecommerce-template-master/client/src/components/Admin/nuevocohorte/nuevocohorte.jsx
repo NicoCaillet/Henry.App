@@ -7,40 +7,58 @@ import { connect } from 'react-redux'
 import { setCohorte } from '../../../store/actions/cohorte.js'
 import { useSelector, useDispatch } from "react-redux";
   
-function NuevoCohorte(props) {
-  const [cohorteA, setCohorteA] = useState('')
+export default function NuevoCohorte(props) {
+  
+const cohorte = useSelector((state) => state.cohorte.cohorte)
+  
+  const [cohorteA, setCohorteA] = useState({cohorte})
+  const dispatch = useDispatch()
 
   const handleInputChange = (e) => {
     e.preventDefault();
-    setCohorteA(
-      e.target.value
-    );
-  };
-
+    setCohorteA({
+      ...cohorteA,
+      [e.target.name]: e.target.value
+    });
+  }
 
   return (
     <div className={s.admin} >
       <div className={s.aside}>
         <h3> Crear nuevo cohorte</h3>
         <div>
+        <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            label="Fecha de inicio"
+            fullWidth
+            type="text"
+            name="fecha"
+            value={cohorteA.fecha}
+            onChange={handleInputChange}
+            autoFocus />
+
           <TextField
             variant="outlined"
             margin="normal"
             required
-            label="Fecha de comienzo"
+            label="Nombre de cohorte"
             fullWidth
             type="text"
-            name="alumnos"
-            value={cohorteA}
+            name="nombre"
+            value={cohorteA.nombre}
             onChange={handleInputChange}
             autoFocus />
+
+            
 
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
-            onClick={() => props.setCohorte(cohorteA)}>
+            onClick={() => dispatch(setCohorte(cohorteA))}>
             Agregar cohorte
           </Button>
 
@@ -52,12 +70,3 @@ function NuevoCohorte(props) {
   );
 }
 
-const mapStateToProps = ({ cohorte }) => ({
-  cohorte,
-})
-
-const mapDispatchToProps = dispatch => ({
-  setCohorte: cohorte => dispatch(setCohorte(cohorte))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(NuevoCohorte)
