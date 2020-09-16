@@ -73,7 +73,7 @@ function QontoStepIcon(props) {
 }
 
 
-const trayectoria = { modulo: 3 }
+const trayectoria = { modulo: 4 }
 
 export default function Trayectoria() {
     return (
