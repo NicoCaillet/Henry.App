@@ -8,21 +8,14 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import useStyles from './MiPerfil.styles';
 import Trayectoria from './Trayectoria'
 import Axios from 'axios';
-import { connect, useSelector, useDispatch } from 'react-redux'
-import {putUser}  from "../../store/actions/user"
+import { useSelector, useDispatch } from 'react-redux'
+import { putUser } from "../../store/actions/user"
 
-
-
+// Hardcodeo de la foto
 const perfil = {
-    nombre: 'Manuel',
-    apellido: 'Barna Ferres',
     foto: 'https://www.soyhenry.com/static/MANU-800a7fffdc31e8be6dddc7a9b573f5f9.png',
-    edad: '30',
-    localidad: 'Buenos Aires',
-    email: 'manu@gmail.com',
-    rol: 'Estudiante',
-    password: '123123',
 }
+
 
 // Funcion para el efecto de slide en el dialogo
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -31,32 +24,34 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 
 export default function MiPerfil(props) {
-    const user = useSelector((state) => state.user.user);
-    const dispatch = useDispatch()
     const classes = useStyles();
 
+    const user = useSelector((state) => state.user.user);
+    const dispatch = useDispatch()
+
     // PopOver del email
+    const [popOverMail, setPopOverMail] = useState(null);
+
+    const handleClickMail = (event) => {
+        setPopOverMail(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setPopOverMail(null);
+    };
+
+    const open = Boolean(popOverMail);
+    const mail = open ? 'simple-popover' : undefined;
+
+    //Actualizar usuario
+    const [putUsuario, setPutUsuario] = useState(user)
+
+
     useEffect(() => {
         Axios.get("http://localhost:3006/user/me", { withCredentials: true })
             .then(res => console.log(res.data))
             .catch(err => console.log(err));
     }, [])
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleClickMail = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-    //actualiza usuario
-    const  [putUsuario, setPutUsuario] = useState(user)
-
-    //
-    const open = Boolean(anchorEl);
-    const mail = open ? 'simple-popover' : undefined;
-    /////
 
     /// Dialogo para modificar datos de MiPerfil
     const [openEdit, setOpenEdit] = useState(false);
@@ -68,6 +63,7 @@ export default function MiPerfil(props) {
     const handleCloseEdit = () => {
         setOpenEdit(false);
     };
+
     //handleSubmit
     const handleSubmit = (e) => {
         setPutUsuario({
@@ -75,7 +71,6 @@ export default function MiPerfil(props) {
             [e.target.name]: e.target.value,
         })
     }
-    //
     //
 
     /// Dialogo para modificar contraseña
@@ -89,6 +84,21 @@ export default function MiPerfil(props) {
         setOpenPass(false);
     };
 
+
+    // Modificar Contraseña
+    const [pass, setPass] = useState({
+        password: '',
+        repassword: ''
+    });
+
+    let handlePassChange = (e) => {
+        setPass({
+            ...pass,
+            [e.target.name]: e.target.value
+        })
+    }
+    //// Habria que conectar con Axios
+
     //
 
 
@@ -97,9 +107,9 @@ export default function MiPerfil(props) {
             <Container className={classes.contenedor} >
                 <Grid className={classes.contenedor} container>
                     {/* ACA EMPIEZA LA TARJETA */}
-                    <Grid item xs={10} sm={10} md={6} >
+                    <Grid item xs={10} sm={7} md={7} lg={8}>
                         <div className={classes.div1}>
-                            <Grid item xs={10} sm={10} md={6} lg={6}>
+                            <Grid xs={10} sm={10} md={7} lg={5}>
                                 <Card className={classes.card}>
                                     <CardHeader
                                         action={<IconButton aria-label="settings">
@@ -107,7 +117,7 @@ export default function MiPerfil(props) {
                                         title={user.nombre + ' ' + user.apellido}
                                     />
                                     <CardMedia className={classes.media}
-                                        image={perfil.foto}
+                                        image={perfil.foto} /* MODIFICAR */
                                     ////////
                                     >
                                     </CardMedia>
@@ -122,7 +132,7 @@ export default function MiPerfil(props) {
                                         <Popover
                                             id={mail}
                                             open={open}
-                                            anchorEl={anchorEl}
+                                            anchorEl={popOverMail}
                                             onClose={handleClose}
                                             anchorOrigin={{
                                                 vertical: 'bottom',
@@ -141,7 +151,7 @@ export default function MiPerfil(props) {
                         </div>
                     </Grid>
                     {/* ACA EMPIEZA LA DESCRIPCION DE PERFIL */}
-                    <Grid item xs={10} sm={10} md={4}>
+                    <Grid item xs={10} sm={7} md={4} lg={4}>
                         <div className={classes.div2}>
                             <Card className={classes.card2}>
                                 <TextField value={user.nombre} label="Nombre" name="nombre" autoFocus margin="dense" type="text" color='secondary' fullWidth />
@@ -150,26 +160,27 @@ export default function MiPerfil(props) {
                                 <TextField value={user.localidad} label="Localidad" name="localidad" autoFocus margin="dense" color='secondary' type="text" fullWidth />
                                 <TextField value={user.email} label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth />
                                 <TextField value={user.rol} label="Rol" name="rol" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                <TextField value={user.password} label="Rol" name="rol" autoFocus margin="dense" type="text" color='secondary' fullWidth />
                                 <IconButton onClick={handleClickOpenEdit} color='secondary' aria-label="editar" >
                                     <EditIcon />
                                 </IconButton>
                                 <Dialog open={openEdit} onClose={handleCloseEdit} TransitionComponent={Transition} keepMounted aria-labelledby="alert-dialog-slide-title" aria-describedby="alert-dialog-slide-description">
                                     <DialogTitle id="form-dialog-title">Modificar mi perfil</DialogTitle>
                                     <DialogContent>
-                                        <TextField  onChange ={handleSubmit} value= {putUsuario.nombre}  label="Nombre" name="nombre" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                                        <TextField  onChange ={handleSubmit} value= {putUsuario.apellido} label="Apellido" name="apellido" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                                        <TextField  onChange ={handleSubmit} value= {putUsuario.edad} label="Edad" name="edad" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                                        <TextField  onChange ={handleSubmit} value= {putUsuario.localidad} label="Localidad" name="localidad" autoFocus margin="dense" color='secondary' type="text" fullWidth />
-                                        <TextField  onChange ={handleSubmit} value= {putUsuario.email} label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                        <TextField onChange={handleSubmit} value={putUsuario.nombre} label="Nombre" name="nombre" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                        <TextField onChange={handleSubmit} value={putUsuario.apellido} label="Apellido" name="apellido" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                        <TextField onChange={handleSubmit} value={putUsuario.edad} label="Edad" name="edad" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                        <TextField onChange={handleSubmit} value={putUsuario.localidad} label="Localidad" name="localidad" autoFocus margin="dense" color='secondary' type="text" fullWidth />
+                                        <TextField onChange={handleSubmit} value={putUsuario.email} label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth />
                                     </DialogContent>
                                     <DialogActions>
                                         <Button onClick={handleCloseEdit} color="secondary">
                                             Cancelar
-                                    </Button>
-                                        <Button  onClick={()=>{
-                                            handleCloseEdit(); 
+                                        </Button>
+                                        <Button onClick={() => {
+                                            handleCloseEdit();
                                             dispatch(putUser(putUsuario));
-                                            }} color="secondary">
+                                        }} color="secondary">
                                             Modificar
                                     </Button>
                                     </DialogActions>
@@ -179,16 +190,17 @@ export default function MiPerfil(props) {
                                 </IconButton>
                                 <Dialog open={openPass} onClose={handleClosePass} TransitionComponent={Transition} keepMounted aria-labelledby="alert-dialog-slide-title" aria-describedby="alert-dialog-slide-description">
                                     <DialogTitle id="form-dialog-title">Modificar mi contraseña</DialogTitle>
+
                                     <DialogContent>
-                                        <TextField /* onChange={handleInputChange} */ label="Contraseña" name="password" autoFocus margin="dense" type="password" color='secondary' fullWidth />
-                                        <TextField /* onChange={handleInputChange} */ label="Nueva contraseña" name="password" autoFocus margin="dense" type="password" color='secondary' fullWidth />
-                                        <TextField /* onChange={handleInputChange} */ label="Confirme su nueva contraseña" name="confirmar password" autoFocus margin="password" type="password" color='secondary' fullWidth />
+                                        <TextField onChange={handlePassChange} label="Contraseña" name="password" autoFocus margin="dense" type="password" color='secondary' fullWidth />
+                                        <TextField onChange={handlePassChange} id="password" label="Nueva contraseña" name="password" autoFocus margin="dense" type="password" color='secondary' fullWidth />
+                                        <TextField onChange={handlePassChange} id="repassword" label="Confirme su nueva contraseña" name="confirmar password" autoFocus margin="password" type="password" color='secondary' fullWidth />
                                     </DialogContent>
                                     <DialogActions>
                                         <Button onClick={handleClosePass} color="secondary">
                                             Cancelar
-                                    </Button>
-                                        <Button onClick={handleClosePass} color="secondary">
+                                        </Button>
+                                        <Button onClick={console.log('clickeo')/* submitNewPass */} color="secondary">
                                             Modificar
                                     </Button>
                                     </DialogActions>
@@ -200,7 +212,7 @@ export default function MiPerfil(props) {
                 </Grid>
             </Container >
             <Trayectoria />
-        </div>
+        </div >
     );
 }
 
