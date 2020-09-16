@@ -6,14 +6,15 @@ export default makeStyles((theme) => ({
         justifyContent: 'center',
     },
     div1: {
-        height: '500px',
+        height: 'auto',
         display: 'flex',
         justifyContent: 'center',
         paddingTop: '40px',
         margin: 'auto',
     },
     div2: {
-        height: '500px',
+        marginTop: '40px',
+        height: 'auto',
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'column'

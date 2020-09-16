@@ -18,7 +18,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-
+import {useDispatch} from 'react-redux';
+import {logOut} from '../../store/actions/user';
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -37,7 +38,7 @@ export default function ButtonAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [auth, setAuth] = React.useState(true);
   const open = Boolean(anchorEl);
-
+  const dispatch = useDispatch();
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -48,7 +49,6 @@ export default function ButtonAppBar() {
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -97,7 +97,10 @@ export default function ButtonAppBar() {
                 onClose={handleClose}
               >
                 <Link to="miPerfil" className={s.nolink}><MenuItem  onClick={handleClose}>Mi Perfil</MenuItem></Link>
-                <MenuItem onClick={handleClose}> LogOut</MenuItem>
+                <MenuItem onClick={() =>{
+                  dispatch(logOut());
+                  handleClose();
+                }}> LogOut</MenuItem>
                 
               </Menu>
             </div>
