@@ -12,6 +12,6 @@ export const getpp = () => {
           type: ppActionTypes.GET_PP,
           payload: res.data,
         });
-      });
+      }).catch(err => console.log(err));
     };
   };

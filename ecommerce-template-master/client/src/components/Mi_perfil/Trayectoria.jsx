@@ -77,7 +77,6 @@ export default function Trayectoria() {
     const user = useSelector((state) => state.user.user);
     const trayectoria = user.proceso
 
-
     return (
         <Stepper alternativeLabel activeStep={trayectoria - 1} connector={<LineaConectora />}>
             <Step>

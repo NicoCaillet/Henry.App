@@ -1,32 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import s from './grupo.module.css';
-import TextField from '@material-ui/core/TextField';
-import Estudiantes from './estudiante'
 import { Link } from 'react-router-dom'
+import s from "./grupoPm.module.css"
+import Nav from "./componentes/nav"
+import Cohorte from "./componentes/cohorte"
+import AddAlumno from './AddAlumno'
+import Title from "./componentes/title"
+import { connect } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 
-export default function Admin(props) {
+export default function grupoPm(props) {
+
+    const student = [
+        {
+            name: "Nicolas",
+        },
+        {
+            name: "Franco",
+        }
+    ]
 
     return (
-        <div>
-            <div className={s.admin} >
-                <div className={s.aside}>
-                    <h3> Buscar estudiante</h3>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        label="Nombre y Apellido"
-                        fullWidth
-                        type="text"
-                        id="numero"
-                        name="numero"
-                        autoFocus />
-                </div>
-            </div>
-            <div>
-                <Estudiantes />
-            </div>
-        </div>
+        <div style={{ display: 'flex' }}>
+            <div className={s.container}>
+                <Nav />
+                <Title />
+                <Cohorte student={student} />
+                {student.map((student) => (
+                    <Cohorte
+                        student={student} />
+                ))}
 
+            </div>
+            <AddAlumno />
+        </div>
     );
 }

@@ -5,20 +5,6 @@ const crypto = require("crypto");
 //crear usuario
 //http://localhost:3006/user/
 server.post('/', async(req, res, next) => {
-
-		/* 
-		const {email, password,apellido,nombre,rol,proceso, active} = req.body;
-		Usuario.create({
-			email,
-			nombre,
-			apellido,
-			password,
-			rol: "alumno",
-			proceso: "1",
-			active
-        }).then(user => res.status(201).send(user))
-		.catch (err => next(err)); 
-		*/
 		const salt = crypto.randomBytes(64).toString("hex");
 		try {
 			const {email, password,apellido,nombre, rol,proceso, active, pairId, grupoId, cohorteId} = req.body;
@@ -73,6 +59,10 @@ server.post("/login", async (req, res, next) =>{
 		});
 	})(req, res, next);
 });
+server.get('/logout', (req, res) =>{
+	req.logout();
+	res.sendStatus(200);
+})
 //actualiza el rol de un usuario
 server.put('/:id/rol', (req, res, next) => {
     const { id } = req.params;
