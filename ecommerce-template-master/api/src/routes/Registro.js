@@ -77,7 +77,7 @@ server.put('/:id/rol', (req, res, next) => {
     }).catch(next);
 });
 //actualiza informacion del usuario
-server.put('/:id', (req, res) => {
+server.put('/update/:id', (req, res) => {
 	var newEmail = req.body.email;
 	var {edad,localidad,nombre, apellido} = req.body;
 	console.log(req.body);
@@ -100,6 +100,18 @@ server.put('/:id', (req, res) => {
 			res.send('Usuario inexistente');
 		});
 });
+server.put('/repassword', (req, res, next) =>{
+	const passwordHash = crypto.pbkdf2Sync(req.body.password, req.user.salt, 10000, 64, "sha512").toString("base64");
+	if(passwordHash !== req.user.password) return res.sendStatus(401);
+	const newSalt = crypto.randomBytes(64).toString("hex");
+	const newPasswordHash = crypto.pbkdf2Sync(req.body.newPass, newSalt, 10000, 64, "sha512").toString("base64");
+	Usuario.update({
+		password: newPasswordHash,
+		salt: newSalt
+	},{ where:{ id: req.user.id } })
+		.then(usuario  => res.json(usuario))
+		.catch(err => next(err));
+})
 //borra usuario
 server.put('/:id/delete', (req,res)=>{
 	const id= req.params.id

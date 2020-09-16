@@ -22,6 +22,11 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 user: ''
             }
+        case UserActionTypes.RE_PASS:
+            return{
+                ...state,
+                user: ''
+            }
         default:
             return state
     }
