@@ -2,7 +2,7 @@ import { CohorteActionTypes } from '../actions/cohorte.js';
 
 
 const initialState = {
-    cohorte: ''
+    cohorte: {}
 };
 
 export const cohorteReducer = (state = initialState, action) => {

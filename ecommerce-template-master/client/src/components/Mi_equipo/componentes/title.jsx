@@ -9,7 +9,9 @@ export default function Title() {
         <div className={s.letra}> Nombre </div>
         <div className={s.letra}> Apellido </div>
         <div className={s.letra}> Edad </div>
+        <div className={s.letra}> Localidad </div>
         <div className={s.letra}> Mail </div>
+
       </div>
     );
   }

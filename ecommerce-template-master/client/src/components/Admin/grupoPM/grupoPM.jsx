@@ -4,7 +4,7 @@ import s from "./grupoPm.module.css"
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import IconButton from '@material-ui/core/IconButton';
 import Nav from "./componentes/nav"
-import Cohorte from "./componentes/cohorte"
+import Cohorte from "./componentes/cohorte.jsx"
 import AddAlumno from './AddAlumno'
 import Title from "./componentes/title"
 import { connect, useSelector, useDispatch } from 'react-redux';

@@ -8,7 +8,7 @@ server.get("/", (req, res, next) =>{
 })
 server.post("/nuevo", (req, res, next) =>{
     const Validfecha = moment(req.body.fecha, "DD/MM/YYYY").isValid();
-    if(!Validfecha) res.status(500).json({ msg:"Formato de fecha invalido" });
+    if(!Validfecha) return res.status(500).json({ msg:"Formato de fecha invalido" });
      Cohorte.create({
         fecha: moment(req.body.fecha, "DD/MM/YYYY").format(),
         nombre: req.body.nombre
