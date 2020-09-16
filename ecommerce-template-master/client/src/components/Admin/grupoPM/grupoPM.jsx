@@ -1,35 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import s from "./grupoPm.module.css"
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
+import IconButton from '@material-ui/core/IconButton';
 import Nav from "./componentes/nav"
 import Cohorte from "./componentes/cohorte"
 import AddAlumno from './AddAlumno'
 import Title from "./componentes/title"
-import { connect } from 'react-redux'
-import { useSelector, useDispatch } from "react-redux";
+import { connect, useSelector, useDispatch } from 'react-redux';
 
 export default function grupoPm(props) {
+    // const cohorte = useSelector((state) => state.cohorte);
 
     const student = [
         {
-            name: "Nicolas",
+            name: "WebFt03",
         },
         {
-            name: "Franco",
+            name: "WebFt04",
         }
     ]
+
 
     return (
         <div style={{ display: 'flex' }}>
             <div className={s.container}>
                 <Nav />
                 <Title />
-                <Cohorte student={student} />
                 {student.map((student) => (
-                    <Cohorte
-                        student={student} />
+                    <Cohorte student={student} />
                 ))}
-
             </div>
             <AddAlumno />
         </div>
