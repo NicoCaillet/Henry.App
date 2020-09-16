@@ -3,7 +3,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import Prueba from '../test'
 
 const prueba = [{ id: 1, nombre: 'DOM - Selectores', link: 'https://player.vimeo.com/video/412450156' },
 { id: 2, nombre: 'CSS Avanzado', link: 'https://player.vimeo.com/video/412450067' },
@@ -47,7 +46,6 @@ export default function Modulo(props) {
                         </Button>
                     </div>)
                 )}
-                <Prueba />
             </div>
         </div>
 

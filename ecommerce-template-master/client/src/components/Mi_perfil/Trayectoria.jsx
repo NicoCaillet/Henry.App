@@ -1,13 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Check from '@material-ui/icons/Check';
 import StepConnector from '@material-ui/core/StepConnector';
 import Typography from '@material-ui/core/Typography';
+import { useSelector } from 'react-redux'
 
 
 const LineaConectora = withStyles({
@@ -72,12 +71,15 @@ function QontoStepIcon(props) {
     else { return (<div className={classes.circle} />) }
 }
 
-
-const trayectoria = { modulo: 3 }
-
 export default function Trayectoria() {
+
+
+    const user = useSelector((state) => state.user.user);
+    const trayectoria = user.proceso
+
+
     return (
-        <Stepper alternativeLabel activeStep={trayectoria.modulo - 1} connector={<LineaConectora />}>
+        <Stepper alternativeLabel activeStep={trayectoria - 1} connector={<LineaConectora />}>
             <Step>
                 <StepLabel StepIconComponent={QontoStepIcon}>
                     <Typography>M1</Typography>
