@@ -9,8 +9,8 @@ import useStyles from './MiPerfil.styles';
 import Trayectoria from './Trayectoria'
 import Axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
-import { putUser } from "../../store/actions/user"
-
+import { putUser, rePass, logOut } from "../../store/actions/user"
+import { useHistory } from 'react-router-dom';
 // Hardcodeo de la foto
 const perfil = {
     foto: 'https://www.soyhenry.com/static/MANU-800a7fffdc31e8be6dddc7a9b573f5f9.png',
@@ -25,7 +25,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function MiPerfil(props) {
     const classes = useStyles();
-
+    const history = useHistory();
     const user = useSelector((state) => state.user.user);
     const dispatch = useDispatch()
 
@@ -60,10 +60,6 @@ export default function MiPerfil(props) {
         setOpenEdit(true);
     };
 
-    const handleCloseEdit = () => {
-        setOpenEdit(false);
-    };
-
     //handleSubmit
     const handleSubmit = (e) => {
         setPutUsuario({
@@ -82,20 +78,33 @@ export default function MiPerfil(props) {
 
     const handleClosePass = () => {
         setOpenPass(false);
+
     };
 
 
     // Modificar Contraseña
     const [pass, setPass] = useState({
         password: '',
+        newPass: '',
         repassword: ''
     });
+
+    const handleCloseEdit = () => {
+        setOpenEdit(false);
+        
+    };
 
     let handlePassChange = (e) => {
         setPass({
             ...pass,
             [e.target.name]: e.target.value
         })
+    }
+    const submitNewPass = async() =>{
+        await dispatch(rePass(pass));
+        setOpenPass(false);
+        await dispatch(logOut());
+        history.replace("/");
     }
     //// Habria que conectar con Axios
 
@@ -160,7 +169,6 @@ export default function MiPerfil(props) {
                                 <TextField value={user.localidad} label="Localidad" name="localidad" autoFocus margin="dense" color='secondary' type="text" fullWidth />
                                 <TextField value={user.email} label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth />
                                 <TextField value={user.rol} label="Rol" name="rol" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                                <TextField value={user.password} label="Rol" name="rol" autoFocus margin="dense" type="text" color='secondary' fullWidth />
                                 <IconButton onClick={handleClickOpenEdit} color='secondary' aria-label="editar" >
                                     <EditIcon />
                                 </IconButton>
@@ -192,15 +200,15 @@ export default function MiPerfil(props) {
                                     <DialogTitle id="form-dialog-title">Modificar mi contraseña</DialogTitle>
 
                                     <DialogContent>
-                                        <TextField onChange={handlePassChange} label="Contraseña" name="password" autoFocus margin="dense" type="password" color='secondary' fullWidth />
-                                        <TextField onChange={handlePassChange} id="password" label="Nueva contraseña" name="password" autoFocus margin="dense" type="password" color='secondary' fullWidth />
-                                        <TextField onChange={handlePassChange} id="repassword" label="Confirme su nueva contraseña" name="confirmar password" autoFocus margin="password" type="password" color='secondary' fullWidth />
+                                        <TextField onChange={handlePassChange} value={pass.password} label="Contraseña" name="password" autoFocus margin="dense" type="password" color='secondary' fullWidth />
+                                        <TextField onChange={handlePassChange} value={pass.newPass} id="password" label="Nueva contraseña" name="newPass" autoFocus margin="dense" type="password" color='secondary' fullWidth />
+                                        <TextField onChange={handlePassChange} value={pass.repassword}  id="repassword" label="Confirme su nueva contraseña" name="repassword" autoFocus margin="password" type="password" color='secondary' fullWidth />
                                     </DialogContent>
                                     <DialogActions>
                                         <Button onClick={handleClosePass} color="secondary">
                                             Cancelar
                                         </Button>
-                                        <Button onClick={console.log('clickeo')/* submitNewPass */} color="secondary">
+                                        <Button onClick={submitNewPass/*  */} color="secondary">
                                             Modificar
                                     </Button>
                                     </DialogActions>
