@@ -24,10 +24,7 @@ export default function AdminPage() {
     switch (e.target.id) {
       case "grupo_pm":
         element = <GrupoPM />;
-        break;
-      case "grupo_pp":
-        element = <GrupoPP />;
-        break;
+        break;  
       case "nuevo_cohorte":
         element = <NuevoCohorte />;
         break;
@@ -51,20 +48,8 @@ export default function AdminPage() {
         />
         <label htmlFor="grupo_pm">
           <ReceiptIcon className={s.icon} />
-          Crear grupo PM
+          Administracion de cohortes
         </label>
-        <input
-          type="radio"
-          onChange={(e) => renderComponent(e)}
-          id="grupo_pp"
-          name="menu"
-          value="products"
-        />
-        <label htmlFor="grupo_pp">
-          <StoreIcon className={s.icon} />
-          Crear grupo PP
-        </label>
-
         <input
           type="radio"
           onChange={(e) => renderComponent(e)}

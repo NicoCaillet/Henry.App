@@ -2,7 +2,8 @@ import { CohorteActionTypes } from '../actions/cohorte.js';
 
 
 const initialState = {
-    cohorte: {}
+    cohorte: {},
+    cohortes: []
 };
 
 export const cohorteReducer = (state = initialState, action) => {
@@ -12,6 +13,11 @@ export const cohorteReducer = (state = initialState, action) => {
                 ...state,
                 cohorte: action.payload,
             }
+        case CohorteActionTypes.GET_COHORTE: 
+        return {
+            ...state,
+            cohortes: action.payload 
+        }
         default:
             return state
     }

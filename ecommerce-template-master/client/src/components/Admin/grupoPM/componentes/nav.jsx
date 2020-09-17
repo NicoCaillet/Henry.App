@@ -29,7 +29,7 @@ export default function ButtonAppBar() {
       <AppBar position="static" >
         <Toolbar className={s.nav}>
           <Typography variant="h6" className={classes.title}>
-            <span className={s.titulo}> Cohorte </span>
+            <span className={s.titulo}> Cohortes </span>
           </Typography>
 
         </Toolbar>
