@@ -10,6 +10,7 @@ import Modulo from './components/Modulos/Modulo';
 import Admin from './components/Admin/Admin';
 import Info from './components/Tabla_info_Admin/Info';
 import MiEquipo from './components/Mi_equipo/MiEquipo';
+import Equipo2 from './components/Mi_equipo/Equipo2';
 import Registrarse from './components/Registrarse/Registrarse';
 import { connect } from 'react-redux';
 import { pruebaRedux } from './store/actions/actionTest';

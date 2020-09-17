@@ -5,13 +5,13 @@ import s from './student.module.css'
 
 
 
-export default function Student({ student }) {
+export default function Student({ alumnos }) {
   return (
     <div className={s.grid}>
-      <div className={s.letra}> {student.name} </div>
-      <div className={s.letra}> {student.lastname} </div>
-      <div className={s.letra}> {student.age} </div>
-      <div className={s.letra}> {student.email} </div>
+      <div className={s.letra}> {alumnos.nombre} </div>
+      <div className={s.letra}> {alumnos.apellido} </div>
+      <div className={s.letra}> {alumnos.edad} </div>
+      <div className={s.letra}> {alumnos.email} </div>
     </div>
   );
 }

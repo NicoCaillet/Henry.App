@@ -6,68 +6,33 @@ import Student from "./componentes.student/student"
 import Title from "./componentes.student/title"
 import { connect } from 'react-redux'
 import { useSelector, useDispatch } from "react-redux";
+import { getAlumnosid } from '../../../store/actions/alumnos.js'
 
-export default function AddAlumno(props) {
+export default function AddAlumno({id}) {
     // const [component, setComponent] = useState(),
-    const student = [
-        {
-            name: "Nicolas",
-            lastname: "Caillet Bois",
-            age: 18,
-            email: "nicolas@gmail.com"
-        },
-        {
-            name: "Franco",
-            lastname: "Bonnahon",
-            age: 18,
-            email: "franco@gmail.com"
-        },
-        {
-            name: "Gianni",
-            lastname: "Pisani",
-            age: 18,
-            email: "destroyer@gmail.com"
-        },
-        {
-            name: "Gianni",
-            lastname: "Pisani",
-            age: 18,
-            email: "destroyer@gmail.com"
-        },
-        {
-            name: "Gianni",
-            lastname: "Pisani",
-            age: 18,
-            email: "destroyer@gmail.com"
-        },
-        {
-            name: "Gianni",
-            lastname: "Pisani",
-            age: 18,
-            email: "destroyer@gmail.com"
-        },
-    ]
+    
+    const dispatch = useDispatch();
 
-    // const renderComponent = function (e) {
-    //     var element;
-    //     switch (e.target.id) {
-    //       case "grupo_pm":
-    //         element = <GrupoPM />;
-    //         break;
-    //       default:
-    //         element = <h2>Entro al default</h2>;
-    //         break;
-    //     }
-    //     setComponent(element);
-    //   }
+    const cohorte = useSelector((state) => state.cohorte.cohortes);
+    const alumnos = useSelector((state) => state.alumnos.alumnos);
+
+
+    
+   console.log(id)
+
+    useEffect(() => {
+        // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
+        dispatch(getAlumnosid(cohorte.id))
+        
+    }, [])
+
 
     return (
         <div className={s.container}>
             <Nav />
             <Title />
-            {student.map((student) => (
-                <Student
-                    student={student} />
+            {alumnos && alumnos.map((alumnos) => (
+                <Student alumnos={alumnos}/>
             ))}
         </div>
     );

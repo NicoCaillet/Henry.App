@@ -7,7 +7,6 @@ export default function Title() {
   return (
     <div className={s.grid}>
       <div className={s.letra}> Nombre </div>
-      <div className={s.letra}> Añadir </div>
     </div>
   );
 }

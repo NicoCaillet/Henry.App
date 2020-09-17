@@ -4,13 +4,17 @@ import { Link } from 'react-router-dom'
 import s from './cohorte.module.css';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 
-export default function Cohorte({ student }) {
-  console.log(student)
+
+export default function Cohorte({ cohorte, render }) {
+
+
   return (
     <div className={s.grid}>
-      <div className={s.letra}>{student.name}</div>
-      <div > {<IconButton><DoneOutlineIcon /></IconButton>} </div>
+      <Button className={s.button} onClick={render} variant="contained" color="primary">
+        {cohorte.nombre} 
+      </Button>
     </div>
   );
 }
