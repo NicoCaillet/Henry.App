@@ -42,4 +42,12 @@ server.put("/cohorte/agregar", (req, res, next) => {
     }).then(usuario => res.json(usuario))
         .catch(err => next(err));
 })
+server.post('/agregar', (req, res, next) => {
+    Usuario.create({
+        email: req.body.email,
+        rol: 'alumno',
+        active: true
+    }).then( res => res.send('OK'))
+    .catch( err => next(err))
+})
 module.exports = server;

@@ -7,6 +7,7 @@ import { Slide, Dialog, DialogActions, DialogContent, DialogTitle, Button } from
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import EditIcon from '@material-ui/icons/Edit'
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +36,18 @@ export default function ButtonAppBar() {
   const handleCloseEdit = () => {
     setOpenEdit(false);
   };
+
+  const handleConfirm = () => {
+    setOpenEdit(false);
+    putUsuario.emails.split(',').map(elem => {
+      axios.post('http://localhost:3006/alumnos/agregar',
+      {
+        email: elem
+      }, {withCredencials: true})
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+    })
+  };
   //handleSubmit
   const handleSubmit = (e) => {
     setPutUsuario({
@@ -56,19 +69,19 @@ export default function ButtonAppBar() {
             <EditIcon />
           </IconButton>
           <Dialog open={openEdit} onClose={handleCloseEdit} TransitionComponent={Transition} keepMounted aria-labelledby="alert-dialog-slide-title" aria-describedby="alert-dialog-slide-description">
-            <DialogTitle id="form-dialog-title">Agregar Estudiante</DialogTitle>
+            <DialogTitle id="form-dialog-title">Agregar Estudiantes</DialogTitle>
             <DialogContent>
-              <TextField onChange={handleSubmit} value={putUsuario.nombre} label="Nombre" name="nombre" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-              <TextField onChange={handleSubmit} value={putUsuario.apellido} label="Apellido" name="apellido" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+              <TextField onChange={handleSubmit} value={putUsuario.emails} label="E-mails" name="emails" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+              {/* <TextField onChange={handleSubmit} value={putUsuario.apellido} label="Apellido" name="apellido" autoFocus margin="dense" type="text" color='secondary' fullWidth />
               <TextField onChange={handleSubmit} value={putUsuario.edad} label="Edad" name="edad" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-              <TextField onChange={handleSubmit} value={putUsuario.email} label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+              <TextField onChange={handleSubmit} value={putUsuario.email} label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth /> */}
             </DialogContent>
             <DialogActions>
               <Button onClick={handleCloseEdit} color="secondary">
                 Cancelar
             </Button>
               <Button onClick={() => {
-                handleCloseEdit();
+                handleConfirm();
               }} color="secondary">
                 Agregar
             </Button>
