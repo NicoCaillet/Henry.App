@@ -9,8 +9,7 @@ server.post('/', async(req, res, next) => {
 		try {
 			const {email, password,apellido,nombre, rol,proceso, active, pairId, grupoId, cohorteId} = req.body;
 			const passwordHash = crypto.pbkdf2Sync(password, salt, 10000, 64, "sha512").toString("base64");
-			 const user = await Usuario.create({
-				email,
+			 const user = await Usuario.update({
 				nombre,
 				apellido,
 				password: passwordHash,
@@ -21,7 +20,9 @@ server.post('/', async(req, res, next) => {
 				pairId,
 				cohorteId,
 				grupoId
-			});
+			},
+			{where : {email}}
+			);
 			 if (user) {
 				passport.authenticate("local", function (err, user, info) {
 					if (err) {
