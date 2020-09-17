@@ -18,6 +18,7 @@ import { useState } from 'react';
 import Axios from 'axios';
 import { connect } from 'react-redux'
 import { setUser } from '../../store/actions/user'
+import {useHistory} from "react-router-dom"
 
 function Copyright() {
   return (
@@ -52,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function Input(props) {
+  const redirect = useHistory()
   const [fields, setFields] = useState({
     email: "",
     password: "",
@@ -67,7 +69,9 @@ function Input(props) {
   const handleInput = function(e){
     e.preventDefault();
     Axios.post("http://localhost:3006/user/login", fields,{ withCredentials: true })
-      .then(res => props.setUser(res.data.user))
+      .then(res => {props.setUser(res.data.user)
+      redirect.replace("/home")
+      })
       .catch(err => console.log(err.response));
   }
   return (

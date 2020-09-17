@@ -9,11 +9,11 @@ module.exports = (sequelize) => {
         },
         nombre : {
             type: DataTypes.STRING,
-            allowNull : false,
+            allowNull : true,
         },
         apellido : {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         rol : {
             type: DataTypes.ENUM ('alumno', 'instructor', 'pm', 'director'),
@@ -22,13 +22,15 @@ module.exports = (sequelize) => {
         },
         password : {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         },
         edad : {
             type: DataTypes.INTEGER,
+            allowNull: true
         },
         localidad : {
             type: DataTypes.STRING,
+            allowNull: true
         },
         //proceso de carrera
         proceso: {
@@ -38,12 +40,15 @@ module.exports = (sequelize) => {
         },
         provider: {
             type: DataTypes.STRING,
+            allowNull: true
         },
         providerId: {
             type: DataTypes.STRING,
+            allowNull: true
         },
         salt : {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: true
         },
         active: {
             type: DataTypes.BOOLEAN,

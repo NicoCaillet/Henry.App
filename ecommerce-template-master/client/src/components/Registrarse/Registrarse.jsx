@@ -16,6 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import imagen from "../../images/check.png";
 import axios from 'axios';
+import {useHistory} from "react-router-dom";
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -52,7 +53,7 @@ export default function Registrarse() {
     const classes = useStyles();
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState('');
-
+    const redirect = useHistory();
     const [field, setField] = useState({
         nombre: "",
         apellido: "",
@@ -90,6 +91,7 @@ export default function Registrarse() {
                 } else { // el usuario se creo bien
                     setHelperText('')
                 }
+                redirect.replace("/")
             }).catch(err => {
                 //console.log(err.response)
                 //setHelperText(err.response)
