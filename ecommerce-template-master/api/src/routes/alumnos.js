@@ -47,7 +47,7 @@ server.post('/agregar', (req, res, next) => {
         email: req.body.email,
         rol: 'alumno',
         active: true
-    }).then( res => res.send('OK'))
+    }).then( () => res.send('OK'))
     .catch( err => next(err))
 })
 module.exports = server;
