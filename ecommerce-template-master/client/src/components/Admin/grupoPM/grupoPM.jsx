@@ -19,10 +19,10 @@ export default function GrupoPm(props) {
         dispatch(getCohorte())
     }, [])
 
-    const [RenderTable, setRenderTable] = useState(false);
+    const [RenderTable, setRenderTable] = useState(0);
 
-    const renderCohort = function () {
-        setRenderTable(true)
+    const renderCohort = function (id) {
+        setRenderTable(id)
 
     }
 
@@ -33,10 +33,10 @@ export default function GrupoPm(props) {
                 <Nav />
                 <Title />
                 {cohorte && cohorte.map((cohorte) => (
-                    <Cohorte cohorte={cohorte} render={renderCohort} />
+                    <Cohorte cohorte={cohorte} render={() => renderCohort(cohorte.id)} />
                 ))}
             </div>
-            {RenderTable && <AddAlumno />}
+            {RenderTable > 0 && <AddAlumno id={RenderTable} />}
         </div>
     );
 }
