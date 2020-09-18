@@ -3,7 +3,9 @@ export const UserActionTypes = {
     SET_USER: 'SET_USER',
     PUT_USER: "PUT_USER",
     LOG_OUT: 'LOG_OUT',
-    RE_PASS: 'RE_PASS'
+    RE_PASS: 'RE_PASS',
+    GET_USER: "GET_USER",
+    PUT_USER: "PUT_USER",
 }
 
 export const setUser = (user) => {
@@ -46,3 +48,22 @@ export const logOut = () =>{
             .catch(err => console.log(err));
     }
 }
+
+export const getUser = () => {
+    return dispatch => {
+        axios.get("http://localhost:3006/alumnos/", {withCredentials: true})
+        .then (() =>dispatch ({type: UserActionTypes.GET_USER, payload: res.data}))
+        .catch (err => console.log(err))
+    }
+}
+
+export const putUser = ({usuarioId, grupoId}) => {
+    return dispatch => {
+        axios.put("http://localhost:3006/alumnos/grupo/agregar",{
+        usuarioId: usuarioId,
+        grupoId: grupoId
+        }, {withCredentials: true})
+        .then(() => dispatch ({type: UserActionTypes.PUT_USER, payload: res.data}))
+        .catch(err => console.log(err))
+        }
+    }
