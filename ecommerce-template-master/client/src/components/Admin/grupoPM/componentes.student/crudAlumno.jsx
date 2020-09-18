@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from 'react';
+import React, { useState, forwardRef, useEffect} from 'react';
 import MaterialTable from 'material-table';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -16,7 +16,7 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useSelector, useDispatch } from "react-redux";
-import { getAlumnosid } from '../../../../store/actions/alumnos'
+import { getUser } from '../../../../store/actions/alumnos'
 
 
 const tableIcons = {
@@ -55,6 +55,11 @@ export default function CrudAlumnos() {
     const cohorte = useSelector((state) => state.cohorte.cohortes);
     const alumnos = useSelector((state) => state.alumnos.alumnos);
 
+    useEffect(() => {
+        // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
+        dispatch(getUser())
+    
+    }, [])
 
     return (
         <MaterialTable
@@ -63,7 +68,6 @@ export default function CrudAlumnos() {
             columns={columns}
             data={alumnos}
             editable={{
-               
                 onRowUpdate: <div> </div>,
                 onRowDelete: <div> </div> 
             }}
