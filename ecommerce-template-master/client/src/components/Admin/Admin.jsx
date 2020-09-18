@@ -7,13 +7,13 @@ import GrupoPM from "./grupoPM/grupoPM"
 
 //material ui
 import ReceiptIcon from "@material-ui/icons/Receipt";
-import StoreIcon from "@material-ui/icons/Store";
+import GroupIcon from '@material-ui/icons/Group';
 import ListAltIcon from "@material-ui/icons/ListAlt";
 
 
 export default function AdminPage() {
   const [component, setComponent] = useState();
-  
+
   useEffect(() => {
     let temp = <h3>Bienvenido al panel de administracion</h3>;
     setComponent(temp);
@@ -24,9 +24,12 @@ export default function AdminPage() {
     switch (e.target.id) {
       case "grupo_pm":
         element = <GrupoPM />;
-        break;  
+        break;
       case "nuevo_cohorte":
         element = <NuevoCohorte />;
+        break;
+      case "grupo_pp":
+        element = <GrupoPP />;
         break;
       default:
         element = <h2>Entro al default</h2>;
@@ -62,7 +65,17 @@ export default function AdminPage() {
           <ListAltIcon className={s.icon} />
           Nuevo cohorte
         </label>
-        
+        <input
+          type="radio"
+          onChange={(e) => renderComponent(e)}
+          id="grupo_pp"
+          name="menu"
+          value="products"
+        />
+        <label htmlFor="grupo_pp">
+          <GroupIcon className={s.icon} />
+          Crear grupo PP
+        </label>
       </div>
       <div className={s.main}>{component && component}</div>
     </div>
