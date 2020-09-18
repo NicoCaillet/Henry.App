@@ -15,6 +15,8 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import { useSelector, useDispatch } from "react-redux";
+import { getAlumnosid } from '../../../../store/actions/alumnos'
 
 
 const tableIcons = {
@@ -35,25 +37,23 @@ const tableIcons = {
     SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
-}
+};
+
+const columns = [
+    { title: 'Nombre', field: 'nombre' },
+    { title: 'Apellido', field: 'apellido' },
+    { title: 'E-mail', field: 'email' },
+    { title: 'Rol', field: 'rol' },
+    { title: 'Cohorte', field: 'cohorteId', type: 'numeric' },
+    { title: 'Grupo', field: 'grupoId', type: 'numeric' },
+    { title: 'Grupo-PP', field: 'pairId', type: 'numeric' }
+]
 
 export default function CrudAlumnos() {
+    const alumnos = useSelector((state) => state.alumnos.alumnos);
     const [state, setState] = useState({
-        data: [
-            { nombre: 'Edinson', apellido: 'Rosario', email: 'edijr@mail.com', rol: 'alumno', cohorte: 'WebFt03', grupo: '4', grupoPP: '7' },
-            { nombre: 'Nahuel', apellido: 'Russo', email: 'nahue@mail.com', rol: 'alumno', cohorte: 'WebFt03', grupo: '4', grupoPP: '8' },
-        ],
+        data: alumnos
     });
-
-    const columns = [
-        { title: 'Nombre', field: 'nombre' },
-        { title: 'Apellido', field: 'apellido' },
-        { title: 'E-mail', field: 'email' },
-        { title: 'Rol', field: 'rol' },
-        { title: 'Cohorte', field: 'cohorte' },
-        { title: 'Grupo', field: 'grupo' },
-        { title: 'Grupo-PP', field: 'grupoPP' }
-    ]
 
     return (
         <MaterialTable
