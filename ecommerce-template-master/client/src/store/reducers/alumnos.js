@@ -18,11 +18,16 @@ export const alumnosReducer = (state = initialState, action) => {
                     ...state,
                     user: action.payload
                 }
-                case alumnosActionTypes.PUT_USER:
+                case alumnosActionTypes.PUT_USER_GRUPO:
                     return {
                         ...state,
                         user: action.payload
                     }
+                    case alumnosActionTypes.PUT_USER_COHORTE:
+                        return {
+                            ...state,
+                            user: action.payload
+                        }
         
         default:
             return state
