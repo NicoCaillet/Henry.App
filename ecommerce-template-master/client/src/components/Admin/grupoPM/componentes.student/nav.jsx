@@ -6,8 +6,10 @@ import { TextField, Popover, Grid, Container, Card, CardMedia, CardActions, Card
 import { Slide, Dialog, DialogActions, DialogContent, DialogTitle, Button } from "@material-ui/core";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import EditIcon from '@material-ui/icons/Edit'
-import axios from 'axios'
+import EditIcon from '@material-ui/icons/Edit';
+import ListIcon from '@material-ui/icons/List';
+import axios from 'axios';
+import CrudAlumnos from './crudAlumno';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -41,11 +44,11 @@ export default function ButtonAppBar() {
     setOpenEdit(false);
     putUsuario.emails.split(',').map(elem => {
       axios.post('http://localhost:3006/alumnos/agregar',
-      {
-        email: elem
-      }, {withCredencials: true})
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
+        {
+          email: elem
+        }, { withCredencials: true })
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
     })
   };
   //handleSubmit
@@ -55,7 +58,15 @@ export default function ButtonAppBar() {
       [e.target.name]: e.target.value,
     })
   }
+  // ----------------------------------------------------------
+  const [openEdit2, setOpenEdit2] = useState(false);
+  const handleClickOpenEdit2 = () => {
+    setOpenEdit2(true);
+  };
 
+  const handleCloseEdit2 = () => {
+    setOpenEdit2(false);
+  };
 
   const classes = useStyles();
   return (
@@ -65,6 +76,21 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             <span className={s.titulo}>Cohorte</span>
           </Typography>
+          <IconButton color='primary' onClick={handleClickOpenEdit2}>
+            <ListIcon />
+          </IconButton>
+          <Dialog maxWidth='lg' fullWidth open={openEdit2} onClose={handleCloseEdit2} TransitionComponent={Transition} keepMounted aria-labelledby="alert-dialog-slide-title" aria-describedby="alert-dialog-slide-description">
+            <DialogContent>
+              <CrudAlumnos />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseEdit2} color="secondary">
+                Cerrar
+            </Button>
+            </DialogActions>
+          </Dialog>
+
+          {/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
           <IconButton color='primary' onClick={handleClickOpenEdit}>
             <EditIcon />
           </IconButton>
