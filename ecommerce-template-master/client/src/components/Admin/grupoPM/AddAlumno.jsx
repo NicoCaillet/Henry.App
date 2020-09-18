@@ -20,7 +20,7 @@ export default function AddAlumno({id}) {
         // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
         dispatch(getAlumnosid(id))
         
-    }, id)
+    },[id])
 
 
     return (
