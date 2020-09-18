@@ -49,12 +49,9 @@ return usuario.save()
     .catch(err => next(err));
 })
 server.put("/cohorte/agregar", (req, res, next) => {
-    Usuario.update({
-        cohorteId: req.body.cohorteId
-    }, {
-        where: {
-            id: req.body.usuarioId
-        }
+    Usuario.findByPk(req.body.usuarioId)
+    .then(usuario => {usuario.cohorteId = req.body.cohorteId;
+        return usuario.save();
     }).then(usuario => res.json(usuario))
         .catch(err => next(err));
 })
