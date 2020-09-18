@@ -2,7 +2,8 @@ import { alumnosActionTypes } from '../actions/alumnos.js';
 
 
 const initialState = {
-    alumnos: []
+    alumnos: [],
+    user: [] 
 };
 
 export const alumnosReducer = (state = initialState, action) => {
@@ -12,6 +13,16 @@ export const alumnosReducer = (state = initialState, action) => {
                 ...state,
                 alumnos: action.payload,
             }
+            case alumnosActionTypes.GET_USER:
+                return {
+                    ...state,
+                    user: action.payload
+                }
+                case alumnosActionTypes.PUT_USER:
+                    return {
+                        ...state,
+                        user: action.payload
+                    }
         
         default:
             return state
