@@ -3,7 +3,7 @@ import { alumnosActionTypes } from '../actions/alumnos.js';
 
 const initialState = {
     alumnos: [],
-    user: [] 
+    user: []
 };
 
 export const alumnosReducer = (state = initialState, action) => {
@@ -16,17 +16,17 @@ export const alumnosReducer = (state = initialState, action) => {
             case alumnosActionTypes.GET_USER:
                 return {
                     ...state,
-                    user: action.payload
+                    alumnos: action.payload
                 }
                 case alumnosActionTypes.PUT_USER_GRUPO:
                     return {
                         ...state,
-                        user: action.payload
+                        alumnos: action.payload
                     }
                     case alumnosActionTypes.PUT_USER_COHORTE:
                         return {
                             ...state,
-                            user: action.payload
+                            alumnos: action.payload
                         }
         
         default:

@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from 'react';
+import React, { useState, forwardRef, useEffect} from 'react';
 import MaterialTable from 'material-table';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -16,11 +16,11 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useSelector, useDispatch } from "react-redux";
-import { getAlumnosid } from '../../../../store/actions/alumnos'
+import { getUser } from '../../../../store/actions/alumnos'
 
 
 const tableIcons = {
-    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+    
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
     Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
     Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
@@ -50,53 +50,26 @@ const columns = [
 ]
 
 export default function CrudAlumnos() {
+    const dispatch = useDispatch();
+
+    const cohorte = useSelector((state) => state.cohorte.cohortes);
     const alumnos = useSelector((state) => state.alumnos.alumnos);
-    const [state, setState] = useState({
-        data: alumnos
-    });
+
+    useEffect(() => {
+        // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
+        dispatch(getUser())
+    
+    }, [])
 
     return (
         <MaterialTable
             title="Editar Estudiantes"
             icons={tableIcons}
             columns={columns}
-            data={state.data}
+            data={alumnos}
             editable={{
-                onRowAdd: (newData) =>
-                    new Promise((resolve) => {
-                        setTimeout(() => {
-                            resolve();
-                            setState((prevState) => {
-                                const data = [...prevState.data];
-                                data.push(newData);
-                                return { ...prevState, data };
-                            });
-                        }, 600);
-                    }),
-                onRowUpdate: (newData, oldData) =>
-                    new Promise((resolve) => {
-                        setTimeout(() => {
-                            resolve();
-                            if (oldData) {
-                                setState((prevState) => {
-                                    const data = [...prevState.data];
-                                    data[data.indexOf(oldData)] = newData;
-                                    return { ...prevState, data };
-                                });
-                            }
-                        }, 600);
-                    }),
-                onRowDelete: (oldData) =>
-                    new Promise((resolve) => {
-                        setTimeout(() => {
-                            resolve();
-                            setState((prevState) => {
-                                const data = [...prevState.data];
-                                data.splice(data.indexOf(oldData), 1);
-                                return { ...prevState, data };
-                            });
-                        }, 600);
-                    }),
+            onRowUpdate: {/*putUsuarioGrupo()*/}
+                
             }}
         />
     );
