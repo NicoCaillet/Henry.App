@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import { useSelector, useDispatch } from "react-redux";
 import { getAlumnosid } from '../../../store/actions/alumnos.js'
 
+
 export default function AddAlumno({id}) {
     // const [component, setComponent] = useState(),
     
@@ -19,8 +20,8 @@ export default function AddAlumno({id}) {
     useEffect(() => {
         // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
         dispatch(getAlumnosid(id))
-        
-    }, id)
+    
+    }, [id])
 
 
     return (

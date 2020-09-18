@@ -14,3 +14,6 @@ export const alumnosActionTypes = {
       }).catch(err => console.log(err));
     };
   };
+
+
+

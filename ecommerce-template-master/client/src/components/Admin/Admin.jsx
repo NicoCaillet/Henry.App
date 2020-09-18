@@ -4,6 +4,7 @@ import s from "./AdminPage.module.css";
 import NuevoCohorte from "./nuevocohorte/nuevocohorte"
 import GrupoPP from "./grupoPP/grupoPP"
 import GrupoPM from "./grupoPM/grupoPM"
+import Contenedor from './usuarios/contenedortabla.jsx'
 
 //material ui
 import ReceiptIcon from "@material-ui/icons/Receipt";
@@ -30,6 +31,9 @@ export default function AdminPage() {
         break;
       case "grupo_pp":
         element = <GrupoPP />;
+        break;
+      case "usuarios": 
+        element = <Contenedor /> 
         break;
       default:
         element = <h2>Entro al default</h2>;
@@ -75,6 +79,17 @@ export default function AdminPage() {
         <label htmlFor="grupo_pp">
           <GroupIcon className={s.icon} />
           Crear grupo PP
+        </label>
+        <input
+          type="radio"
+          onChange={(e) => renderComponent(e)}
+          id="usuarios"
+          name="menu"
+          value="orders"
+        />
+        <label htmlFor="usuarios">
+          <ReceiptIcon className={s.icon} />
+          Administracion de usuarios
         </label>
       </div>
       <div className={s.main}>{component && component}</div>
