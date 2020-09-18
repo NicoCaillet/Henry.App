@@ -68,8 +68,8 @@ export default function CrudAlumnos() {
             columns={columns}
             data={alumnos}
             editable={{
-                onRowUpdate: <div> </div>,
-                onRowDelete: <div> </div> 
+            onRowUpdate: {/*putUsuarioGrupo()*/}
+                
             }}
         />
     );
