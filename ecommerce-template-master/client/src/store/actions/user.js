@@ -52,18 +52,18 @@ export const logOut = () =>{
 export const getUser = () => {
     return dispatch => {
         axios.get("http://localhost:3006/alumnos/", {withCredentials: true})
-        .then (() =>dispatch ({type: UserActionTypes.GET_USER, payload: res.data}))
+        .then ((res) =>dispatch ({type: UserActionTypes.GET_USER, payload: res.data}))
         .catch (err => console.log(err))
     }
 }
 
-export const putUser = ({usuarioId, grupoId}) => {
+export const putUsuario = ({usuarioId, grupoId}) => {
     return dispatch => {
         axios.put("http://localhost:3006/alumnos/grupo/agregar",{
         usuarioId: usuarioId,
         grupoId: grupoId
         }, {withCredentials: true})
-        .then(() => dispatch ({type: UserActionTypes.PUT_USER, payload: res.data}))
+        .then((res) => dispatch ({type: UserActionTypes.PUT_USER, payload: res.data}))
         .catch(err => console.log(err))
         }
     }
