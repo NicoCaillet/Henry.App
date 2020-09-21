@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import s from "./nav.module.css"
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField, Popover, Grid, Container, Card, CardMedia, CardActions, CardHeader, Divider, Typography, IconButton } from '@material-ui/core';
-import { Slide, Dialog, DialogActions, DialogContent, DialogTitle, Button } from "@material-ui/core";
+import { TextField, Popover, Grid, Container, Card, CardMedia, CardActions, CardHeader, Divider, Typography, IconButton, Chip } from '@material-ui/core';
+import { Slide, Dialog, DialogActions, DialogContent, DialogContentText , DialogTitle, Button } from "@material-ui/core";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import EditIcon from '@material-ui/icons/Edit';
@@ -23,39 +23,34 @@ const useStyles = makeStyles((theme) => ({
   },
 
 }));
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 export default function ButtonAppBar() {
   const [openEdit, setOpenEdit] = useState(false);
   const [putUsuario, setPutUsuario] = useState('')
-
+  const [Emails, setEmails] = useState([]);
+  const regex = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/gi;
   const handleClickOpenEdit = () => {
     setOpenEdit(true);
   };
-
   const handleCloseEdit = () => {
     setOpenEdit(false);
   };
-
   const handleConfirm = () => {
     setOpenEdit(false);
-    putUsuario.emails.split(',').map(elem => {
       axios.post('http://localhost:3006/alumnos/agregar',
         {
-          email: elem
+          emails: putUsuario.emails.match(regex)
         }, { withCredencials: true })
         .then(res => console.log(res))
         .catch(err => console.log(err))
-    })
   };
   //handleSubmit
   const handleSubmit = (e) => {
     setPutUsuario({
       ...putUsuario,
-      [e.target.name]: e.target.value,
+      emails: e.target.value,
     })
   }
   // ----------------------------------------------------------
@@ -67,7 +62,6 @@ export default function ButtonAppBar() {
   const handleCloseEdit2 = () => {
     setOpenEdit2(false);
   };
-
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -82,11 +76,20 @@ export default function ButtonAppBar() {
           </IconButton>
           <Dialog open={openEdit} onClose={handleCloseEdit} TransitionComponent={Transition} keepMounted aria-labelledby="alert-dialog-slide-title" aria-describedby="alert-dialog-slide-description">
             <DialogTitle id="form-dialog-title">Agregar Estudiantes</DialogTitle>
+            <DialogContentText>
+              Separar por: (,) (:) (;) (\) (,) (Enter) o (Espacio)
+            </DialogContentText>
             <DialogContent>
-              <TextField onChange={handleSubmit} value={putUsuario.emails} label="E-mails" name="emails" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-              {/* <TextField onChange={handleSubmit} value={putUsuario.apellido} label="Apellido" name="apellido" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-              <TextField onChange={handleSubmit} value={putUsuario.edad} label="Edad" name="edad" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-              <TextField onChange={handleSubmit} value={putUsuario.email} label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth /> */}
+              <TextField onChange={handleSubmit} value={putUsuario.emails} label="E-mails" name="emails" autoFocus margin="dense" type="text" color='secondary' 
+              fullWidth
+              multiline
+               />
+              {putUsuario.emails && putUsuario.emails.match(regex) && putUsuario.emails.match(regex).map(email =>
+                <Chip label={email} color="primary" onDelete={() =>{
+                  const newEmails = putUsuario.emails.replace(email, "");
+                  setPutUsuario({...putUsuario, emails: newEmails.trim()});
+                }}/>
+              )}
             </DialogContent>
             <DialogActions>
               <Button onClick={handleCloseEdit} color="secondary">

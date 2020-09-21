@@ -1,7 +1,8 @@
-/* import React, { useState, forwardRef, useEffect} from 'react';
+import React, { useState, forwardRef, useEffect} from 'react';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import Check from '@material-ui/icons/Check';
+import Close from '@material-ui/icons/Close';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import Clear from '@material-ui/icons/Clear';
@@ -19,7 +20,6 @@ import { getUser } from '../../../../store/actions/alumnos'
 import {TableContainer, TableHead, TableBody, TableRow, TableCell, Paper} from '@material-ui/core';
 
 const tableIcons = {
-    
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
     Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
     Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
@@ -37,48 +37,54 @@ const tableIcons = {
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
-
-const columns = [
-    { title: 'Nombre', field: 'nombre' },
-    { title: 'Apellido', field: 'apellido' },
-    { title: 'E-mail', field: 'email' },
-    { title: 'Rol', field: 'rol' },
-    { title: 'Cohorte', field: 'cohorteId', type: 'numeric' },
-    { title: 'Grupo', field: 'grupoId', type: 'numeric' },
-    { title: 'Grupo-PP', field: 'pairId', type: 'numeric' }
-]
-
 export default function CrudAlumnos() {
     const dispatch = useDispatch();
-
-    const cohorte = useSelector((state) => state.cohorte.cohortes);
     const alumnos = useSelector((state) => state.alumnos.alumnos);
 
     useEffect(() => {
         // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
         dispatch(getUser())
     }, [])
+    const handleEdit = (id) =>{
+
+    };
+    const handleDelete = (id) =>{
+
+    };
     return (
         <TableContainer component={Paper}>
             <TableHead>
                 <TableRow>
                     {Object.keys(alumnos[0]).map(key =>(
-                        <TableCell>{key}</TableCell>
+                        <TableCell variant="head">{key.toUpperCase()}</TableCell>
                     ))}
+                    <TableCell variant="head">EDITAR</TableCell>
+                    <TableCell variant="head">ELIMINAR</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
                 {alumnos.map(alumno => (
                     <TableRow>
-                        <TableCell>
-                            {alumno.email}
-                        </TableCell>
+                            {(()=>{
+                                let keys = [];
+                                for(let key in alumno){
+                                    keys.push(alumno[key])
+                                }
+                                return keys.map(cell => {
+                                    return(
+                                        <TableCell>{
+                                            typeof cell === "boolean"?
+                                            (cell?<Check/>:<Close/>):
+                                            cell
+                                        }</TableCell>
+                                    );
+                                })
+                            })()}
+                            <TableCell onClick={() => handleEdit(alumno.id)}><Edit/></TableCell>
+                            <TableCell onClick={() => handleDelete(alumno.id)}><DeleteOutline/></TableCell>
                     </TableRow>
                 ))}
             </TableBody>
         </TableContainer>
     );
 }
-
-
- */

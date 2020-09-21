@@ -4,8 +4,8 @@ const {Op} = require("sequelize");
 //get de todos los alumnos
 server.get("/", (req, res, next) =>{
     Usuario.findAll({
-        atributtes:{
-            excludes:["provider, providerId", "password", "salt"]
+        attributes:{
+            exclude:["password", "provider", "providerId", "salt", "rol", "createdAt", "updatedAt" ]
         },
         where:{
             rol: "alumno"
@@ -64,11 +64,14 @@ server.put("/cohorte/agregar", (req, res, next) => {
 })
 //crea un usuario con solo email
 server.post('/agregar', (req, res, next) => {
-    Usuario.create({
-        email: req.body.email,
-        rol: 'alumno',
-        active: true
-    }).then( () => res.send('OK'))
+    const addEmails = req.body.emails.map(email => {
+        return Usuario.create({
+            email: email,
+            rol: 'alumno',
+            active: true
+        })
+    })
+    Promise.all(addEmails).then(() => res.send('OK'))
     .catch( err => next(err))
 })
 //trae todos los grupos pp de un cohorte
