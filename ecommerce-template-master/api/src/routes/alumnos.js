@@ -3,6 +3,9 @@ const {Usuario, Cohorte, Grupo} = require("../db");
 const {Op} = require("sequelize");
 server.get("/", (req, res, next) =>{
     Usuario.findAll({
+        attributes:{
+            exclude:["password", "provider", "providerId", "salt", "rol", "createdAt", "updatedAt" ]
+        },
         where:{
             rol: "alumno"
         }

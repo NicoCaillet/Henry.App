@@ -17,7 +17,6 @@ export default function Contenedor(props) {
     return (
         <div style={{ display: 'flex' }} >
             <div className={s.container + " " + s.margin}>
-               <Nav />
         
                 <TablaUsuarios /> 
             </div>

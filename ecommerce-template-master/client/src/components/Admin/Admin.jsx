@@ -32,7 +32,7 @@ export default function AdminPage() {
       case "grupo_pp":
         element = <GrupoPP />;
         break;
-      case "usuarios": 
+      case "alumnos": 
         element = <Contenedor /> 
         break;
       default:
@@ -83,13 +83,13 @@ export default function AdminPage() {
         <input
           type="radio"
           onChange={(e) => renderComponent(e)}
-          id="usuarios"
+          id="alumnos"
           name="menu"
           value="orders"
         />
-        <label htmlFor="usuarios">
+        <label htmlFor="alumnos">
           <ReceiptIcon className={s.icon} />
-          Administracion de usuarios
+          Administracion de alumnos
         </label>
       </div>
       <div className={s.main}>{component && component}</div>
