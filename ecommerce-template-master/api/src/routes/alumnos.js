@@ -1,7 +1,7 @@
 const server = require("express").Router();
 const {Usuario, Cohorte, Grupo} = require("../db");
 const {Op} = require("sequelize");
-
+//get de todos los alumnos
 server.get("/", (req, res, next) =>{
     Usuario.findAll({
         atributtes:{
@@ -13,6 +13,7 @@ server.get("/", (req, res, next) =>{
     }).then(alumnos => res.json(alumnos))
       .catch(err => next(err));
 })
+//get de todos los alumnos de un cohorte
 server.get("/cohorte/:cohorte", (req, res, next) =>{
     Usuario.findAll({
         where:{
@@ -45,6 +46,7 @@ server.get("/pm/:pm", async(req, res, next) =>{
     })
     .catch(err => next(err));
 });
+//actualiza el grupo de un alumno
 server.put("/grupo/agregar", (req, res, next) =>{
     Usuario.findByPk(req.body.usuarioId)
 .then(usuario => {usuario.grupoId = req.body.grupoId;
@@ -52,6 +54,7 @@ return usuario.save()
 }).then(usuario => res.json(usuario))
     .catch(err => next(err));
 })
+//actualiza el cohorte de un grupo
 server.put("/cohorte/agregar", (req, res, next) => {
     Usuario.findByPk(req.body.usuarioId)
     .then(usuario => {usuario.cohorteId = req.body.cohorteId;
@@ -59,6 +62,7 @@ server.put("/cohorte/agregar", (req, res, next) => {
     }).then(usuario => res.json(usuario))
         .catch(err => next(err));
 })
+//crea un usuario con solo email
 server.post('/agregar', (req, res, next) => {
     Usuario.create({
         email: req.body.email,
@@ -67,7 +71,6 @@ server.post('/agregar', (req, res, next) => {
     }).then( () => res.send('OK'))
     .catch( err => next(err))
 })
-//select grupoId from cohorte
 //trae todos los grupos pp de un cohorte
 server.get ("/grupopm/:cohorte", (req,res,next) => {
     Grupo.findAll({
