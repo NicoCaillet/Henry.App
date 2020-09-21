@@ -33,8 +33,8 @@ server.get("/pm/:pm", async(req, res, next) =>{
             "$usuarios.id$":{[Op.not]:pm.id}
         },
         include:{
-           model: Usuario,
-           as: "usuarios"
+        model: Usuario,
+        as: "usuarios"
         }
     }).then(grupo =>{
         res.json(grupo.usuarios);
@@ -42,22 +42,16 @@ server.get("/pm/:pm", async(req, res, next) =>{
     .catch(err => next(err));
 });
 server.put("/grupo/agregar", (req, res, next) =>{
-    Usuario.update({
-        grupoId: req.body.grupoId,
-    }, { 
-        where: {
-            id: req.body.usuarioId
-        } 
-    }).then(usuario => res.json(usuario))
-      .catch(err => next(err));
+    Usuario.findByPk(req.body.usuarioId)
+.then(usuario => {usuario.grupoId = req.body.grupoId;
+return usuario.save()
+}).then(usuario => res.json(usuario))
+    .catch(err => next(err));
 })
 server.put("/cohorte/agregar", (req, res, next) => {
-    Usuario.update({
-        cohorteId: req.body.cohorteId
-    }, {
-        where: {
-            id: req.body.usuarioId
-        }
+    Usuario.findByPk(req.body.usuarioId)
+    .then(usuario => {usuario.cohorteId = req.body.cohorteId;
+        return usuario.save();
     }).then(usuario => res.json(usuario))
         .catch(err => next(err));
 })

@@ -3,7 +3,8 @@ export const UserActionTypes = {
     SET_USER: 'SET_USER',
     PUT_USER: "PUT_USER",
     LOG_OUT: 'LOG_OUT',
-    RE_PASS: 'RE_PASS'
+    RE_PASS: 'RE_PASS',
+   
 }
 
 export const setUser = (user) => {

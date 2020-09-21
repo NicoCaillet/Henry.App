@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ButtonBase from '@material-ui/core/ButtonBase';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
+import { ButtonBase, Typography, Grid, Container } from '@material-ui/core'
 import useStyles from './Home.styles'
 
 const images = [
@@ -34,7 +31,7 @@ export default function Home() {
                 {images.map((image) => (
                     <Grid item key={image} xs={8} sm={10} md={5}>
                         {/* OJO QUE EL LINK ESTA HARDCODEADO */}
-                        <Link style={{ textDecoration: 'none' }} to={`/modulo/${image.title}`} >
+                        <Link style={{ textDecoration: 'none' }} to={`/modulo/${image.title}`} modulo={image.modulo} >
                             <ButtonBase key={image.title} className={classes.image} focusVisibleClassName={classes.focusVisible}>
                                 <span
                                     className={classes.imageSrc}
