@@ -15,9 +15,9 @@ import Registrarse from './components/Registrarse/Registrarse';
 import { connect } from 'react-redux';
 import { pruebaRedux } from './store/actions/actionTest';
 import store from './store/';
-store.subscribe(()=>{
+store.subscribe(() => {
   const state = store.getState();
-  localStorage.setItem("state",JSON.stringify(state));
+  localStorage.setItem("state", JSON.stringify(state));
 })
 const theme = createMuiTheme({
   palette: {
@@ -52,7 +52,7 @@ function App(props) {
         <Route path="/Registrarse">
           <Registrarse />
         </Route>
-        <Route exact path="/Modulo/:id">
+        <Route exact path="/Modulo/:modulo">
           <Modulo />
         </Route>
         <Route exact path="/Admin">
