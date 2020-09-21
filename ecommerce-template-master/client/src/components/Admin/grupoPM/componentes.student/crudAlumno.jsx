@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useEffect, useStyles} from 'react';
+import React, { useState, forwardRef, useEffect} from 'react';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import Check from '@material-ui/icons/Check';
@@ -17,11 +17,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from '../../../../store/actions/alumnos'
-import {TableContainer, TableHead, TableBody, TableRow, TableCell, Paper, IconButton} from '@material-ui/core';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
-
-
+import {TableContainer, TableHead, TableBody, TableRow, TableCell, Paper} from '@material-ui/core';
 
 const tableIcons = {
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -45,18 +41,16 @@ export default function CrudAlumnos() {
     const dispatch = useDispatch();
     const alumnos = useSelector((state) => state.alumnos.alumnos);
 
-    
     useEffect(() => {
         // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
         dispatch(getUser())
     }, [])
     const handleEdit = (id) =>{
-        
+
     };
     const handleDelete = (id) =>{
-        
+
     };
-    if(alumnos.length)
     return (
         <TableContainer component={Paper}>
             <TableHead>
@@ -86,15 +80,11 @@ export default function CrudAlumnos() {
                                     );
                                 })
                             })()}
-                            <TableCell component={IconButton} onClick={() => handleEdit(alumno.id)}><Edit/></TableCell>
-                            <TableCell component={IconButton} onClick={() => handleDelete(alumno.id)}><DeleteOutline/></TableCell>
+                            <TableCell onClick={() => handleEdit(alumno.id)}><Edit/></TableCell>
+                            <TableCell onClick={() => handleDelete(alumno.id)}><DeleteOutline/></TableCell>
                     </TableRow>
                 ))}
             </TableBody>
         </TableContainer>
     );
-    return (
-        <CircularProgress color="inherit" />
-    
-    )
 }

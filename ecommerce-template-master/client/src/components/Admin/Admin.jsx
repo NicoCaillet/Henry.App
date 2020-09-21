@@ -95,6 +95,4 @@ export default function AdminPage() {
       <div className={s.main}>{component && component}</div>
     </div>
   );
-    
-
 }
