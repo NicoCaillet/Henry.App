@@ -1,5 +1,4 @@
-import React, { useState, forwardRef, useEffect} from 'react';
-import MaterialTable from 'material-table';
+/* import React, { useState, forwardRef, useEffect} from 'react';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import Check from '@material-ui/icons/Check';
@@ -17,7 +16,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from '../../../../store/actions/alumnos'
-
+import {TableContainer, TableHead, TableBody, TableRow, TableCell, Paper} from '@material-ui/core';
 
 const tableIcons = {
     
@@ -58,19 +57,28 @@ export default function CrudAlumnos() {
     useEffect(() => {
         // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
         dispatch(getUser())
-    
     }, [])
-
     return (
-        <MaterialTable
-            title="Editar Estudiantes"
-            icons={tableIcons}
-            columns={columns}
-            data={alumnos}
-            editable={{
-            onRowUpdate: {/*putUsuarioGrupo()*/}
-                
-            }}
-        />
+        <TableContainer component={Paper}>
+            <TableHead>
+                <TableRow>
+                    {Object.keys(alumnos[0]).map(key =>(
+                        <TableCell>{key}</TableCell>
+                    ))}
+                </TableRow>
+            </TableHead>
+            <TableBody>
+                {alumnos.map(alumno => (
+                    <TableRow>
+                        <TableCell>
+                            {alumno.email}
+                        </TableCell>
+                    </TableRow>
+                ))}
+            </TableBody>
+        </TableContainer>
     );
 }
+
+
+ */

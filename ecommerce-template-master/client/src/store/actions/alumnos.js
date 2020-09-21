@@ -22,7 +22,7 @@ export const alumnosActionTypes = {
 export const getUser = () => {
   return dispatch => {
       axios.get("http://localhost:3006/alumnos/", {withCredentials: true})
-      .then ((res) =>dispatch ({type: alumnosActionTypes.GET_USER, payload: res.data}))
+      .then ((res) => dispatch ({type: alumnosActionTypes.GET_USER, payload: res.data}))
       .catch (err => console.log(err))
   }
 }
