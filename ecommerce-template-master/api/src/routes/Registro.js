@@ -44,6 +44,7 @@ server.post('/', async(req, res, next) => {
 			return res.status(500).json({ status: "error", message: "Error, el email ya existe.", input: "email", err });
 		}
 });
+//login de un usuario
 server.post("/login", async (req, res, next) =>{
 	passport.authenticate("local", function (err, user, info) {
 		if (err) {
@@ -60,6 +61,8 @@ server.post("/login", async (req, res, next) =>{
 		});
 	})(req, res, next);
 });
+
+//deslogueo de un usuario
 server.get('/logout', (req, res) =>{
 	req.logout();
 	res.sendStatus(200);
@@ -101,6 +104,8 @@ server.put('/update/:id', (req, res) => {
 			res.send('Usuario inexistente');
 		});
 });
+
+//cambio de password
 server.put('/repassword', (req, res, next) =>{
 	const passwordHash = crypto.pbkdf2Sync(req.body.password, req.user.salt, 10000, 64, "sha512").toString("base64");
 	if(passwordHash !== req.user.password) return res.sendStatus(401);
