@@ -1,7 +1,7 @@
 const server = require("express").Router();
 const {Pair, Usuario} = require("../db");
 
-
+//crea un grupo de pair programming
 server.post("/grupo", (req, res, next) =>{
     Pair.create({
         alumnos: req.body.alumnos,
@@ -10,7 +10,7 @@ server.post("/grupo", (req, res, next) =>{
     }).then(pair => res.json(pair))
         .catch(err => next(err));
 });
-
+//trae los alumnos del grupo de pairprogramming
 server.get("/", (req, res, next) =>{
 
     Pair.findOne({

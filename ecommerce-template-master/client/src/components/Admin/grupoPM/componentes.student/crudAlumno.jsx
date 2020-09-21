@@ -44,7 +44,6 @@ export default function CrudAlumnos() {
     useEffect(() => {
         // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
         dispatch(getUser())
-    
     }, [])
     const handleEdit = (id) =>{
 

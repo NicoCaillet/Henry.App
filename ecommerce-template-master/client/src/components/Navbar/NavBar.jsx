@@ -20,6 +20,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import {useDispatch} from 'react-redux';
 import {logOut} from '../../store/actions/user';
+import { connect } from 'react-redux'
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ButtonAppBar() {
+function ButtonAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [auth, setAuth] = React.useState(true);
@@ -57,14 +58,14 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title + " " + s.letras + " " + s.espacio}>
            <Link to="/Home"> <img src={imagen} alt="" className={s.imagen}/> </Link> 
            <div className={s.divs + " " + s.equipo}> 
-            <Link to="/miEquipo" className={s.nolink }> 
+            {props.user.user && (<Link to="/miEquipo" className={s.nolink }> 
             <h6 className={s.titulosnav}> Tu equipo </h6>
-            </Link>
+            </Link>)}
            </div> 
            <div className={s.divs + " " + s.div}> 
-            <Link to="/Admin" className={s.nolink}> 
+            {props.user.user && (props.user.user.rol == 'pm' || props.user.user.rol == 'director') && (<Link to="/Admin" className={s.nolink}> 
             <h6 className={s.titulosnav + " " + s.espacio}> Administrar </h6>
-            </Link>
+            </Link>)}
            </div>         
           
            </Typography>
@@ -114,3 +115,8 @@ export default function ButtonAppBar() {
   );
 }
 
+const mapStateToProps = ({ user }) => ({
+  user
+})
+
+export default connect(mapStateToProps, null)(ButtonAppBar)
