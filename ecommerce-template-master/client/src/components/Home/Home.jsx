@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ButtonBase from '@material-ui/core/ButtonBase';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
+import { ButtonBase, Typography, Grid, Container } from '@material-ui/core'
 import useStyles from './Home.styles'
 
 const images = [
