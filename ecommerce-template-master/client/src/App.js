@@ -43,9 +43,9 @@ function App(props) {
           <Input />
         </Route>
         {/* Mas adelante vamos a poner el HomeUser en path="/" */}
-        <Route exact path="/Home">
+        {props.user.user && (<Route exact path="/Home">
           <Home />
-        </Route>
+        </Route>)}
         <Route exact path="/MiPerfil">
           <MiPerfil />
         </Route>
@@ -75,8 +75,9 @@ function App(props) {
 }
 
 //REDUX INSTALADO STORE DE PRUEBA Y ACTION DE PRUEBA
-const mapStateToProps = ({ test }) => ({
-  test
+const mapStateToProps = ({ test, user }) => ({
+  test,
+  user
 })
 
 const mapDispatchToProps = dispatch => ({
