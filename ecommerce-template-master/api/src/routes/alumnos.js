@@ -1,8 +1,12 @@
 const server = require("express").Router();
 const {Usuario, Cohorte, Grupo} = require("../db");
 const {Op} = require("sequelize");
+
 server.get("/", (req, res, next) =>{
     Usuario.findAll({
+        atributtes:{
+            excludes:["provider, providerId", "password", "salt"]
+        },
         where:{
             rol: "alumno"
         }
@@ -22,7 +26,7 @@ server.get("/cohorte/:cohorte", (req, res, next) =>{
     }).then(usuario => res.json(usuario))
         .catch(err => next(err));
 });
-
+//trae alumnos de un grupo pm
 server.get("/pm/:pm", async(req, res, next) =>{
     const pm = await Usuario.findOne({
         where:{ nombre: req.params.pm }
@@ -63,4 +67,19 @@ server.post('/agregar', (req, res, next) => {
     }).then( () => res.send('OK'))
     .catch( err => next(err))
 })
+//select grupoId from cohorte
+//trae todos los grupos pp de un cohorte
+server.get ("/grupopm/:cohorte", (req,res,next) => {
+    Grupo.findAll({
+        where : {
+            "$cohorte.id$": req.params.cohorte
+        },
+        include: {
+            model : Cohorte,
+            as : "cohorte"
+        }
+    }).then(grupo => res.json(grupo))
+    .catch(err => next(err))
+})
+
 module.exports = server;

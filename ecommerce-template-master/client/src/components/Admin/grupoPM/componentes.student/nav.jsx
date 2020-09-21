@@ -76,20 +76,6 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             <span className={s.titulo}>Cohorte</span>
           </Typography>
-          <IconButton color='primary' onClick={handleClickOpenEdit2}>
-            <ListIcon />
-          </IconButton>
-          <Dialog maxWidth='lg' fullWidth open={openEdit2} onClose={handleCloseEdit2} TransitionComponent={Transition} keepMounted aria-labelledby="alert-dialog-slide-title" aria-describedby="alert-dialog-slide-description">
-            <DialogContent>
-              <CrudAlumnos />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleCloseEdit2} color="secondary">
-                Cerrar
-            </Button>
-            </DialogActions>
-          </Dialog>
-
           {/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
           <IconButton color='primary' onClick={handleClickOpenEdit}>
             <EditIcon />
