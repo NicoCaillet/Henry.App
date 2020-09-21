@@ -62,11 +62,14 @@ server.put("/cohorte/agregar", (req, res, next) => {
         .catch(err => next(err));
 })
 server.post('/agregar', (req, res, next) => {
-    Usuario.create({
-        email: req.body.email,
-        rol: 'alumno',
-        active: true
-    }).then( () => res.send('OK'))
+    const addEmails = req.body.emails.map(email => {
+        return Usuario.create({
+            email: email,
+            rol: 'alumno',
+            active: true
+        })
+    })
+    Promise.all(addEmails).then(() => res.send('OK'))
     .catch( err => next(err))
 })
 module.exports = server;

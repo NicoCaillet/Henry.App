@@ -26,10 +26,8 @@ server.get("/:id", (req, res, next) =>{
 
 
 server.post("/nuevo", (req, res, next) =>{
-    const Validfecha = moment(req.body.fecha, "DD/MM/YYYY").isValid();
-    if(!Validfecha) return res.status(500).json({ msg:"Formato de fecha invalido" });
      Cohorte.create({
-        fecha: moment(req.body.fecha, "DD/MM/YYYY").format(),
+        fecha: req.body.fecha, 
         nombre: req.body.nombre
     }).then(cohorte => res.json(cohorte))
         .catch(err => next(err));

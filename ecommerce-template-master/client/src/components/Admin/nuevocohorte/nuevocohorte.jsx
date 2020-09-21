@@ -6,16 +6,26 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
 import { setCohorte } from '../../../store/actions/cohorte.js'
 import { useSelector, useDispatch } from "react-redux";
-  
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
+import { es } from 'date-fns/locale'
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
 export default function NuevoCohorte(props) {
   
 const cohorte = useSelector((state) => state.cohorte.cohorte)
   
   const [cohorteA, setCohorteA] = useState({cohorte})
   const dispatch = useDispatch()
-
+  const handleDateChange = (date) => {
+    setCohorteA({
+      ...cohorteA,
+      "fecha":date
+    })
+  }
   const handleInputChange = (e) => {
-    e.preventDefault();
     setCohorteA({
       ...cohorteA,
       [e.target.name]: e.target.value
@@ -27,18 +37,25 @@ const cohorte = useSelector((state) => state.cohorte.cohorte)
       <div className={s.aside}>
         <h3> Crear nuevo cohorte</h3>
         <div>
-        <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            label="Fecha de inicio"
-            fullWidth
-            type="text"
-            name="fecha"
-            value={cohorteA.fecha}
-            onChange={handleInputChange}
-            autoFocus />
-
+        <MuiPickersUtilsProvider locale={es} utils={DateFnsUtils}>
+      <Grid container justify="space-around">
+        <KeyboardDatePicker
+          margin="normal"
+          name="name"
+          label="Fecha de inicio"
+          format="dd/M/yyyy"
+          inputVariant="outlined"
+          variant="dialog"
+          orientation="portrait"
+          invalidDateMessage="Formato invalido"
+          value={cohorteA["fecha"]}
+          onChange={handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
+      </Grid>
+    </MuiPickersUtilsProvider>
           <TextField
             variant="outlined"
             margin="normal"
