@@ -17,7 +17,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from '../../../../store/actions/alumnos'
-import {TableContainer, TableHead, TableBody, TableRow, TableCell, Paper, IconButton} from '@material-ui/core';
+import {TableContainer, TableHead, TableBody, TableRow, TableCell, Paper, Button} from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -86,8 +86,8 @@ export default function CrudAlumnos() {
                                     );
                                 })
                             })()}
-                            <TableCell component={IconButton} onClick={() => handleEdit(alumno.id)}><Edit/></TableCell>
-                            <TableCell component={IconButton} onClick={() => handleDelete(alumno.id)}><DeleteOutline/></TableCell>
+                            <Button component={TableCell} onClick={() => handleEdit(alumno.id)}><Edit/></Button>
+                            <Button component={TableCell} onClick={() => handleDelete(alumno.id)}><DeleteOutline/></Button>
                     </TableRow>
                 ))}
             </TableBody>
