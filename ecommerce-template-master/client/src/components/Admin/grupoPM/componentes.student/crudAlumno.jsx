@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useEffect, useStyles} from 'react';
+import React, { useState, forwardRef, useEffect} from 'react';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import Check from '@material-ui/icons/Check';
@@ -217,8 +217,4 @@ export default function CrudAlumnos() {
             </TableBody>
         </TableContainer>
     );
-    return (
-        <CircularProgress color="inherit" />
-    
-    )
 }

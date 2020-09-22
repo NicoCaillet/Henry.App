@@ -11,7 +11,6 @@ import ReceiptIcon from "@material-ui/icons/Receipt";
 import GroupIcon from '@material-ui/icons/Group';
 import ListAltIcon from "@material-ui/icons/ListAlt";
 
-
 export default function AdminPage() {
   const [component, setComponent] = useState();
 
@@ -95,6 +94,4 @@ export default function AdminPage() {
       <div className={s.main}>{component && component}</div>
     </div>
   );
-    
-
 }

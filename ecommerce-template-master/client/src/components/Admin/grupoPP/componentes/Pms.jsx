@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import s from "./miequipo.module.css"
+import s from "./pm.module.css"
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import IconButton from '@material-ui/core/IconButton';
-import Nav from "../grupoPM/componentes/nav"
-import Cohorte from "../grupoPM/componentes/cohorte.jsx"
-import Title from "../grupoPM/componentes/title"
+import Nav from "../../grupoPM/componentes/nav"
+import Cohorte from "../../grupoPM/componentes/cohorte.jsx"
+import Title from "../../grupoPM/componentes/title"
 import { connect, useSelector, useDispatch } from 'react-redux';
-import { getCohorte } from '../../../store/actions/cohorte'
-
-import Pm from './componentes/Pms'
-
+import { getCohorte } from '../../../../store/actions/cohorte'
 
 export default function GrupoPm(props) {
     const dispatch = useDispatch();
@@ -34,12 +31,11 @@ export default function GrupoPm(props) {
             <div className={s.container + " " + s.margin}>
                 <Nav />
                 <Title />
-                
                 {cohorte && cohorte.map((cohorte) => (
-                    <Link to={`/Admin/grupoPm/${cohorte.id}`}> <Cohorte cohorte={cohorte} render={() => renderCohort(cohorte.id)} /> </Link>
+                    <Cohorte cohorte={cohorte} render={() => renderCohort(cohorte.id)} />
                 ))}
             </div>
-            {/* {RenderTable > 0 && <Pm  />} */}
+            {/* {RenderTable > 0 && <AddAlumno id={RenderTable} />} */}
         </div>
     );
 }
