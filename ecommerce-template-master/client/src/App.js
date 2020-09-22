@@ -14,6 +14,7 @@ import Equipo2 from './components/Mi_equipo/Equipo2';
 import Registrarse from './components/Registrarse/Registrarse';
 import { connect } from 'react-redux';
 import { pruebaRedux } from './store/actions/actionTest';
+import Pm from './components/Admin/grupoPP/Dialog/dialog';
 import store from './store/';
 store.subscribe(() => {
   const state = store.getState();
@@ -37,6 +38,8 @@ const theme = createMuiTheme({
 });
 
 function App(props) {
+
+
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
@@ -72,6 +75,9 @@ function App(props) {
         </Route >
         <Route exact path='/modulo:id'>
           <Modulo />
+        </Route>
+        <Route exact path={`/Admin/grupoPm/:cohorte`}>
+          <Pm />
         </Route>
 
       </ThemeProvider>

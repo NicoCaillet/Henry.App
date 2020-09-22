@@ -34,11 +34,12 @@ export default function GrupoPm(props) {
             <div className={s.container + " " + s.margin}>
                 <Nav />
                 <Title />
+                
                 {cohorte && cohorte.map((cohorte) => (
-                    <Cohorte cohorte={cohorte} render={() => renderCohort(cohorte.id)} />
+                    <Link to={`/Admin/grupoPm/${cohorte.id}`}> <Cohorte cohorte={cohorte} render={() => renderCohort(cohorte.id)} /> </Link>
                 ))}
             </div>
-            {RenderTable > 0 && <Pm  />}
+            {/* {RenderTable > 0 && <Pm  />} */}
         </div>
     );
 }
