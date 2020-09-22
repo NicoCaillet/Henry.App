@@ -48,3 +48,5 @@ export const putUsuarioGrupo = ({usuarioId, grupoId}) => {
           .catch(err => console.log(err))
       }
   }
+
+  

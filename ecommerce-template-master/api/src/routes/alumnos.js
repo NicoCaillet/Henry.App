@@ -74,7 +74,7 @@ server.post('/agregar', (req, res, next) => {
     Promise.all(addEmails).then(() => res.send('OK'))
     .catch( err => next(err))
 })
-//trae todos los grupos pp de un cohorte
+//trae todos los grupos pm de un cohorte
 server.get ("/grupopm/:cohorte", (req,res,next) => {
     Grupo.findAll({
         where : {
