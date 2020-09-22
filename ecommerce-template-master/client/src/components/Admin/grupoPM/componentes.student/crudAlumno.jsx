@@ -16,10 +16,6 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useSelector, useDispatch } from "react-redux";
-<<<<<<< HEAD
-import { getUser } from '../../../../store/actions/alumnos'
-import {TableContainer, TableHead, TableBody, TableRow, TableCell, Paper} from '@material-ui/core';
-=======
 import { getUser,putUsuarioCohorte } from '../../../../store/actions/alumnos'
 import {dropUser} from "../../../../store/actions/user"
 import {TableContainer, TableHead, TableBody, TableRow, TableCell, Paper, Button} from '@material-ui/core';
@@ -35,7 +31,6 @@ import Slide from '@material-ui/core/Slide';
 import Autocomplete from "@material-ui/lab/Autocomplete"
 
 
->>>>>>> 6c8acf3c12bec8f60e2eccdb5ffe5bd17f74d5f6
 
 const tableIcons = {
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -69,8 +64,6 @@ export default function CrudAlumnos() {
         cohorteId: null
     });
 
-<<<<<<< HEAD
-=======
     const [dropped, setDropped] = useState({
     open: false,
     alumnoId: ""
@@ -79,19 +72,10 @@ export default function CrudAlumnos() {
     setEdit({...edit, cohorteId: value.id});
     }
     
->>>>>>> 6c8acf3c12bec8f60e2eccdb5ffe5bd17f74d5f6
     useEffect(() => {
         // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
         dispatch(getUser())
     }, [])
-<<<<<<< HEAD
-    const handleEdit = (id) =>{
-
-    };
-    const handleDelete = (id) =>{
-
-    };
-=======
     const handleEdit =  () =>{
         dispatch(putUsuarioCohorte(edit)).then(() =>{
         dispatch(getUser());
@@ -132,7 +116,6 @@ export default function CrudAlumnos() {
             });
             };
     if(alumnos.length)
->>>>>>> 6c8acf3c12bec8f60e2eccdb5ffe5bd17f74d5f6
     return (
         <TableContainer component={Paper}>
             <TableHead>
@@ -162,10 +145,6 @@ export default function CrudAlumnos() {
                                     );
                                 })
                             })()}
-<<<<<<< HEAD
-                            <TableCell onClick={() => handleEdit(alumno.id)}><Edit/></TableCell>
-                            <TableCell onClick={() => handleDelete(alumno.id)}><DeleteOutline/></TableCell>
-=======
                             <Button component={TableCell} onClick={() => handleClickOpen(alumno.id)}><Edit/></Button>
                     <Dialog open={edit.open} onClose={handleClose} aria-labelledby="form-dialog-title">
 
@@ -233,7 +212,6 @@ export default function CrudAlumnos() {
         </Button>
         </DialogActions>
     </Dialog>
->>>>>>> 6c8acf3c12bec8f60e2eccdb5ffe5bd17f74d5f6
                     </TableRow>
                 ))}
             </TableBody>
