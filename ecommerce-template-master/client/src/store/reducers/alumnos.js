@@ -26,7 +26,6 @@ export const alumnosReducer = (state = initialState, action) => {
                     case alumnosActionTypes.PUT_USER_COHORTE:
                         return {
                             ...state,
-                            alumnos: action.payload
                         }
         
         default:

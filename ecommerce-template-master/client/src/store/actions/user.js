@@ -4,13 +4,19 @@ export const UserActionTypes = {
     PUT_USER: "PUT_USER",
     LOG_OUT: 'LOG_OUT',
     RE_PASS: 'RE_PASS',
-   
+   DROP_USER: "DROP_USER"
 }
 
 export const setUser = (user) => {
     return {
         type: UserActionTypes.SET_USER,
         payload: user
+    }
+}
+export const dropUser =  (id) => {
+    return (dispatch) =>{
+        return axios.put(`http://localhost:3006/user/${id}/delete`,null,{ withCredentials:true })
+            .then(() => dispatch({ type: UserActionTypes.DROP_USER}))
     }
 }
 export const putUser = ({nombre, apellido, email, localidad, edad, id}) => {
