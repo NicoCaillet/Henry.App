@@ -10,7 +10,7 @@ export const alumnosActionTypes = {
   export const getAlumnosid = (id) => {
     return (dispatch) => {
       axios.get(`http://localhost:3006/alumnos/cohorte/${id}`, {withCredentials: true}).then((res) => {
-       return dispatch({
+      dispatch({
           type: alumnosActionTypes.GET_ALUMNOS,
           payload: res.data
         });
@@ -29,7 +29,7 @@ export const getUser = () => {
 //put a un usuario
 export const putUsuarioGrupo = ({usuarioId, grupoId}) => {
   return dispatch => {
-      axios.put("http://localhost:3006/alumnos/grupo/agregar",{
+      return axios.put("http://localhost:3006/alumnos/grupo/agregar",{
       usuarioId: usuarioId,
       grupoId: grupoId
       }, {withCredentials: true})
@@ -38,12 +38,13 @@ export const putUsuarioGrupo = ({usuarioId, grupoId}) => {
       }
   }
 //put a un cohorte
-  export const putUsuarioCohorte = ({usuarioId,cohorteId}) => {
+  export const putUsuarioCohorte = (values) => {
+    console.log(values)
       return dispatch => {
-          axios.put("http://localhost:3006/alumnos/cohorte/agregar", {
-              usuarioId: usuarioId,
-              cohorteId: cohorteId
-          }, {withCredentials: true})
+          return axios.put("http://localhost:3006/alumnos/cohorte/agregar", {
+            usuarioId : values.alumnoId,
+            cohorteId: values.cohorteId
+          } , {withCredentials: true})
           .then (res => dispatch ({type:alumnosActionTypes.PUT_USER_COHORTE, payload: res.data}))
           .catch(err => console.log(err))
       }

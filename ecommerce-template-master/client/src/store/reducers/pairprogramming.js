@@ -12,6 +12,11 @@ export const pairProgramingReducer = (state = initialState, action) => {
                 ...state,
                 equipo: action.payload
             }
+        case ppActionTypes.GET_PP:
+            return {
+                ...state,
+                grupos: action.payload
+            }
         default:
             return state
     }

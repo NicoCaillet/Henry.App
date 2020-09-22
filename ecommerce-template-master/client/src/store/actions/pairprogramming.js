@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export const ppActionTypes = {
-    GET_PP: 'GET_PP'
+    GET_PP: 'GET_PP',
+    GET_PPS: 'GET_PPS',
 }
 
 export const getpp = () => {
@@ -15,3 +16,9 @@ export const getpp = () => {
       }).catch(err => console.log(err));
     };
   };
+export const getPps = () => {
+  return dispatch => {
+    axios.get("http://localhost:3006/pair/grupos", { withCredentials: true })
+      .then((res) => dispatch({type: ppActionTypes.GET_PPS, payload: res.data}))
+  }
+}

@@ -16,8 +16,26 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useSelector, useDispatch } from "react-redux";
+<<<<<<< HEAD
 import { getUser } from '../../../../store/actions/alumnos'
 import {TableContainer, TableHead, TableBody, TableRow, TableCell, Paper} from '@material-ui/core';
+=======
+import { getUser,putUsuarioCohorte } from '../../../../store/actions/alumnos'
+import {dropUser} from "../../../../store/actions/user"
+import {TableContainer, TableHead, TableBody, TableRow, TableCell, Paper, Button} from '@material-ui/core';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+import Autocomplete from "@material-ui/lab/Autocomplete"
+
+
+>>>>>>> 6c8acf3c12bec8f60e2eccdb5ffe5bd17f74d5f6
 
 const tableIcons = {
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -37,20 +55,84 @@ const tableIcons = {
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 export default function CrudAlumnos() {
     const dispatch = useDispatch();
     const alumnos = useSelector((state) => state.alumnos.alumnos);
+    const cohortes = useSelector((state) => state.cohorte.cohortes);
+    const pps = useSelector((state) => state.pairPrograming.grupos);
+    const [edit, setEdit] = useState({
+        open: false,
+        alumnoId: null,
+        cohorteId: null
+    });
 
+<<<<<<< HEAD
+=======
+    const [dropped, setDropped] = useState({
+    open: false,
+    alumnoId: ""
+    });
+    const handleInputChange = (e, value) => {
+    setEdit({...edit, cohorteId: value.id});
+    }
+    
+>>>>>>> 6c8acf3c12bec8f60e2eccdb5ffe5bd17f74d5f6
     useEffect(() => {
         // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
         dispatch(getUser())
     }, [])
+<<<<<<< HEAD
     const handleEdit = (id) =>{
 
     };
     const handleDelete = (id) =>{
 
     };
+=======
+    const handleEdit =  () =>{
+        dispatch(putUsuarioCohorte(edit)).then(() =>{
+        dispatch(getUser());
+        });
+    };
+    const handleDelete = async (id) =>{
+        await dispatch(dropUser(id))
+        dispatch(getUser());
+    };
+    //delete dialog
+            const handleClickOpened = (id) => {
+            setDropped({
+                ...dropped,
+                open: true,
+                alumnoId: id
+            })
+            };
+        
+            const handleClosed = () => {
+            setDropped({
+                ...dropped,
+            open:false
+            })
+            };
+            //edit dialog
+            const handleClickOpen = (alumnoId) => {
+            setEdit({
+                    ...edit,
+                    open:true,
+                    alumnoId
+            });
+            };
+        
+            const handleClose = () => {
+            setEdit({
+                ...edit,
+                open:false
+            });
+            };
+    if(alumnos.length)
+>>>>>>> 6c8acf3c12bec8f60e2eccdb5ffe5bd17f74d5f6
     return (
         <TableContainer component={Paper}>
             <TableHead>
@@ -80,8 +162,78 @@ export default function CrudAlumnos() {
                                     );
                                 })
                             })()}
+<<<<<<< HEAD
                             <TableCell onClick={() => handleEdit(alumno.id)}><Edit/></TableCell>
                             <TableCell onClick={() => handleDelete(alumno.id)}><DeleteOutline/></TableCell>
+=======
+                            <Button component={TableCell} onClick={() => handleClickOpen(alumno.id)}><Edit/></Button>
+                    <Dialog open={edit.open} onClose={handleClose} aria-labelledby="form-dialog-title">
+
+            <DialogTitle id="form-dialog-title">Editar Alumno</DialogTitle>
+            <DialogContent>
+            <DialogContentText>
+            Edita el grupo de cohorte, pm o pair de un alumno.
+            </DialogContentText>
+            <Autocomplete
+    id="cohorte"
+    options={cohortes}
+    getOptionLabel={(option) => option.nombre}
+    onChange={handleInputChange}
+    style={{ width: 300 }}
+    renderInput={(params) => <TextField {...params} label="Cohortes" variant="outlined" />}
+    />
+        
+        <Autocomplete
+    id="cohorte"
+    options={cohortes}
+    getOptionLabel={(option) => option.nombre}
+    onChange={handleInputChange}
+    style={{ width: 300 }}
+    renderInput={(params) => <TextField {...params} label="Grupo PM" variant="outlined" />}
+    />
+            <Autocomplete
+    id="cohorte"
+    options={cohortes}
+    getOptionLabel={(option) => option.nombre}
+    onChange={handleInputChange}
+    style={{ width: 300 }}
+    renderInput={(params) => <TextField {...params} label="Grupo PP" variant="outlined" />}
+    />
+        </DialogContent>
+        <DialogActions>
+        <Button onClick={handleClose} color="primary">
+            Cancelar
+        </Button>
+        <Button onClick={()=> {handleEdit(edit.alumnoId, edit.cohorteId);handleClose()}} color="primary">
+            Aceptar
+        </Button>
+        </DialogActions>
+    </Dialog>
+                            <Button component={TableCell} onClick={() => {handleClickOpened(alumno.id);}}><DeleteOutline/></Button>
+                            <Dialog
+        open={dropped.open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClosed}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+    >
+        <DialogTitle id="alert-dialog-slide-title">{"Eliminar alumno"}</DialogTitle>
+        <DialogContent>
+        <DialogContentText id="alert-dialog-slide-description">
+            ¿Seguro que quieres eliminar este alumno?
+        </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+        <Button onClick={handleClosed} color="primary">
+            Cancelar
+        </Button>
+        <Button onClick={() => {handleDelete(dropped.alumnoId); handleClosed()}} color="primary">
+            Aceptar
+        </Button>
+        </DialogActions>
+    </Dialog>
+>>>>>>> 6c8acf3c12bec8f60e2eccdb5ffe5bd17f74d5f6
                     </TableRow>
                 ))}
             </TableBody>
