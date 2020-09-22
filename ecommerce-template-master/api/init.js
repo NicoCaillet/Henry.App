@@ -221,10 +221,14 @@ module.exports = {
         {
             //id: 1,
             alumnos: 6,
+            cohorteId:1,
+            grupoId: 1,
         },
         {
             //id: 2,
             alumnos: 6,
+            cohorteId: 1,
+            grupoId: 2
         }
     ],
 

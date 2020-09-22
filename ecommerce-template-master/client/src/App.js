@@ -14,7 +14,7 @@ import Equipo2 from './components/Mi_equipo/Equipo2';
 import Registrarse from './components/Registrarse/Registrarse';
 import { connect } from 'react-redux';
 import { pruebaRedux } from './store/actions/actionTest';
-import Pm from './components/Admin/grupoPP/Dialog/dialog';
+import Pm from './components/Admin/grupoPP/TablaPM/tablapm';
 import store from './store/';
 store.subscribe(() => {
   const state = store.getState();

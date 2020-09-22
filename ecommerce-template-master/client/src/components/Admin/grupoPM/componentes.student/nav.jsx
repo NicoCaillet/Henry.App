@@ -12,6 +12,7 @@ import axios from 'axios';
 import CrudAlumnos from './crudAlumno';
 
 const useStyles = makeStyles((theme) => ({
+  
   root: {
     flexGrow: 1,
   },
@@ -21,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
-
 }));
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
