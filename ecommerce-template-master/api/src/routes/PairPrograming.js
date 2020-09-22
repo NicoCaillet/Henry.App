@@ -24,6 +24,12 @@ server.get("/", (req, res, next) =>{
     }).then(pair => res.json(pair.usuarios))
         .catch(err => next(err));
 });
+//trae todos los grupos de pair
+server.get("/grupos", (req, res, next) =>{
+    Pair.findAll()
+        .then(pair => res.json(pair))
+        .catch(err => next(err));
+})
 
 
 

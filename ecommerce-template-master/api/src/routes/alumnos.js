@@ -57,7 +57,8 @@ return usuario.save()
 //actualiza el cohorte de un grupo
 server.put("/cohorte/agregar", (req, res, next) => {
     Usuario.findByPk(req.body.usuarioId)
-    .then(usuario => {usuario.cohorteId = req.body.cohorteId;
+    .then(usuario => {
+        usuario.cohorteId = req.body.cohorteId;
         return usuario.save();
     }).then(usuario => res.json(usuario))
         .catch(err => next(err));
