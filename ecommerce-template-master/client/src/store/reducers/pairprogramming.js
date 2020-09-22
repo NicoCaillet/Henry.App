@@ -17,6 +17,11 @@ export const pairProgramingReducer = (state = initialState, action) => {
                 ...state,
                 grupos: action.payload
             }
+        case ppActionTypes.GET_PP_PM:
+            return{
+                ...state,
+                gruposDePm: action.payload
+            }
         default:
             return state
     }

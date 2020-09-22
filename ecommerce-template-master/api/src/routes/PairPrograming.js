@@ -18,15 +18,20 @@ server.get("/", (req, res, next) =>{
             id: req.user.pairId
         },
         include:{
-            model: Usuario,
+            model:Usuario,
             as: "usuarios"
         }
     }).then(pair => res.json(pair.usuarios))
         .catch(err => next(err));
 });
 //trae todos los grupos de pair
-server.get("/grupos", (req, res, next) =>{
-    Pair.findAll()
+server.get("/cohorte/:cohorteId/grupo/:grupoId", (req, res, next) =>{
+    Pair.findAll({
+        where:{
+            cohorteId: req.params.cohorteId,
+            grupoId: req.params.grupoId
+        }
+    })
         .then(pair => res.json(pair))
         .catch(err => next(err));
 })
