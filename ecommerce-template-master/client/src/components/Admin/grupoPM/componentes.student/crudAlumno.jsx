@@ -162,22 +162,22 @@ export default function CrudAlumnos() {
     renderInput={(params) => <TextField {...params} label="Cohortes" variant="outlined" />}
     />
         
-        <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="PmId"
-            type="string"
-            fullWidth
-        />
-        <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="PairProgrammingId"
-            type="string"
-            fullWidth
-        />
+        <Autocomplete
+    id="cohorte"
+    options={cohortes}
+    getOptionLabel={(option) => option.nombre}
+    onChange={handleInputChange}
+    style={{ width: 300 }}
+    renderInput={(params) => <TextField {...params} label="Grupo PM" variant="outlined" />}
+    />
+            <Autocomplete
+    id="cohorte"
+    options={cohortes}
+    getOptionLabel={(option) => option.nombre}
+    onChange={handleInputChange}
+    style={{ width: 300 }}
+    renderInput={(params) => <TextField {...params} label="Grupo PP" variant="outlined" />}
+    />
         </DialogContent>
         <DialogActions>
         <Button onClick={handleClose} color="primary">
