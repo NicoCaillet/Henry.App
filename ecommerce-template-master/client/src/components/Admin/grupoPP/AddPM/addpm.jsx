@@ -4,7 +4,7 @@ import s from './addpm.module.css'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
-import { setPm } from '../../../../store/actions/grupoPM.js'
+import { setPm, getGrupo } from '../../../../store/actions/grupoPM.js'
 import { useSelector, useDispatch } from "react-redux";
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
@@ -36,7 +36,11 @@ const cohorte = useSelector((state) => state.cohorte.cohorte)
       [e.target.name]: e.target.value
     });
   }
-
+  const handleSubmit = () =>{
+    dispatch(setPm(cohorteA.nombre, cohorteid)).then(()=>{
+      dispatch(getGrupo(cohorteid))
+    })
+  }
   return (
     <div className={s.admin} >
       <div className={s.aside}>
@@ -62,7 +66,7 @@ const cohorte = useSelector((state) => state.cohorte.cohorte)
             fullWidth
             variant="contained"
             color="primary" 
-            onClick={() => {console.log("Estoy recontra loco"); dispatch(setPm(cohorteA, cohorteid))}}
+            onClick={handleSubmit}
             >
 
             Agregar 

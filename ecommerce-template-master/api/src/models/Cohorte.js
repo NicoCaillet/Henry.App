@@ -10,7 +10,10 @@ module.exports = (sequelize) => {
         },
         nombre: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            get(){
+                return "web_ft" +this.getDataValue("id");
+            }
         },
         fecha : {
             type: DataTypes.DATE,
