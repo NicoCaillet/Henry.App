@@ -18,7 +18,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useSelector, useDispatch } from "react-redux";
 import { getGrupo } from '../../../../store/actions/grupoPM'
-import {TableContainer, TableHead, TableBody, TableRow, TableCell, Paper, Button} from '@material-ui/core';
+import {TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper, Button} from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
@@ -109,7 +109,8 @@ export default function CrudAlumnos() {
     if(gruposPM.length)
     return (
       <div> 
-        <TableContainer component={Paper} style={{ width: '82%' }} className={s.container}>
+        <TableContainer component={Paper} style={{width: "82%"}} className={s.container}>
+          <Table>
             <TableHead>
                 <TableRow>
                     {Object.keys(gruposPM[0]).map(key =>(
@@ -158,6 +159,7 @@ export default function CrudAlumnos() {
                     </TableRow>
                 ))}
             </TableBody>
+            </Table>
         </TableContainer>
         <Button variant = "contained" color= "terceary" onClick= {setRedirect}>Regresar</Button>
         </div>

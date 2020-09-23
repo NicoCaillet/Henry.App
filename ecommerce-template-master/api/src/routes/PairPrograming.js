@@ -27,6 +27,7 @@ server.get("/", (req, res, next) =>{
 //trae todos los grupos de pair
 server.get("/cohorte/:cohorteId/grupo/:grupoId", (req, res, next) =>{
     Pair.findAll({
+        
         where:{
             cohorteId: req.params.cohorteId,
             grupoId: req.params.grupoId
