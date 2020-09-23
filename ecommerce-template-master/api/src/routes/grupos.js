@@ -1,7 +1,7 @@
 const server = require("express").Router();
-const {Grupo} = require("../db");
-//crea un grupo
+const {Grupo, Cohorte} = require("../db");
 server.get("/cohorte/:cohorteId", (req, res, next) =>{
+    console.log(Grupo)
     Grupo.findAll({
         attributes:{
             exclude: ["updatedAt"]
@@ -12,9 +12,10 @@ server.get("/cohorte/:cohorteId", (req, res, next) =>{
     }).then(grupos => res.json(grupos))
     .catch(err => next(err));
 })
-server.post("/nuevo", (req, res, next) =>{
+server.post("/nuevo", async (req, res, next) =>{
+    const {nombre : nombreCohorte} = await Cohorte.findByPk(req.body.cohorteId)
     Grupo.create({
-        nombre: req.body.cohorteId + req.body.pm,
+        nombre: nombreCohorte +"_"+ req.body.pm,
         cohorteId: req.body.cohorteId
     }).then(grupo => res.json(grupo))
         .catch(err => next(err));
