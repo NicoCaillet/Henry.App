@@ -27,6 +27,11 @@ export const alumnosReducer = (state = initialState, action) => {
                         return {
                             ...state,
                         }
+                    case alumnosActionTypes.PUT_USER_PP:
+                        return {
+                            ...state,
+                            alumnos:action.payload
+                        }
         
         default:
             return state

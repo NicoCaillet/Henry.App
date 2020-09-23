@@ -66,9 +66,10 @@ const cohorte = useSelector((state) => state.cohorte.cohorte)
             fullWidth
             variant="contained"
             color="primary" 
-            onClick={handleSubmit}
-            >
 
+            onClick={handleSubmit}
+
+            >
             Agregar 
           </Button>
           <div className={s.boton}>
@@ -79,8 +80,6 @@ const cohorte = useSelector((state) => state.cohorte.cohorte)
                 color="primary" 
                 onClick={onClose}
                 >
-            
-
                 Cancelar
             </Button>
            </div>

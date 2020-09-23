@@ -54,7 +54,7 @@ return usuario.save()
 }).then(usuario => res.json(usuario))
     .catch(err => next(err));
 })
-//actualiza el cohorte de un grupo
+//actualiza el cohorte de un alumno
 server.put("/cohorte/agregar", (req, res, next) => {
     Usuario.findByPk(req.body.usuarioId)
     .then(usuario => {
@@ -88,6 +88,14 @@ server.get ("/grupopm/:cohorte", (req,res,next) => {
         }
     }).then(grupo => res.json(grupo))
     .catch(err => next(err))
+})
+//actualiza grupo pp de un alumno
+server.put("/pair/agregar", (req, res, next) =>{
+    Usuario.findByPk(req.body.usuarioId)
+.then(usuario => {usuario.pairId = req.body.pairId;
+return usuario.save()
+}).then(usuario => res.json(usuario))
+    .catch(err => next(err));
 })
 
 module.exports = server;

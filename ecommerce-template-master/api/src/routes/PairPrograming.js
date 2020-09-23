@@ -39,4 +39,6 @@ server.get("/cohorte/:cohorteId/grupo/:grupoId", (req, res, next) =>{
 
 
 
+
+
 module.exports = server;

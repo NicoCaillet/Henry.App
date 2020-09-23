@@ -4,7 +4,8 @@ export const alumnosActionTypes = {
   GET_ALUMNOS: 'GET_ALUMNOS',
   GET_ALUMNOS_COHORTE: "GET_ALUMNOS_COHORTE",
   PUT_USER_GRUPO: "PUT_USER_GRUPO",
-  PUT_USER_COHORTE: "PUT_USER_COHORTE"
+  PUT_USER_COHORTE: "PUT_USER_COHORTE",
+  PUT_USER_PP: "PUT_USER_PP"
 }
 
   export const getAlumnosid = (id) => {
@@ -26,7 +27,7 @@ export const getAlumnos = () => {
       .catch (err => console.log(err))
   }
 }
-//put a un usuario
+//put a un grupo de usuario
 export const putUsuarioGrupo = ({usuarioId, grupoId}) => {
   return dispatch => {
       return axios.put("http://localhost:3006/alumnos/grupo/agregar",{
@@ -37,7 +38,7 @@ export const putUsuarioGrupo = ({usuarioId, grupoId}) => {
       .catch(err => console.log(err))
       }
   }
-//put a un cohorte
+//put a un cohorte de usuario
   export const putUsuarioCohorte = (values) => {
     console.log(values)
       return dispatch => {
@@ -49,5 +50,14 @@ export const putUsuarioGrupo = ({usuarioId, grupoId}) => {
           .catch(err => console.log(err))
       }
   }
-
-  
+//put a un grupo pp de usuario
+  export const putUsuarioPp = ({usuarioId,pairId}) => {
+    return dispatch => {
+      axios.put ("http://localhost:3006/alumnos/pair/agregar", {
+        usuarioId: usuarioId,
+        pairId: pairId
+      }, {withCredentials: true})
+      .then((res) => dispatch ({type:alumnosActionTypes.PUT_USER_PP, payload:res.data}))
+      .catch(err => console.log(err))
+    }
+  }

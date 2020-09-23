@@ -26,7 +26,7 @@ export const setPm = (pm, cohorteId) => {
             type: GrupoPMActionsTypes.SET_PM
             
           });
-        });
+        }).catch(err => console.log(err))
     };
   };
 export const putGrupo = (values) => {
