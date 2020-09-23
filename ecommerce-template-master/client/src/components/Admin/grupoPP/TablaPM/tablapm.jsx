@@ -41,7 +41,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {getPPdePM} from '../../../../store/actions/pairprogramming';
-
+import s from './tabla.module.css'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -108,8 +108,8 @@ export default function CrudAlumnos() {
 
     if(gruposPM.length)
     return (
-      <div>
-        <TableContainer component={Paper}>
+      <div> 
+        <TableContainer component={Paper} style={{ width: '82%' }} className={s.container}>
             <TableHead>
                 <TableRow>
                     {Object.keys(gruposPM[0]).map(key =>(
@@ -117,6 +117,7 @@ export default function CrudAlumnos() {
                     ))}
                     <TableCell variant="head">EDITAR</TableCell>
                     <TableCell variant="head">ELIMINAR</TableCell>
+                    <TableCell variant="head">VER GRUPO</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
