@@ -17,9 +17,9 @@ export const getGrupo = (cohorteId) => {
 
 export const setPm = (pm, cohorteId) => {
     return (dispatch) => {
-      axios.post(`http://localhost:3006/grupos/nuevo`, {
-        nombre: pm,
-        cohorte :cohorteId
+      return axios.post(`http://localhost:3006/grupos/nuevo`, {
+        pm,
+        cohorteId
         })
         .then((pm) => {
           return dispatch({
