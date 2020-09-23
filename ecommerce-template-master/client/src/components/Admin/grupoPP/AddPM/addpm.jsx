@@ -62,9 +62,8 @@ const cohorte = useSelector((state) => state.cohorte.cohorte)
             fullWidth
             variant="contained"
             color="primary" 
-            onClick={() => {console.log("Estoy recontra loco"); dispatch(setPm(cohorteA, cohorteid))}}
+            onClick={() => {console.log(cohorteA); dispatch(setPm(cohorteA, cohorteid))}}
             >
-
             Agregar 
           </Button>
           <div className={s.boton}>
@@ -75,8 +74,6 @@ const cohorte = useSelector((state) => state.cohorte.cohorte)
                 color="primary" 
                 onClick={onClose}
                 >
-            
-
                 Cancelar
             </Button>
            </div>

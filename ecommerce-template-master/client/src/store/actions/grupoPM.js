@@ -17,16 +17,16 @@ export const getGrupo = (cohorteId) => {
 
 export const setPm = (pm, cohorteId) => {
     return (dispatch) => {
-      axios.post(`http://localhost:3006/grupo/nuevo`, {
-        pm,
-        cohorteId
+      axios.post(`http://localhost:3006/grupos/nuevo`, {
+        nombre: pm,
+        cohorte :cohorteId
         })
         .then((pm) => {
           return dispatch({
             type: GrupoPMActionsTypes.SET_PM
             
           });
-        });
+        }).catch(err => console.log(err))
     };
   };
 export const putGrupo = (values) => {
