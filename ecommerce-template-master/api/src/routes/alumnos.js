@@ -69,7 +69,8 @@ server.post('/agregar', (req, res, next) => {
         return Usuario.create({
             email: email,
             rol: 'alumno',
-            active: true
+            active: true,
+            cohorteId: req.body.cohorteId
         })
     })
     Promise.all(addEmails).then(() => res.send('OK'))

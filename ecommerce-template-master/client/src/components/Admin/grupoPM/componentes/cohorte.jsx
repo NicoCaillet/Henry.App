@@ -12,7 +12,7 @@ export default function Cohorte({ cohorte, render }) {
 
   return (
     <div className={s.grid}>
-      <Button className={s.button} onClick={render} variant="contained" color="primary">
+      <Button className={s.button} onClick={ () => render()} variant="contained" color="primary">
         {cohorte.nombre} 
       </Button>
     </div>
