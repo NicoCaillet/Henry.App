@@ -1,5 +1,6 @@
 import React, { useState, forwardRef, useEffect} from 'react';
 import AddBox from '@material-ui/icons/AddBox';
+import {Redirect} from "react-router-dom"
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import Check from '@material-ui/icons/Check';
 import Close from '@material-ui/icons/Close';
@@ -82,6 +83,7 @@ export default function CrudAlumnos() {
     const pps = useSelector((state) => state.pairPrograming.grupos);
     const gruposPM = useSelector((state) => state.grupoPM.gruposPM);
     const gruposPPdePm = useSelector((state) => state.pairPrograming.gruposDePm);
+    const [redirect, setRedirect] = useState(false)
     const classes = useStyles();
   const [open, setOpen] = React.useState(false);
    
@@ -99,10 +101,14 @@ export default function CrudAlumnos() {
         const handleClose = () => {
         setOpen(false);
         };
+        if (redirect) {
+          return <Redirect to="/Admin" />;
+      }
 
 
     if(gruposPM.length)
     return (
+      <div>
         <TableContainer component={Paper}>
             <TableHead>
                 <TableRow>
@@ -152,6 +158,8 @@ export default function CrudAlumnos() {
                 ))}
             </TableBody>
         </TableContainer>
+        <Button variant = "contained" color= "terceary" onClick= {setRedirect}>Regresar</Button>
+        </div>
     );
     return(<div>ESPERE...</div>);
 }
