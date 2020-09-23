@@ -42,7 +42,7 @@ import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {getPPdePM} from '../../../../store/actions/pairprogramming';
 import s from './tabla.module.css'
-
+import AddPM from '../AddPM/addpm'
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -85,15 +85,24 @@ export default function CrudAlumnos() {
     const gruposPPdePm = useSelector((state) => state.pairPrograming.gruposDePm);
     const [redirect, setRedirect] = useState(false)
     const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-   
+    const [open, setOpen] = React.useState(false);
+    const [renderAdd, setrenderAdd] = useState(false)
+
     useEffect(() => {
         // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
         dispatch(getGrupo(cohorte))
         
     }, [cohorte])
 
-    
+    const setrenderagregar = function(){
+      setrenderAdd(true);
+      
+    }
+
+    const onClose = function(){
+      setrenderAdd(false);
+    }
+
     const handleClickOpen = (grupoId) => {
         setOpen(true);
         dispatch(getPPdePM(cohorte, grupoId))
@@ -109,7 +118,7 @@ export default function CrudAlumnos() {
     if(gruposPM.length)
     return (
       <div> 
-        <TableContainer component={Paper} style={{ width: '82%' }} className={s.container}>
+        <TableContainer component={Paper} style={{ width: '84%' }} className={s.container}>
             <TableHead>
                 <TableRow>
                     {Object.keys(gruposPM[0]).map(key =>(
@@ -135,6 +144,7 @@ export default function CrudAlumnos() {
                     <Button component={TableCell}><Edit/></Button>
                     <Button component={TableCell}><DeleteOutline/></Button>
                     <Button component= {TableCell} onClick ={() => handleClickOpen(grupo.id)}>Ver Grupo PM</Button> 
+                    
                     <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
           <Toolbar>
@@ -158,9 +168,15 @@ export default function CrudAlumnos() {
                     </TableRow>
                 ))}
             </TableBody>
-        </TableContainer>
-        <Button variant = "contained" color= "terceary" onClick= {setRedirect}>Regresar</Button>
+            <div className={s.regresar}> 
+          <Button variant="contained" color="primary" onClick={setRedirect} className={s.regresar}>Regresar </Button>
+          <Button variant="contained" color="primary"  onClick={setrenderagregar}className={s.agregar}>Agregar PM </Button>
         </div>
+        </TableContainer>
+        {renderAdd && <AddPM onClose={onClose} cohorteid={cohorte}/> }
+        
+        </div>
+
     );
     return(<div>ESPERE...</div>);
 }
