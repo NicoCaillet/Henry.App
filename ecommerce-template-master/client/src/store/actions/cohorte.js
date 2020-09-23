@@ -13,12 +13,11 @@ export const setCohorte = (data) => {
           nombre: data.nombre
         })
         .then((cohorte) => {
-          return dispatch({
-            type: CohorteActionTypes.SET_COHORTE,
-            payload: cohorte.data
-            
-          });
-        });
+            dispatch({
+              type: CohorteActionTypes.SET_COHORTE,
+              payload: cohorte.data
+            })
+        }).catch(err => console.log(err));
     };
   };
 

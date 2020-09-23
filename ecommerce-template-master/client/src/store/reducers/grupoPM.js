@@ -11,6 +11,8 @@ export const grupoPMReducer =  (state = initialState, action) => {
                 ...state,
                 gruposPM: action.payload
             }
+        case GrupoPMActionsTypes.PUT_GRUPO:
+            return state;
         default:
             return state;
     }
