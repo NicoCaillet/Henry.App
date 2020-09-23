@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-export default function ButtonAppBar() {
+export default function ButtonAppBar({ cohorteId }) {
   const [openEdit, setOpenEdit] = useState(false);
   const [putUsuario, setPutUsuario] = useState('')
   const [Emails, setEmails] = useState([]);
@@ -41,7 +41,8 @@ export default function ButtonAppBar() {
     setOpenEdit(false);
       axios.post('http://localhost:3006/alumnos/agregar',
         {
-          emails: putUsuario.emails.match(regex)
+          emails: putUsuario.emails.match(regex),
+          cohorteId,
         }, { withCredencials: true })
         .then(res => console.log(res))
         .catch(err => console.log(err))

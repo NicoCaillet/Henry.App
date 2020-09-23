@@ -26,7 +26,7 @@ export default function AddAlumno({id}) {
 
     return (
         <div className={s.container}>
-            <Nav />
+            <Nav cohorteId={id} />
             <Title />
             {alumnos && alumnos.map((alumnos) => (
                 <Student alumnos={alumnos}/>
