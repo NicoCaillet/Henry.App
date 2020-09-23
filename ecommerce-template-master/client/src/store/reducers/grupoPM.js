@@ -2,7 +2,8 @@ import {
     GrupoPMActionsTypes
 } from '../actions/grupoPM';
 const initialState = {
-    gruposPM: []
+    gruposPM: [],
+    pm: []
 };
 export const grupoPMReducer =  (state = initialState, action) => {
     switch(action.type){
@@ -10,6 +11,10 @@ export const grupoPMReducer =  (state = initialState, action) => {
             return{
                 ...state,
                 gruposPM: action.payload
+            }
+        case GrupoPMActionsTypes.SET_PM:
+            return{ 
+               ...state
             }
         case GrupoPMActionsTypes.PUT_GRUPO:
             return state;
