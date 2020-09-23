@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const alumnosActionTypes = {
   GET_ALUMNOS: 'GET_ALUMNOS',
-  GET_USER: "GET_USER",
+  GET_ALUMNOS_COHORTE: "GET_ALUMNOS_COHORTE",
   PUT_USER_GRUPO: "PUT_USER_GRUPO",
   PUT_USER_COHORTE: "PUT_USER_COHORTE"
 }
@@ -11,7 +11,7 @@ export const alumnosActionTypes = {
     return (dispatch) => {
       axios.get(`http://localhost:3006/alumnos/cohorte/${id}`, {withCredentials: true}).then((res) => {
       dispatch({
-          type: alumnosActionTypes.GET_ALUMNOS,
+          type: alumnosActionTypes.GET_ALUMNOS_COHORTE,
           payload: res.data
         });
       }).catch(err => console.log(err));
@@ -19,10 +19,10 @@ export const alumnosActionTypes = {
   };
 
   //get todos los usuarios
-export const getUser = () => {
+export const getAlumnos = () => {
   return dispatch => {
       axios.get("http://localhost:3006/alumnos/", {withCredentials: true})
-      .then ((res) => dispatch ({type: alumnosActionTypes.GET_USER, payload: res.data}))
+      .then ((res) => dispatch ({type: alumnosActionTypes.GET_ALUMNOS, payload: res.data}))
       .catch (err => console.log(err))
   }
 }

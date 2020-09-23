@@ -2,18 +2,18 @@ import { alumnosActionTypes } from '../actions/alumnos.js';
 
 
 const initialState = {
-    alumnos: [],
-    user: []
+    alumnos_cohorte: [],
+    alumnos: []
 };
 
 export const alumnosReducer = (state = initialState, action) => {
     switch (action.type) {
-        case alumnosActionTypes.GET_ALUMNOS:
+        case alumnosActionTypes.GET_ALUMNOS_COHORTE:
             return {
                 ...state,
-                alumnos: action.payload,
+                alumnos_cohorte: action.payload,
             }
-            case alumnosActionTypes.GET_USER:
+            case alumnosActionTypes.GET_ALUMNOS:
                 return {
                     ...state,
                     alumnos: action.payload

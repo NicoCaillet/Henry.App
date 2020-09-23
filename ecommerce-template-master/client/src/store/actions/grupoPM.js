@@ -2,7 +2,8 @@ import axios from 'axios';
 import GrupoPm from '../../components/Admin/grupoPP/componentes/Pms';
 export const GrupoPMActionsTypes = {
     GET_GRUPO: "GET_GRUPO",
-    SET_PM: "SET_PM"
+    SET_PM: "SET_PM",
+    PUT_GRUPO: "PUT_GRUPO"
 }
 export const getGrupo = (cohorteId) => {
     return dispatch => {
@@ -28,3 +29,10 @@ export const setPm = (pm, cohorteId) => {
         });
     };
   };
+export const putGrupo = (values) => {
+    return dispatch => {
+        return axios.put("http://localhost/grupos/editar",values, { withCredentials: true })
+            .then(() => dispatch({type: GrupoPMActionsTypes.PUT_GRUPO}))
+            .catch(err => console.log(err));
+    }
+}
