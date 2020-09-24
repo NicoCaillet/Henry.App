@@ -43,6 +43,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {getPPdePM} from '../../../../store/actions/pairprogramming';
 import s from './tabla.module.css'
 import AddPM from '../AddPM/addpm'
+import ElevatedHeaderCardDemo from './tarjetaPP'
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -146,13 +147,13 @@ export default function CrudAlumnos() {
                     <Button component= {TableCell} onClick ={() => handleClickOpen(grupo.id)}>Ver Grupo PM</Button> 
                     
                     <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-        <AppBar className={classes.appBar}>
+        {/* <AppBar className={classes.appBar}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Grupos Pm
+              Grupos JUNIOR DEL PINCHA
             </Typography>
             <Button autoFocus color="inherit" onClick={handleClose}>
               Cerrar
@@ -163,7 +164,8 @@ export default function CrudAlumnos() {
             {gruposPPdePm && gruposPPdePm.map(grupo => (<ListItem button>
             <ListItemText primary={grupo.id} secondary={grupo.alumnos} />
             </ListItem>))}
-        </List>
+        </List> */}
+      <ElevatedHeaderCardDemo/>
       </Dialog>
                     </TableRow>
                 ))}
