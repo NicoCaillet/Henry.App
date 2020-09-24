@@ -102,7 +102,6 @@ export default function CrudAlumnos() {
     const onClose = function(){
       setrenderAdd(false);
     }
-
     const handleClickOpen = (grupoId) => {
         setOpen(true);
         dispatch(getPPdePM(cohorte, grupoId))
@@ -119,12 +118,12 @@ export default function CrudAlumnos() {
     return (
       <div> 
         <TableContainer component={Paper} style={{ width: '82%' }} className={s.container}>
+          <Table>
             <TableHead>
                 <TableRow>
                     {Object.keys(gruposPM[0]).map(key =>(
                         <TableCell variant="head">{key.toUpperCase()}</TableCell>
                     ))}
-                    <TableCell variant="head">EDITAR</TableCell>
                     <TableCell variant="head">ELIMINAR</TableCell>
                     <TableCell variant="head">VER GRUPO</TableCell>
                 </TableRow>
@@ -141,7 +140,6 @@ export default function CrudAlumnos() {
                             (<TableCell>{cell}</TableCell>)
                         )
                     })()}
-                    <Button component={TableCell}><Edit/></Button>
                     <Button component={TableCell}><DeleteOutline/></Button>
                     <Button component= {TableCell} onClick ={() => handleClickOpen(grupo.id)}>Ver Grupo PM</Button> 
                     
@@ -172,6 +170,7 @@ export default function CrudAlumnos() {
           <Button variant="contained" color="primary" onClick={setRedirect} className={s.regresar}>Regresar </Button>
           <Button variant="contained" color="primary"  onClick={setrenderagregar}className={s.agregar}>Agregar PM </Button>
         </div>
+        </Table>
         </TableContainer>
         {renderAdd && <AddPM onClose={onClose} cohorteid={cohorte}/> }
         

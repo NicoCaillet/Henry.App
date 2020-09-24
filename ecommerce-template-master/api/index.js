@@ -31,6 +31,7 @@ function createPromise(model, value) {
 async function initial() {
   const promises = {};
   for (let model in init) {
+    await db[model].sync({force:true});
     promises[model] = init[model].map(e => {
       if (model === "Grupo") {
         e.nombre = `web_ft${e.cohorteId}_(nombre del pm)`;
@@ -45,7 +46,7 @@ async function initial() {
   }
 }
 // Syncing all the models at once.
-db.conn.sync({ force: true }).then(async () => {
+db.conn.sync().then(async () => {
   await initial();
   server.listen(3006, () => {
     console.log('%s listening at 3006'); // eslint-disable-line no-console

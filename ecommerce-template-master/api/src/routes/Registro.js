@@ -46,6 +46,7 @@ server.post('/', async(req, res, next) => {
 });
 //login de un usuario
 server.post("/login", async (req, res, next) =>{
+	if(req.isAuthenticated()) return res.sendStatus(200);
 	passport.authenticate("local", function (err, user, info) {
 		if (err) {
 			return next(err);
@@ -57,6 +58,7 @@ server.post("/login", async (req, res, next) =>{
 			if (err) {
 				return next(err);
 			}
+			console.log(req.session)
 			return res.json({ status: "ok", user, isAuth: req.isAuthenticated() });
 		});
 	})(req, res, next);
@@ -65,6 +67,7 @@ server.post("/login", async (req, res, next) =>{
 //deslogueo de un usuario
 server.get('/logout', (req, res) =>{
 	req.logout();
+	req.session.destroy();
 	res.sendStatus(200);
 })
 //actualiza el rol de un usuario
@@ -132,7 +135,7 @@ server.put('/:id/delete', (req,res)=>{
 	})
 })
 server.get("/me", (req, res, next) =>{
-	if(!req.user) return res.sendStatus(401);
+	if(!req.isAuthenticated()) return res.sendStatus(401);
 	res.json(req.user);
 })
 
