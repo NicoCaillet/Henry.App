@@ -43,6 +43,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {getPPdePM} from '../../../../store/actions/pairprogramming';
 import s from './tabla.module.css'
 import AddPM from '../AddPM/addpm'
+import ElevatedHeaderCardDemo from './tarjetaPP'
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -102,7 +103,6 @@ export default function CrudAlumnos() {
     const onClose = function(){
       setrenderAdd(false);
     }
-
     const handleClickOpen = (grupoId) => {
         setOpen(true);
         dispatch(getPPdePM(cohorte, grupoId))
@@ -119,12 +119,12 @@ export default function CrudAlumnos() {
     return (
       <div> 
         <TableContainer component={Paper} style={{ width: '82%' }} className={s.container}>
+          <Table>
             <TableHead>
                 <TableRow>
                     {Object.keys(gruposPM[0]).map(key =>(
                         <TableCell variant="head">{key.toUpperCase()}</TableCell>
                     ))}
-                    <TableCell variant="head">EDITAR</TableCell>
                     <TableCell variant="head">ELIMINAR</TableCell>
                     <TableCell variant="head">VER GRUPO</TableCell>
                 </TableRow>
@@ -141,18 +141,17 @@ export default function CrudAlumnos() {
                             (<TableCell>{cell}</TableCell>)
                         )
                     })()}
-                    <Button component={TableCell}><Edit/></Button>
                     <Button component={TableCell}><DeleteOutline/></Button>
                     <Button component= {TableCell} onClick ={() => handleClickOpen(grupo.id)}>Ver Grupo PM</Button> 
                     
                     <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-        <AppBar className={classes.appBar}>
+        {/* <AppBar className={classes.appBar}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
               <CloseIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Grupos Pm
+              Grupos JUNIOR DEL PINCHA
             </Typography>
             <Button autoFocus color="inherit" onClick={handleClose}>
               Cerrar
@@ -163,7 +162,8 @@ export default function CrudAlumnos() {
             {gruposPPdePm && gruposPPdePm.map(grupo => (<ListItem button>
             <ListItemText primary={grupo.id} secondary={grupo.alumnos} />
             </ListItem>))}
-        </List>
+        </List> */}
+      <ElevatedHeaderCardDemo/>
       </Dialog>
                     </TableRow>
                 ))}
@@ -172,6 +172,7 @@ export default function CrudAlumnos() {
           <Button variant="contained" color="primary" onClick={setRedirect} className={s.regresar}>Regresar </Button>
           <Button variant="contained" color="primary"  onClick={setrenderagregar}className={s.agregar}>Agregar PM </Button>
         </div>
+        </Table>
         </TableContainer>
         {renderAdd && <AddPM onClose={onClose} cohorteid={cohorte}/> }
         
