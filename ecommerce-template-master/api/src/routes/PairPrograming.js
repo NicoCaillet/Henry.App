@@ -31,6 +31,10 @@ server.get("/cohorte/:cohorteId/grupo/:grupoId", (req, res, next) =>{
         where:{
             cohorteId: req.params.cohorteId,
             grupoId: req.params.grupoId
+        },
+        include:{
+            model:Usuario,
+            as: "usuarios"
         }
     })
         .then(pair => res.json(pair))
