@@ -16,7 +16,8 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useSelector, useDispatch } from "react-redux";
-import { getAlumnos, putUsuarioCohorte } from '../../../../store/actions/alumnos'
+import { getAlumnos, putAlumno } from '../../../../store/actions/alumnos'
+import { getPps } from '../../../../store/actions/pairprogramming'
 import {dropUser} from "../../../../store/actions/user"
 import {TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper, Button} from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -57,6 +58,7 @@ export default function CrudAlumnos() {
     const dispatch = useDispatch();
     const alumnos = useSelector((state) => state.alumnos.alumnos);
     const cohortes = useSelector((state) => state.cohorte.cohortes);
+    const gruposPM = useSelector((state) => state.grupoPM.gruposPM);
     const pps = useSelector((state) => state.pairPrograming.grupos);
     const [edit, setEdit] = useState({
         open: false,
@@ -69,17 +71,22 @@ export default function CrudAlumnos() {
     alumnoId: ""
     });
     const handleInputChange = (e, value) => {
-        setEdit({...edit, cohorteId: value.id});
+        const input = e.target.id.split("-")[0];
+        console.log(e.target.id, input, value)
+        setEdit({...edit, [input]: value.id});
+        console.log(edit);
     }
     
     useEffect(() => {
         // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
         dispatch(getAlumnos())
+        
     }, [])
     const handleEdit =  () =>{
-        dispatch(putUsuarioCohorte(edit)).then(() =>{
+        dispatch(putAlumno(edit)).then(() =>{
         dispatch(getAlumnos());
         });
+        
     };
     const handleDelete = async (id) =>{
         await dispatch(dropUser(id))
@@ -155,7 +162,7 @@ export default function CrudAlumnos() {
                                 Edita el grupo de cohorte, pm o pair de un alumno.
                             </DialogContentText>
                                 <Autocomplete
-                                    id="cohorte"
+                                    id="cohorteId"
                                     options={cohortes}
                                     getOptionLabel={(option) => option.nombre}
                                     onChange={handleInputChange}
@@ -164,55 +171,47 @@ export default function CrudAlumnos() {
                                 />
                             
                                 <Autocomplete
-                                    id="cohorte"
-                                    options={cohortes}
+                                    id="grupoId"
+                                    options={gruposPM}
                                     getOptionLabel={(option) => option.nombre}
                                     onChange={handleInputChange}
                                     style={{ width: 300 }}
                                     renderInput={(params) => <TextField {...params} label="Grupo PM" variant="outlined" />}
-                                />
-                                <Autocomplete
-                                    id="cohorte"
-                                    options={cohortes}
-                                    getOptionLabel={(option) => option.nombre}
-                                    onChange={handleInputChange}
-                                    style={{ width: 300 }}
-                                    renderInput={(params) => <TextField {...params} label="Grupo PP" variant="outlined" />}
                                 />
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleClose} color="primary">
                                 Cancelar
                             </Button>
-                            <Button onClick={()=> {handleEdit(edit.alumnoId, edit.cohorteId);handleClose()}} color="primary">
+                            <Button onClick={()=> {handleEdit();handleClose()}} color="primary">
                                 Aceptar
                             </Button>
                         </DialogActions>
                     </Dialog>
                             <Button component={TableCell} onClick={() => {handleClickOpened(alumno.id);}}><DeleteOutline/></Button>
                             <Dialog
-        open={dropped.open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClosed}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
-    >
-        <DialogTitle id="alert-dialog-slide-title">{"Eliminar alumno"}</DialogTitle>
-        <DialogContent>
-        <DialogContentText id="alert-dialog-slide-description">
-            ¿Seguro que quieres eliminar este alumno?
-        </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-        <Button onClick={handleClosed} color="primary">
-            Cancelar
-        </Button>
-        <Button onClick={() => {handleDelete(dropped.alumnoId); handleClosed()}} color="primary">
-            Aceptar
-        </Button>
-        </DialogActions>
-    </Dialog>
+                                open={dropped.open}
+                                TransitionComponent={Transition}
+                                keepMounted
+                                onClose={handleClosed}
+                                aria-labelledby="alert-dialog-slide-title"
+                                aria-describedby="alert-dialog-slide-description"
+                            >
+                                <DialogTitle id="alert-dialog-slide-title">{"Eliminar alumno"}</DialogTitle>
+                                <DialogContent>
+                                <DialogContentText id="alert-dialog-slide-description">
+                                    ¿Seguro que quieres eliminar este alumno?
+                                </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                <Button onClick={handleClosed} color="primary">
+                                    Cancelar
+                                </Button>
+                                <Button onClick={() => {handleDelete(dropped.alumnoId); handleClosed()}} color="primary">
+                                    Aceptar
+                                </Button>
+                                </DialogActions>
+                            </Dialog>
                     </TableRow>
                 ))}
             </TableBody>

@@ -19,7 +19,7 @@ export const getpp = () => {
   };
 export const getPps = () => {
   return dispatch => {
-    axios.get("http://localhost:3006/pair/grupos", { withCredentials: true })
+    return axios.get("http://localhost:3006/pair/grupos", { withCredentials: true })
       .then((res) => dispatch({type: ppActionTypes.GET_PPS, payload: res.data}))
       .catch(err => console.log(err));
   }
