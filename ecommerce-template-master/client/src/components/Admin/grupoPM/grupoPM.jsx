@@ -23,7 +23,6 @@ export default function GrupoPm(props) {
 
     const renderCohort = function (id) {
         setRenderTable(id)
-
     }
 
 

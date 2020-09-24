@@ -27,7 +27,7 @@ export const getAlumnos = () => {
       .catch (err => console.log(err))
   }
 }
-//put a un grupo de usuario
+//actualiza el grupo pm de un usuario
 export const putUsuarioGrupo = ({usuarioId, grupoId}) => {
   return dispatch => {
       return axios.put("http://localhost:3006/alumnos/grupo/agregar",{
@@ -39,18 +39,19 @@ export const putUsuarioGrupo = ({usuarioId, grupoId}) => {
       }
   }
 //put a un cohorte de usuario
-  export const putUsuarioCohorte = (values) => {
+  export const putAlumno = (values) => {
     console.log(values)
       return dispatch => {
-          return axios.put("http://localhost:3006/alumnos/cohorte/agregar", {
+          return axios.put("http://localhost:3006/alumnos/editar", {
             usuarioId : values.alumnoId,
-            cohorteId: values.cohorteId
+            cohorteId: values.cohorteId,
+            grupoId: values.grupoId,
           } , {withCredentials: true})
           .then (res => dispatch ({type:alumnosActionTypes.PUT_USER_COHORTE, payload: res.data}))
           .catch(err => console.log(err))
       }
   }
-//put a un grupo pp de usuario
+//actualiza el grupo pp de un usuario
   export const putUsuarioPp = ({usuarioId,pairId}) => {
     return dispatch => {
       axios.put ("http://localhost:3006/alumnos/pair/agregar", {

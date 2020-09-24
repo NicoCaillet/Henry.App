@@ -2,7 +2,8 @@ import { ppActionTypes } from '../actions/pairprogramming.js';
 
 
 const initialState = {
-    equipo: []
+    equipo: [],
+    grupos: []
 };
 
 export const pairProgramingReducer = (state = initialState, action) => {
@@ -12,7 +13,7 @@ export const pairProgramingReducer = (state = initialState, action) => {
                 ...state,
                 equipo: action.payload
             }
-        case ppActionTypes.GET_PP:
+        case ppActionTypes.GET_PPS:
             return {
                 ...state,
                 grupos: action.payload

@@ -5,7 +5,7 @@ const {Op} = require("sequelize");
 server.get("/", (req, res, next) =>{
     Usuario.findAll({
         attributes:{
-            exclude:["password", "provider", "providerId", "salt", "rol", "createdAt", "updatedAt" ]
+            exclude:["password", "provider", "providerId", "salt", "rol", "createdAt", "updatedAt", "pairId" ]
         },
         where:{
             rol: "alumno"
@@ -46,23 +46,25 @@ server.get("/pm/:pm", async(req, res, next) =>{
     })
     .catch(err => next(err));
 });
-//actualiza el grupo de un alumno
-server.put("/grupo/agregar", (req, res, next) =>{
+//actualiza los grupos de un alumno
+server.put("/editar", (req, res, next) =>{
+    console.log(req.body);
     Usuario.findByPk(req.body.usuarioId)
 .then(usuario => {usuario.grupoId = req.body.grupoId;
+    usuario.cohorteId = req.body.cohorteId
 return usuario.save()
 }).then(usuario => res.json(usuario))
     .catch(err => next(err));
 })
 //actualiza el cohorte de un alumno
-server.put("/cohorte/agregar", (req, res, next) => {
+/* server.put("/cohorte/agregar", (req, res, next) => {
     Usuario.findByPk(req.body.usuarioId)
     .then(usuario => {
         usuario.cohorteId = req.body.cohorteId;
         return usuario.save();
     }).then(usuario => res.json(usuario))
         .catch(err => next(err));
-})
+}) */
 //crea un usuario con solo email
 server.post('/agregar', (req, res, next) => {
     const addEmails = req.body.emails.map(email => {

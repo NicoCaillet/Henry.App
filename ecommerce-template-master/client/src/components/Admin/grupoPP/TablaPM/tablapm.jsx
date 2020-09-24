@@ -1,6 +1,6 @@
 import React, { useState, forwardRef, useEffect} from 'react';
 import AddBox from '@material-ui/icons/AddBox';
-import {Redirect} from "react-router-dom"
+import {Redirect, useHistory} from "react-router-dom"
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import Check from '@material-ui/icons/Check';
 import Close from '@material-ui/icons/Close';
@@ -44,6 +44,8 @@ import {getPPdePM} from '../../../../store/actions/pairprogramming';
 import s from './tabla.module.css'
 import AddPM from '../AddPM/addpm'
 import ElevatedHeaderCardDemo from './tarjetaPP'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -77,6 +79,17 @@ const tableIcons = {
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
+const theme = createMuiTheme();
+
+theme.typography.h3 = {
+  fontSize: '1.2rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.5rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '2rem',
+  },
+};
 export default function CrudAlumnos() {
     const dispatch = useDispatch();
     const { cohorte } = useParams();
@@ -88,6 +101,7 @@ export default function CrudAlumnos() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [renderAdd, setrenderAdd] = useState(false)
+    const history = useHistory();
 
     useEffect(() => {
         // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
@@ -111,13 +125,19 @@ export default function CrudAlumnos() {
         setOpen(false);
         };
         if (redirect) {
-          return <Redirect to="/Admin" />;
+        
+           return <Redirect to="/Admin" />; 
       }
 
 
     if(gruposPM.length)
     return (
-      <div> 
+      <div>
+  <ThemeProvider theme={theme}>
+      <Typography variant="h3">Tabla De Grupos</Typography>
+    </ThemeProvider>
+      
+        <div> 
         <TableContainer component={Paper} style={{ width: '82%' }} className={s.container}>
           <Table>
             <TableHead>
@@ -175,7 +195,7 @@ export default function CrudAlumnos() {
         </Table>
         </TableContainer>
         {renderAdd && <AddPM onClose={onClose} cohorteid={cohorte}/> }
-        
+          </div>
         </div>
 
     );

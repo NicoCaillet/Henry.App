@@ -12,7 +12,6 @@ server.post("/grupo", (req, res, next) =>{
 });
 //trae los alumnos del grupo de pairprogramming
 server.get("/", (req, res, next) =>{
-
     Pair.findOne({
         where:{
             id: req.user.pairId
