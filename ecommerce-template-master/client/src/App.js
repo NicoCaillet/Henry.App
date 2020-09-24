@@ -54,31 +54,31 @@ function App(props) {
         {props.user.user && (<Route exact path="/Home">
           <Home />
         </Route>)}
-        <Route exact path="/MiPerfil">
+        {props.user.user &&(<Route exact path="/MiPerfil">
           <MiPerfil />
-        </Route>
+        </Route>)}
         <Route path="/Registrarse">
           <Registrarse />
         </Route>
-        <Route exact path="/Modulo/:modulo">
+        {props.user.user &&(<Route exact path="/Modulo/:modulo">
           <Modulo />
-        </Route>
-        <Route exact path="/Admin">
+        </Route>)}
+        {props.user.user &&(<Route exact path="/Admin">
           <Admin />
-        </Route>
-        <Route exact path="/data">
+        </Route>)}
+        {props.user.user &&(<Route exact path="/data">
           {/* Va a mostrar la informacion de todos los alumnos. Va a tener filtros por cohortes y pm */}
           <Info /> {/* Buscar nombre adecuado */}
-        </Route>
-        <Route exact path="/MiEquipo">
+        </Route>)}
+        {props.user.user &&(<Route exact path="/MiEquipo">
           <MiEquipo />
-        </Route >
-        <Route exact path='/modulo:id'>
+        </Route >)}
+        {props.user.user &&(<Route exact path='/modulo:id'>
           <Modulo />
-        </Route>
-        <Route exact path={`/Admin/grupoPm/:cohorte`}>
+        </Route>)}
+        {props.user.user &&(<Route exact path={`/Admin/grupoPm/:cohorte`}>
           <Pm />
-        </Route>
+        </Route>)}
 
       </ThemeProvider>
     </div>
