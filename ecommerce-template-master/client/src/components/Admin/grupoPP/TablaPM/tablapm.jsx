@@ -118,7 +118,7 @@ export default function CrudAlumnos() {
   if (gruposPM.length)
     return (
       <div>
-        <TableContainer component={Paper} style={{ width: '82%' }} className={s.container}>
+        <TableContainer component={Paper} className={s.container}>
           <TableHead>
             <TableRow>
               {Object.keys(gruposPM[0]).map(key => (
