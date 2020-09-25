@@ -45,7 +45,7 @@ export default function Modulo(props) {
                     </Grid>
                 </Container>
                             
-                    <Button variant = "contained" color= "terceary" onClick= {setRedirect} >
+                    <Button variant = "contained" className={classes.botonRegresar} onClick= {setRedirect} >
                         Regresar
                     </Button>
             </div>
