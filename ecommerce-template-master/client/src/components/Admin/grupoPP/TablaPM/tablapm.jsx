@@ -138,7 +138,7 @@ export default function CrudAlumnos() {
     </ThemeProvider>
       
         <div> 
-        <TableContainer component={Paper} style={{ width: '82%' }} className={s.container}>
+        <TableContainer component={Paper} className={s.container}>
           <Table>
             <TableHead>
                 <TableRow>

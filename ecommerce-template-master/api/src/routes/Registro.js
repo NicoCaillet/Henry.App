@@ -46,7 +46,7 @@ server.post('/', async(req, res, next) => {
 });
 //login de un usuario
 server.post("/login", async (req, res, next) =>{
-	if(req.isAuthenticated()) return res.sendStatus(200);
+	if(req.isAuthenticated()) return res.json({ status: "ok", user: req.user, isAuth: true });
 	passport.authenticate("local", function (err, user, info) {
 		if (err) {
 			return next(err);

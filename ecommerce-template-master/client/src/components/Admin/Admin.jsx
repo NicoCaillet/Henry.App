@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Route, useHistory, Switch, useRouteMatch} from 'react-router-dom'
+import { Link, Route, useHistory, useParams, useRouteMatch} from 'react-router-dom'
 import s from "./AdminPage.module.css";
 import NuevoCohorte from "./nuevocohorte/nuevocohorte"
 import GrupoPP from "./grupoPP/grupoPP"
@@ -12,19 +12,20 @@ import ReceiptIcon from "@material-ui/icons/Receipt";
 import GroupIcon from '@material-ui/icons/Group';
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-const HomeAdmin = () => {
-  const match = useRouteMatch();
-  const [component, setComponent] = useState();
-  const [route, setRoute] = useState(["Admin"]);
-  const history = useHistory();
+export default function AdminPage() {
   useEffect(() => {
     let temp = <h3>Bienvenido al panel de administracion</h3>;
     setComponent(temp);
   }, []);
-  const renderComponent = function (e) {
+  const match = useRouteMatch();
+  const [component, setComponent] = useState();
+  const history = useHistory();
+  let route = history.location.pathname.split("/");
+  route = route.slice(0, route.length - 1);
+  //const {componente} = useParams();
+  const renderComponent = function (componente) {
     var element;
-    if (!route.includes(e.target.id)) setRoute(["Admin", e.target.id]);
-    switch (e.target.id) {
+    switch (componente) {
       case "Cohortes":
         element = <GrupoPM />;
         break;
@@ -41,26 +42,21 @@ const HomeAdmin = () => {
         element = <h2>Entro al default</h2>;
         break;
     }
-    setComponent(element);
+    return (element);
   };
   return(
 <div className={s.admin}>
       <Breadcrumbs separator="›" color = "secondary">
-        {route.map(link => <Link>{link}</Link>)}
+        {route.map(path => <Link to={route.join("/").slice(0, route.join("/").indexOf(path) + path.length)} >{path}</Link>)}
       </Breadcrumbs>
       <div className={s.aside}>
         <h3> Menu </h3>
-        <input
-          type="radio"
-          onChange={(e) => renderComponent(e)}
-          id="Cohortes"
-          name="menu"
-          value="orders"
-        />
+       <Link to={`${match.url}/Cohortes`} className={s.Link}>
         <label htmlFor="Cohortes">
           <ReceiptIcon className={s.icon} />
           Administracion de cohortes
         </label>
+        </Link>
         <input
           type="radio"
           onChange={(e) => renderComponent(e)}
@@ -69,79 +65,28 @@ const HomeAdmin = () => {
           value="categories"
           className={s.obeja}
         />
+        <Link to={`${match.url}/Nuevo_Cohorte`} className={s.Link}>
         <label htmlFor="Nuevo_Cohorte">
           <ListAltIcon className={s.icon} />
           Nuevo cohorte
         </label>
-        <input
-          type="radio"
-          onChange={(e) => renderComponent(e)}
-          id="Administración_De_Grupos"
-          name="menu"
-          value="products"
-        />
+        </Link>
+        <Link to={`${match.url}/Administración_De_Grupos`}  className={s.Link} >
         <label htmlFor="Administración_De_Grupos">
           <GroupIcon className={s.icon} />
           Administracion de PM's y PP's
         </label>
-        <input
-          type="radio"
-          onChange={(e) => renderComponent(e)}
-          id="Administración_De_Usuarios"
-          name="menu"
-          value="orders"
-        />
+        </Link>
+        <Link to={`${match.url}/Administración_De_Usuarios`} className={s.Link}>
         <label htmlFor="Administración_De_Usuarios">
           <ReceiptIcon className={s.icon} />
           Administracion de alumnos
         </label>
+        </Link>
       </div>
-      <div className={s.main}>{component && component}</div>
-    </div>
-  );
-}
-export default function AdminPage() {
-  const [component, setComponent] = useState();
-  const [route, setRoute] = useState(["Admin"]);
-  const match = useRouteMatch();
-  const history = useHistory();
-  useEffect(() => {
-    let temp = <h3>Bienvenido al panel de administracion</h3>;
-    setComponent(temp);
-  }, []);
-
- const renderComponent = function (e) {
-    var element;
-    if (!route.includes(e.target.id)) setRoute(["Admin", e.target.id]);
-    switch (e.target.id) {
-      case "grupo_pm":
-        element = <GrupoPM />;
-        break;
-      case "nuevo_cohorte":
-        element = <NuevoCohorte />;
-        break;
-      case "grupo_pp":
-        element = <GrupoPP />;
-        break;
-      case "alumnos": 
-        element = <Contenedor /> 
-        break;
-      default:
-        element = <h2>Entro al default</h2>;
-        break;
-    }
-    setComponent(element);
-  };
-
-  return (
-    <div>
-    <Route path="/">
-      <HomeAdmin/>
-    </Route>
-    <Route exact path={`${match.path}/A`}>
-      <h1>La puta madreeeeeeeeeeeeeee</h1>
-      <GrupoPM/>
-    </Route>
+      <Route  path={`${match.path}/:componentes`} render={({match}) => {
+        return (<div className={s.main}>{renderComponent(match.params.componentes)}</div>);
+      }} />
     </div>
   );
 }
