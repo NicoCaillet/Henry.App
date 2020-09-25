@@ -15,6 +15,10 @@
   min-width: 250px;
   float: left;
 }
+.Link{
+  text-decoration: none;
+  color: black;
+}
 .aside h3{
   margin: 0;
   display: block;

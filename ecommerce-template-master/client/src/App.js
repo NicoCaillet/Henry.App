@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css';
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import Input from './components/Input_Prueba/Input'
 import Home from './components/Home/Home';
 import NavBar from './components/Navbar/NavBar';
@@ -17,8 +17,8 @@ import { pruebaRedux } from './store/actions/actionTest';
 import Pm from './components/Admin/grupoPP/TablaPM/tablapm';
 import store from './store/';
 store.subscribe(() => {
-  const state = store.getState();
-  localStorage.setItem("state", JSON.stringify(state));
+  const {user} = store.getState();
+  localStorage.setItem("user", JSON.stringify(user));
 })
 const theme = createMuiTheme({
   palette: {
@@ -51,43 +51,41 @@ function App(props) {
           <Input />
         </Route>
         {/* Mas adelante vamos a poner el HomeUser en path="/" */}
-        {props.user.user && (<Route exact path="/Home">
-          <Home />
-        </Route>)}
-        {props.user.user &&(<Route exact path="/MiPerfil">
-          <MiPerfil />
-        </Route>)}
+        <Route exact path="/Home">
+          {props.user.user?<Home />:<Redirect  to="/"/>}
+        </Route>
+        <Route exact path="/MiPerfil">
+          {props.user.user?<MiPerfil />:<Redirect  to="/"/>}
+        </Route>
         <Route path="/Registrarse">
           <Registrarse />
         </Route>
-        {props.user.user &&(<Route exact path="/Modulo/:modulo">
-          <Modulo />
-        </Route>)}
-        {props.user.user &&(<Route exact path="/Admin">
-          <Admin />
-        </Route>)}
-        {props.user.user &&(<Route exact path="/data">
+        <Route exact path="/Modulo/:modulo">
+          {props.user.user?<Modulo />:<Redirect  to="/"/>}
+        </Route>
+        <Route  path="/Admin">
+          {props.user.user && props.user.user.rol==="director"?<Admin />:<Redirect  to="/"/>}
+        </Route>
+        <Route exact path="/data">
           {/* Va a mostrar la informacion de todos los alumnos. Va a tener filtros por cohortes y pm */}
-          <Info /> {/* Buscar nombre adecuado */}
-        </Route>)}
-        {props.user.user &&(<Route exact path="/MiEquipo">
-          <MiEquipo />
-        </Route >)}
-        {props.user.user &&(<Route exact path='/modulo:id'>
-          <Modulo />
-        </Route>)}
-        {props.user.user &&(<Route exact path={`/Admin/grupoPm/:cohorte`}>
-          <Pm />
-        </Route>)}
-
+          {props.user.user?<Info />:<Redirect  to="/"/>}{/* Buscar nombre adecuado */}
+        </Route>
+        <Route exact path="/MiEquipo">
+          {props.user.user?<MiEquipo />:<Redirect  to="/"/>}
+        </Route >
+        <Route exact path='/modulo:id'>
+          {props.user.user? <Modulo />:<Redirect  to="/"/>}
+        </Route>
+        <Route exact path={`/Admin/grupoPm/:cohorte`}>
+          {props.user.user && props.user.user.rol==="director"? <Pm />:<Redirect  to="/"/>}
+        </Route>
       </ThemeProvider>
     </div>
   );
 }
 
 //REDUX INSTALADO STORE DE PRUEBA Y ACTION DE PRUEBA
-const mapStateToProps = ({ test, user }) => ({
-  test,
+const mapStateToProps = ({ user }) => ({
   user
 })
 

@@ -16,7 +16,7 @@ export default function AddAlumno({id}) {
 
     const cohorte = useSelector((state) => state.cohorte.cohortes);
     const alumnos = useSelector((state) => state.alumnos.alumnos_cohorte);
-
+    
     useEffect(() => {
         // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
         dispatch(getAlumnosid(id))
