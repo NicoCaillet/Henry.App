@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, Route, useHistory, useRouteMatch } from 'react-router-dom'
 import s from "./miequipo.module.css"
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import IconButton from '@material-ui/core/IconButton';
@@ -9,13 +9,14 @@ import Title from "../grupoPM/componentes/title"
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { getCohorte } from '../../../store/actions/cohorte'
 
-import Pm from './componentes/Pms'
+import Pm from './TablaPM/tablapm'
 
 
 export default function GrupoPm(props) {
     const dispatch = useDispatch();
     const cohorte = useSelector((state) => state.cohorte.cohortes);
-
+    const history = useHistory();
+    const match = useRouteMatch();
     useEffect(() => {
         // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
         dispatch(getCohorte())
@@ -24,7 +25,7 @@ export default function GrupoPm(props) {
     const [RenderTable, setRenderTable] = useState(0);
 
     const renderCohort = function (id) {
-        setRenderTable(id)
+        history.push(match.url + "/" + id)
 
     }
 
@@ -34,12 +35,11 @@ export default function GrupoPm(props) {
             <div className={s.container + " " + s.margin}>
                 <Nav />
                 <Title />
-                
                 {cohorte && cohorte.map((cohorte) => (
-                    <Link to={`/Admin/grupoPm/${cohorte.id}`}> <Cohorte cohorte={cohorte} render={() => renderCohort(cohorte.id)} /> </Link>
+                    <Cohorte cohorte={cohorte} render={() => renderCohort(cohorte.id)} />
                 ))}
             </div>
-            {/* {RenderTable > 0 && <Pm  />} */}
+            <Route exact path={`${match.path}/:cohorte`} render={({match}) => <Pm/>}/>
         </div>
     );
 }
