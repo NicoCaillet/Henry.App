@@ -10,11 +10,18 @@ export default makeStyles((theme) => ({
         backgroundColor: '#E6E6DD'
     },
     boton: {
+        width: "400px",
         margin: '10px',
     },
     media: {
         height: 340,
         maxWidth: 345,
-    }
+    },
+    
+botonRegresar: {
+    backgroundColor: "#1e2831",
+    color: "white",
+    display: "flex",
+}
 
 }));
