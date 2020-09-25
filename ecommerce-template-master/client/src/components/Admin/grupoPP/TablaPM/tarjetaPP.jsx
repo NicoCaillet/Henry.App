@@ -88,9 +88,20 @@ export default function ElevatedHeaderCard({ grupoPP, cohorteId }) {
   const cardHeaderShadowStyles = useFadedShadowStyles();
   const gruposPP = useSelector((state) => state.pairPrograming.gruposDePm);
 
-  useEffect(() => {
-    dispatch(getPPdePM(cohorteId, grupoPP[0].id))
-  }, [])
+  // useEffect(() => {
+  //   if (grupoPP[0]) {
+  //     dispatch(getPPdePM(cohorteId, grupoPP[0].id))
+  //   }
+  // }, [])
+  console.log(grupoPP)
+
+  function handleGrupo(e, cohorte, grupoId) {
+    e.preventDefault();
+    if (grupoId) {
+      dispatch(getPPdePM(cohorte, grupoId))
+    }
+    return;
+  }
 
   return (
     <Card className={cx(classes.card, cardShadowStyles.root)}>
@@ -134,7 +145,7 @@ export default function ElevatedHeaderCard({ grupoPP, cohorteId }) {
                               <StyledTableCell align="right">Rol</StyledTableCell>
                             </TableRow>
                           </TableHead>
-                          <TableBody>
+                          <TableBody onChange={(e) => handleGrupo(e, cohorteId, grupo.id)}>
                             {gruposPP[0].usuarios.map((datos) => (
                               <StyledTableRow key={datos.id} >
                                 <StyledTableCell component="th" scope="row">
