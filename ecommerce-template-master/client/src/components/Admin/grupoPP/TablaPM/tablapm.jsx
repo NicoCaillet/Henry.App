@@ -43,7 +43,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { getPPdePM } from '../../../../store/actions/pairprogramming';
 import s from './tabla.module.css'
 import AddPM from '../AddPM/addpm'
-import ElevatedHeaderCardDemo from './tarjetaPP'
+import TarjetaPP from './tarjetaPP'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -118,7 +118,7 @@ export default function CrudAlumnos() {
   if (gruposPM.length)
     return (
       <div>
-        <TableContainer component={Paper} style={{ width: '82%' }} className={s.container}>
+        <TableContainer component={Paper} style={{ width: '90%' }} className={s.container}>
           <TableHead>
             <TableRow>
               {Object.keys(gruposPM[0]).map(key => (
@@ -147,25 +147,10 @@ export default function CrudAlumnos() {
                 <Button component={TableCell} onClick={() => handleClickOpen(grupo.id)}>Ver Grupo PM</Button>
 
                 <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-                  {/* <AppBar className={classes.appBar}>
-          <Toolbar> */}
                   <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                     <CloseIcon />
                   </IconButton>
-                  {/* <Typography variant="h6" className={classes.title}>
-              Grupos JUNIOR DEL PINCHA
-            </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              Cerrar
-            </Button>
-          </Toolbar>
-        </AppBar>
-        <List>
-            {gruposPPdePm && gruposPPdePm.map(grupo => (<ListItem button>
-            <ListItemText primary={grupo.id} secondary={grupo.alumnos} />
-            </ListItem>))}
-        </List>  */}
-                  <ElevatedHeaderCardDemo cohorteId={cohorte} grupoPP={gruposPPdePm} cerrar={() => handleClose()} />
+                  <TarjetaPP grupoPP={gruposPPdePm} cerrar={() => handleClose()} />
                 </Dialog>
               </TableRow>
             ))}
