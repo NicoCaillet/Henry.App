@@ -97,7 +97,7 @@ function ButtonAppBar(props) {
                 open={open}
                 onClose={handleClose}
               >
-                <Link to="miPerfil" className={s.nolink}><MenuItem  onClick={handleClose}>Mi Perfil</MenuItem></Link>
+                <Link to="/miPerfil" className={s.nolink}><MenuItem  onClick={handleClose}>Mi Perfil</MenuItem></Link>
                 <MenuItem onClick={() =>{
                   dispatch(logOut());
                   handleClose();

@@ -64,8 +64,7 @@ function App(props) {
           {props.user.user ? <Modulo /> : <Redirect to="/" />}
         </Route>
         <Route path="/Admin">
-          <Admin />
-          {/* {props.user.user && props.user.user.rol === "director" ? <Admin /> : <Redirect to="/" />} */}
+          {props.user.user && props.user.user.rol === "director" ? <Admin /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/data">
           {/* Va a mostrar la informacion de todos los alumnos. Va a tener filtros por cohortes y pm */}
@@ -78,8 +77,7 @@ function App(props) {
           {props.user.user ? <Modulo /> : <Redirect to="/" />}
         </Route>
         <Route exact path={`/Admin/grupoPm/:cohorte`}>
-          <Pm />
-          {/* {props.user.user && props.user.user.rol==="director"? <Pm />:<Redirect  to="/"/>} */}
+          {props.user.user && props.user.user.rol==="director"? <Pm />:<Redirect  to="/"/>}
         </Route>
       </ThemeProvider>
     </div>

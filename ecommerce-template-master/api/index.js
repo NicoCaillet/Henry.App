@@ -29,6 +29,8 @@ function createPromise(model, value) {
   })
 }
 async function initial() {
+  await db.Feedback.sync({force: true});
+  await db.Nota.sync({force: true});
   const promises = {};
   for (let model in init) {
     await db[model].sync({force:true});

@@ -50,34 +50,6 @@ export default function TarjetaPP({ grupoPP }) {
                     </TableRow>
                   </AccordionSummary>
                   <AccordionDetails>
-<<<<<<< HEAD
-                    <div>
-                      <TableContainer component={Paper}>
-                        <Table className={classes3.table} aria-label="customized table">
-                          <TableHead>
-                            <TableRow>
-                              <StyledTableCell>Email</StyledTableCell>
-                              <StyledTableCell>Nombre</StyledTableCell>
-                              <StyledTableCell align="right">Rol</StyledTableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody onChange={(e) => handleGrupo(e, cohorteId, grupo.id)}>
-                            {grupo.usuarios.map((datos) => (
-                              <StyledTableRow key={datos.id} >
-                                <StyledTableCell component="th" scope="row">
-                                  {datos.email}
-                                </StyledTableCell>
-                                <StyledTableCell component="th" scope="row">
-                                  {datos.nombre}
-                                </StyledTableCell>
-                                <StyledTableCell align="right">{datos.rol}</StyledTableCell>
-                              </StyledTableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
-                      </TableContainer>
-                    </div>
-=======
                     <TableContainer component={Paper}>
                       <Table className={classes.table} aria-label="customized table">
                         <TableHead>
@@ -98,7 +70,6 @@ export default function TarjetaPP({ grupoPP }) {
                         </TableBody>
                       </Table>
                     </TableContainer>
->>>>>>> master
                   </AccordionDetails>
                 </Accordion>
               </div>
