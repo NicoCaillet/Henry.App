@@ -17,7 +17,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useSelector, useDispatch } from "react-redux";
 import { getAlumnos, putAlumno } from '../../../../store/actions/alumnos'
-import { getPps } from '../../../../store/actions/pairprogramming'
+import { getGrupo } from '../../../../store/actions/grupoPM'
 import {dropUser} from "../../../../store/actions/user"
 import {TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper, Button} from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -76,7 +76,13 @@ export default function CrudAlumnos() {
         setEdit({...edit, [input]: value.id});
         console.log(edit);
     }
-    
+    const handleCohorte = (e, value) => {
+        setEdit({...edit, cohorteId: value.id});
+        dispatch(getGrupo(value.id));
+    }
+    const handleGrupoPM = (e, value) => {
+        setEdit({...edit, grupoId: value.id});
+    }
     useEffect(() => {
         // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
         dispatch(getAlumnos())
@@ -165,7 +171,7 @@ export default function CrudAlumnos() {
                                     id="cohorteId"
                                     options={cohortes}
                                     getOptionLabel={(option) => option.nombre}
-                                    onChange={handleInputChange}
+                                    onChange={handleCohorte}
                                     style={{ width: 300 }}
                                     renderInput={(params) => <TextField {...params} label="Cohortes" variant="outlined" />}
                                 />
@@ -174,7 +180,7 @@ export default function CrudAlumnos() {
                                     id="grupoId"
                                     options={gruposPM}
                                     getOptionLabel={(option) => option.nombre}
-                                    onChange={handleInputChange}
+                                    onChange={handleGrupoPM}
                                     style={{ width: 300 }}
                                     renderInput={(params) => <TextField {...params} label="Grupo PM" variant="outlined" />}
                                 />
