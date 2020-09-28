@@ -1,25 +1,12 @@
 import React, { useEffect } from 'react';
 import cx from 'clsx';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import TableBody from '@material-ui/core/TableBody';
-import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
+import { withStyles } from '@material-ui/core/styles';
+import { Accordion, AccordionSummary, AccordionDetails, TableContainer, Paper, CardHeader, CardContent, TableBody, TableCell, TableRow, TableHead, Table, Card } from '@material-ui/core';
 import { useContainedCardHeaderStyles } from '@mui-treasury/styles/cardHeader/contained';
 import { useSoftRiseShadowStyles } from '@mui-treasury/styles/shadow/softRise';
 import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import TableContainer from '@material-ui/core/TableContainer';
-import Paper from '@material-ui/core/Paper';
-import { useSelector, useDispatch } from "react-redux";
-import { getPPdePM } from '../../../../store/actions/pairprogramming';
+import useStyles from './tarjetaPP.styles'
 
 //tabla de alumnos Estilos-----------------------------------------------------
 const StyledTableCell = withStyles((theme) => ({
@@ -40,102 +27,30 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-const useStyles3 = makeStyles({
-  table: {
-    minWidth: 700,
-  },
-});
 
-//-----------------------------------------------------------------------------
-const useStyles2 = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
-}));
-
-
-const useStyles = makeStyles(({ spacing }) => ({
-  card: {
-    marginTop: 40,
-    borderRadius: spacing(0.5),
-    transition: '0.3s',
-    width: '50%',
-    overflow: 'initial',
-    background: '#ffffff',
-    margin: 'auto'
-  },
-  content: {
-    paddingTop: 0,
-    textAlign: 'left',
-    overflowX: 'auto',
-    '& table': {
-      marginBottom: 0,
-    }
-  },
-}));
-
-export default function ElevatedHeaderCard({ grupoPP, cohorteId }) {
-  const dispatch = useDispatch();
+export default function TarjetaPP({ grupoPP }) {
   const classes = useStyles();
-  const classes2 = useStyles2();
-  const classes3 = useStyles();
   const cardHeaderStyles = useContainedCardHeaderStyles();
   const cardShadowStyles = useSoftRiseShadowStyles({ inactive: true });
   const cardHeaderShadowStyles = useFadedShadowStyles();
-  const gruposPP = useSelector((state) => state.pairPrograming.gruposDePm);
-
-  // useEffect(() => {
-  //   if (grupoPP[0]) {
-  //     dispatch(getPPdePM(cohorteId, grupoPP[0].id))
-  //   }
-  // }, [])
-  console.log(grupoPP)
-
-  function handleGrupo(e, cohorte, grupoId) {
-    e.preventDefault();
-    if (grupoId) {
-      dispatch(getPPdePM(cohorte, grupoId))
-    }
-    return;
-  }
 
   return (
-    <Card className={cx(classes.card, cardShadowStyles.root)}>
-      <CardHeader
-        className={cardHeaderShadowStyles.root}
-        classes={cardHeaderStyles}
-        title={'Grupo PP'}
-        subheader={'Cohorte'}
-
-      />
-      <CardContent className={classes.content}>
-
+    <Card className={cx(classes.card, cardShadowStyles.root)} >
+      < CardHeader className={cardHeaderShadowStyles.root} classes={cardHeaderStyles} title={'Grupo PP'} subheader={'Cohorte'} />
+      < CardContent className={classes.content} >
         <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Grupos</TableCell>
-              <TableCell align="right">Alumnos</TableCell>
-            </TableRow>
-          </TableHead>
           <TableBody>
-            {grupoPP.map(grupo => (
-              <div key={grupo.id} className={classes2.root}>
+            {grupoPP && grupoPP.map(grupo => (
+              <div key={grupo.id} className={classes.root}>
                 <Accordion>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
                     <TableRow >
-                      <TableCell aling='left' >{grupo.id}</TableCell>
-                      <TableCell align="right">{grupo.alumnos}</TableCell>
+                      <TableCell aling='center' >Grupo {grupo.id}</TableCell>
+                      <TableCell align="center">({grupo.alumnos} alumnos)</TableCell>
                     </TableRow>
                   </AccordionSummary>
                   <AccordionDetails>
+<<<<<<< HEAD
                     <div>
                       <TableContainer component={Paper}>
                         <Table className={classes3.table} aria-label="customized table">
@@ -162,13 +77,37 @@ export default function ElevatedHeaderCard({ grupoPP, cohorteId }) {
                         </Table>
                       </TableContainer>
                     </div>
+=======
+                    <TableContainer component={Paper}>
+                      <Table className={classes.table} aria-label="customized table">
+                        <TableHead>
+                          <TableRow>
+                            <StyledTableCell align="center">Alumnos</StyledTableCell>
+                            <StyledTableCell align="center">Rol</StyledTableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody >
+                          {grupoPP[0].usuarios.map((datos) => (
+                            <StyledTableRow key={datos.id} >
+                              <StyledTableCell align="center" component="th" scope="row">
+                                {datos.nombre}
+                              </StyledTableCell>
+                              <StyledTableCell align="center">{datos.rol}</StyledTableCell>
+                            </StyledTableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+>>>>>>> master
                   </AccordionDetails>
                 </Accordion>
               </div>
             ))}
           </TableBody>
-        </Table>
-      </CardContent>
-    </Card>
+        </Table >
+      </CardContent >
+    </Card >
   );
 }
+
+
