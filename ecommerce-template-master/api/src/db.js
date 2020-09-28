@@ -32,7 +32,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Usuario, Cohorte, Grupo, Notas, Clase, Pair } = sequelize.models;
+const { Usuario, Cohorte, Grupo, Notas, Clase, Pair, Feedback, Nota } = sequelize.models;
 
 // Aca vendrian las relaciones
 Usuario.belongsTo(Cohorte);
@@ -41,8 +41,7 @@ Usuario.belongsTo(Grupo);
 Grupo.hasMany(Usuario);
 Cohorte.hasMany(Grupo);
 Grupo.belongsTo(Cohorte);
-Usuario.hasMany (Notas);
-Notas.belongsTo (Usuario);
+
 Clase.belongsTo (Cohorte);
 Cohorte.hasMany (Clase);
 Pair.hasMany(Usuario);
@@ -51,7 +50,34 @@ Cohorte.hasMany(Pair);
 Pair.belongsTo(Cohorte);
 Grupo.hasMany(Pair);
 Pair.belongsTo(Grupo);
-
+Usuario.hasMany(Feedback, {foreignKey:"autorId", as:"autor"});
+Usuario.hasMany(Feedback, {foreignKey:"alumnoId", as:"alumno"});
+Feedback.belongsTo(Usuario, {
+  foreignKey: {
+        type: Sequelize.DataTypes.INTEGER,
+        field: 'autorId',
+        allowNull: true
+    }, as:"autor"});
+Feedback.belongsTo(Usuario, {
+  foreignKey: {
+  type: Sequelize.DataTypes.INTEGER,
+  field: 'alumnoId',
+  allowNull: true
+}, as:"alumno"});
+Usuario.hasMany(Nota, {foreignKey:"evaluadoId", as:"evaluado"});
+Usuario.hasMany(Nota, {foreignKey:"correctorId", as:"corrector"});
+Nota.belongsTo(Usuario, {
+  foreignKey: {
+        type: Sequelize.DataTypes.INTEGER,
+        field: 'evaluadoId',
+        allowNull: true
+    }, as:"evaluado"});
+Nota.belongsTo(Usuario, {
+  foreignKey: {
+  type: Sequelize.DataTypes.INTEGER,
+  field: 'correctorId',
+  allowNull: true
+}, as:"corrector"});
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
