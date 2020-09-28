@@ -1,7 +1,6 @@
 const server = require("express").Router();
 const {Grupo, Cohorte} = require("../db");
 server.get("/cohorte/:cohorteId", (req, res, next) =>{
-    console.log(Grupo)
     Grupo.findAll({
         attributes:{
             exclude: ["updatedAt"]

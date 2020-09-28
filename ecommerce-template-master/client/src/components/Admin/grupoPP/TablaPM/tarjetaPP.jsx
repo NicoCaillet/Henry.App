@@ -141,13 +141,17 @@ export default function ElevatedHeaderCard({ grupoPP, cohorteId }) {
                         <Table className={classes3.table} aria-label="customized table">
                           <TableHead>
                             <TableRow>
-                              <StyledTableCell>Alumnos</StyledTableCell>
+                              <StyledTableCell>Email</StyledTableCell>
+                              <StyledTableCell>Nombre</StyledTableCell>
                               <StyledTableCell align="right">Rol</StyledTableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody onChange={(e) => handleGrupo(e, cohorteId, grupo.id)}>
-                            {gruposPP[0].usuarios.map((datos) => (
+                            {grupo.usuarios.map((datos) => (
                               <StyledTableRow key={datos.id} >
+                                <StyledTableCell component="th" scope="row">
+                                  {datos.email}
+                                </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
                                   {datos.nombre}
                                 </StyledTableCell>
