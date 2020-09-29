@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -7,15 +7,32 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import RateReviewIcon from '@material-ui/icons/RateReview';
-import { IconButton, TextField } from '@material-ui/core';
-import Card from '@material-ui/core/Card';
+import { IconButton, TextField, Typography } from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
+import { useSelector, useDispatch } from 'react-redux'
+import { postFeedback } from "../../store/actions/feedback"
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Reviews() {
-    const [open, setOpen] = React.useState(false);
+export default function Reviews({ calificado }) {
+
+    const dispatch = useDispatch()
+    const calificacion = useSelector((state) => state.feedBack.feedback);
+    //feedback----------------------------------------------------------------
+    const userReview = useSelector((state) => state.user.user.id);
+    const alCalificar = calificado;
+    //------------------------------------------------------------------------
+    const [value, setValue] = useState({
+        social: 0,
+        skill: 0,
+        comentario: '',
+        userId: userReview,
+        alumnoId: alCalificar
+    });
+
+    const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -25,9 +42,23 @@ export default function Reviews() {
         setOpen(false);
     };
 
+    const submitFeedback = (e) => {
+        e.preventDefault();
+        dispatch(postFeedback(value))
+        setOpen(false)
+    }
+
+    const handleCalificacion = (e) => {
+        e.preventDefault();
+        setValue({
+            ...value,
+            [e.target.name]: e.target.value
+        })
+    }
+
     return (
         <div>
-            <IconButton variant="outlined" color="primary" onClick={handleClickOpen}>
+            <IconButton variant="outlined" color="secondary" onClick={handleClickOpen}>
                 <RateReviewIcon />
             </IconButton>
             <Dialog
@@ -40,16 +71,30 @@ export default function Reviews() {
             >
                 <DialogTitle id="alert-dialog-slide-title"> Califica a tu compañero</DialogTitle>
                 <DialogContent>
-                    <TextField label="Habilidades Tecnicas" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                    <TextField label="Social Skills" autoFocus margin="dense" type="text" color='secondary' fullWidth />
-                    <TextField label="Deja tus Comentarios" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                    <Typography> Social Skills <Rating
+                        name="social"
+                        value={value.social}
+                        onChange={(e) => {
+                            handleCalificacion(e)
+                        }}
+                    /></Typography>
+                    <Typography> Technical Skills <Rating
+                        name="skill"
+                        value={value.skill}
+                        onChange={(e) => {
+                            handleCalificacion(e)
+                        }}
+                    /></Typography>
+                    <TextField name='comentario' value={value.comentario} onChange={(e) => {
+                        handleCalificacion(e)
+                    }} label="Deja tu Comentario" autoFocus margin="dense" type="text" color='secondary' fullWidth />
 
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="secondary">
                         Cerrar
           </Button>
-                    <Button onClick={handleClose} color="secondary">
+                    <Button onClick={(e) => { submitFeedback(e) }} color="secondary">
                         Aceptar
           </Button>
                 </DialogActions>

@@ -1,7 +1,7 @@
 import { feedbackActionTypes } from '../actions/feedback';
 
 const initialState = {
-    feedback: {}
+    feedback: {},
 }
 
 export const feedbackReducer = (state = initialState, action) => {
@@ -11,11 +11,11 @@ export const feedbackReducer = (state = initialState, action) => {
                 ...state,
                 feedback: action.payload,
             }
-        case feedbackActionTypes.GET_FEEDBACK: 
-        return {
-            ...state,
-            feedback: action.payload 
-        }
+        case feedbackActionTypes.GET_FEEDBACK:
+            return {
+                ...state,
+                feedback: action.payload
+            }
         default:
             return state
     }
