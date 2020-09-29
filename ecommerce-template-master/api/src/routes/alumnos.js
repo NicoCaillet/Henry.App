@@ -1,6 +1,8 @@
 const server = require("express").Router();
 const {Usuario, Cohorte, Grupo} = require("../db");
 const {Op} = require("sequelize");
+var nodemailer = require('nodemailer');
+const {USER, PASS} = process.env;
 //get de todos los alumnos
 server.get("/", (req, res, next) =>{
     Usuario.findAll({
@@ -68,6 +70,28 @@ return usuario.save()
 //crea un usuario con solo email
 server.post('/agregar', (req, res, next) => {
     const addEmails = req.body.emails.map(email => {
+       	var transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: 'henryappxd@gmail.com',
+                pass: '123456henry',
+            },
+	    });
+        // Definimos el email
+        var mailOptions = {
+            from: 'Henrys app <henryappxd@gmail.com>',
+            to: email,
+            subject: 'invitacion a henry',
+            text: 'Tu aplicación a Henry fue exitosa, por favor termina tu registro con el MISMO email que aplicaste en henry por el siguiente link:http://localhost:3000/registrarse',
+        };
+        // Enviamos el email
+        transporter.sendMail(mailOptions, function (error, response) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent');
+            }
+        });
         return Usuario.create({
             email: email,
             rol: 'alumno',

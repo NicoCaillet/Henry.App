@@ -7,7 +7,8 @@ const claseRouter = require ("./clase.js")
 const registroRouter = require ('./Registro.js')
 const procesoRouter = require ('./Proceso.js')
 const pairRouter = require ('./PairPrograming')
-
+const feedbackRouter = require ("./feedbackroutes")
+const notasRouter = require("./notas")
 const router = Router();
 
 // load each router on a route
@@ -20,5 +21,7 @@ router.use ('/proceso', procesoRouter);
 router.use('/alumnos', alumnosRouter);
 router.use('/grupos', gruposRouter);
 router.use('/cohortes', cohortesRouter);
+router.use ("/feedback",feedbackRouter)
+router.use ("/notas",notasRouter)
 
 module.exports = router;
