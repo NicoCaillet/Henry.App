@@ -7,7 +7,7 @@ const crypto = require("crypto");
 server.post('/', async(req, res, next) => {
 		const salt = crypto.randomBytes(64).toString("hex");
 		try {
-			const {email, password,apellido,nombre, rol,proceso, active, pairId, grupoId, cohorteId,localidad,edad} = req.body;
+			const {email, password,apellido,nombre, rol,proceso, active, pairId, grupoId, cohorteId,localidad,edad, image} = req.body;
 			const passwordHash = crypto.pbkdf2Sync(password, salt, 10000, 64, "sha512").toString("base64");
 			 const user = await Usuario.update({
 				nombre,
@@ -21,7 +21,8 @@ server.post('/', async(req, res, next) => {
 				cohorteId,
 				grupoId,
 				localidad,
-				edad
+				edad,
+				image
 			},
 			{where : {email}}
 			);

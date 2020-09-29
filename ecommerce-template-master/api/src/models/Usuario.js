@@ -54,6 +54,10 @@ module.exports = (sequelize) => {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValues: true
+        },
+        image:{
+            type: DataTypes.TEXT,
+            allowNull: true,
         }
     })
 }
