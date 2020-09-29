@@ -61,8 +61,8 @@ export default function Registrarse() {
         password: "",
         localidad: "",
         edad: "",
-        image: ""
     });
+    const [image, setImage] = useState();
 
 //     const uploadImg = async (e) => {
 //     const files = e.target.files;
@@ -110,7 +110,8 @@ export default function Registrarse() {
             password: field.password,
             localidad: field.localidad,
             edad: field.edad,
-            active: true
+            active: true,
+            image,
         }, { withCredentials: true })
             .then(res => {
                 const { status, message } = res.data; // Siempre vamos a mandar un status en register, para verificar que esta logueado (ok) o no (error).
@@ -230,7 +231,14 @@ export default function Registrarse() {
                             />
                             
                                 <p>Imagen de perfil: </p>
-                                <input type="file" name="imagen" />
+                                <input type="file" name="imagen" onChange={(e)=>{
+                                    const input = e.target;
+                                    const reader = new FileReader();
+                                    reader.onloadend = function(){
+                                         setImage(reader.result)
+                                    }
+                                    reader.readAsDataURL(input.files[0])
+                                }} />
                             
             	            
                             <Button
