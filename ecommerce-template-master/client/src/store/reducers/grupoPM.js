@@ -3,22 +3,30 @@ import {
 } from '../actions/grupoPM';
 const initialState = {
     gruposPM: [],
-    pm: []
+    pm: [],
+    pp: []
 };
 export const grupoPMReducer =  (state = initialState, action) => {
     switch(action.type){
         case GrupoPMActionsTypes.GET_GRUPO:
-            return{
+            return  {
                 ...state,
                 gruposPM: action.payload
             }
         case GrupoPMActionsTypes.SET_PM:
-            return{ 
+            return  { 
                ...state
             }
         case GrupoPMActionsTypes.PUT_GRUPO:
-            return state;
+            return  {
+                ...state
+            }
+            case GrupoPMActionsTypes.POST_PP:
+                return {
+            ...state 
+        }
         default:
             return state;
     }
+
 }

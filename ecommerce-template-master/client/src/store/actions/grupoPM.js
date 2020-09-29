@@ -3,7 +3,8 @@ import GrupoPm from '../../components/Admin/grupoPP/componentes/Pms';
 export const GrupoPMActionsTypes = {
     GET_GRUPO: "GET_GRUPO",
     SET_PM: "SET_PM",
-    PUT_GRUPO: "PUT_GRUPO"
+    PUT_GRUPO: "PUT_GRUPO",
+    POST_PP: "POST_PP"
 }
 export const getGrupo = (cohorteId) => {
     return dispatch => {
@@ -35,4 +36,19 @@ export const putGrupo = (values) => {
             .then(() => dispatch({type: GrupoPMActionsTypes.PUT_GRUPO}))
             .catch(err => console.log(err));
     }
+}
+
+
+export const createGrupoPp = (data) => {
+  return dispatch => {
+    return axios.post("http://localhost:3006/pair/random", {
+      grupoId:data.grupoId,
+      cohorteId: data.cohorteId
+    }).then((pair) => {
+      return dispatch ({
+        type: GrupoPMActionsTypes.POST_PP,
+        payload: pair.data
+      })
+    }).catch(err => console.log(err))
+  }
 }

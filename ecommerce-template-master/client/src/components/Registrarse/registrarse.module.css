@@ -1,8 +1,14 @@
-/* .color {
+.color {
     background-color: rgb(255, 255, 1);
     margin: auto;
 
-} */
+}
+
+.imagen{
+    border: solid 2px black;
+    width:200px;
+
+}
 
 .container{
     margin-bottom: 100px;
@@ -20,6 +26,7 @@
 }
 
 .margin{
-    margin-top: 10px;
-
+    margin: 0.5rem !important;
+    
 }
+
