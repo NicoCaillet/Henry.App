@@ -50,10 +50,9 @@ export default function TarjetaPP({ grupoPP }) {
                     </TableRow>
                   </AccordionSummary>
                   <AccordionDetails>
-<<<<<<< HEAD
                     <div>
                       <TableContainer component={Paper}>
-                        <Table className={classes3.table} aria-label="customized table">
+                        <Table className={classes.table} aria-label="customized table">
                           <TableHead>
                             <TableRow>
                               <StyledTableCell>Email</StyledTableCell>
@@ -61,7 +60,7 @@ export default function TarjetaPP({ grupoPP }) {
                               <StyledTableCell align="right">Rol</StyledTableCell>
                             </TableRow>
                           </TableHead>
-                          <TableBody onChange={(e) => handleGrupo(e, cohorteId, grupo.id)}>
+                          <TableBody >
                             {grupo.usuarios.map((datos) => (
                               <StyledTableRow key={datos.id} >
                                 <StyledTableCell component="th" scope="row">
@@ -77,28 +76,6 @@ export default function TarjetaPP({ grupoPP }) {
                         </Table>
                       </TableContainer>
                     </div>
-=======
-                    <TableContainer component={Paper}>
-                      <Table className={classes.table} aria-label="customized table">
-                        <TableHead>
-                          <TableRow>
-                            <StyledTableCell align="center">Alumnos</StyledTableCell>
-                            <StyledTableCell align="center">Rol</StyledTableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody >
-                          {grupoPP[0].usuarios.map((datos) => (
-                            <StyledTableRow key={datos.id} >
-                              <StyledTableCell align="center" component="th" scope="row">
-                                {datos.nombre}
-                              </StyledTableCell>
-                              <StyledTableCell align="center">{datos.rol}</StyledTableCell>
-                            </StyledTableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
->>>>>>> master
                   </AccordionDetails>
                 </Accordion>
               </div>
