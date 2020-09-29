@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import s from "./registrarse.css"
+import s from "./registrarse.module.css"
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -58,8 +58,35 @@ export default function Registrarse() {
         nombre: "",
         apellido: "",
         email: "",
-        password: ""
+        password: "",
+        localidad: "",
+        edad: "",
+        image: ""
     });
+
+//     const uploadImg = async (e) => {
+//     const files = e.target.files;
+//     var newImages = [];
+
+//     setImages(newImages);
+
+//   };
+
+//   const convertBase64 = (file) => {
+//     return new Promise((resolve, reject) => {
+//       const fileReader = new FileReader();
+//       fileReader.readAsDataURL(file);
+
+//       fileReader.onload = () => {
+//         resolve(fileReader.result);
+//       };
+
+//       fileReader.onerror = (error) => {
+//         reject(error);
+//       };
+//     });
+//   };
+
 
     const handleChange = function (e) {
         setField({
@@ -81,6 +108,8 @@ export default function Registrarse() {
             apellido: field.apellido,
             email: field.email,
             password: field.password,
+            localidad: field.localidad,
+            edad: field.edad,
             active: true
         }, { withCredentials: true })
             .then(res => {
@@ -100,7 +129,7 @@ export default function Registrarse() {
 
     return (
         <div>
-            <div className={s.container}>
+            <div >
 
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
@@ -121,6 +150,7 @@ export default function Registrarse() {
                                 label="Nombre"
                                 autoFocus
                                 onChange={handleChange}
+                                className={s.margin}
                             />
                             <TextField
                                 type="text"
@@ -132,6 +162,7 @@ export default function Registrarse() {
                                 label="Apellido"
                                 name="apellido"
                                 onChange={handleChange}
+                                className={s.margin}
                             />
                             <TextField
                                 type="email"
@@ -143,6 +174,7 @@ export default function Registrarse() {
                                 label="Email"
                                 name="email"
                                 onChange={handleChange}
+                                className={s.margin}
                             />
                             <TextField
                                 value={field.password}
@@ -155,6 +187,7 @@ export default function Registrarse() {
                                 id="password"
                                 autoComplete="current-password"
                                 onChange={handleChange}
+                                className={s.margin}
                             />
                             <TextField
                                 value={field.repassword}
@@ -167,9 +200,39 @@ export default function Registrarse() {
                                 id="repassword"
                                 autoComplete="current-password"
                                 onChange={handleChange}
+                                className={s.margin}
                             />
-
-
+                            <TextField
+                                type='text'
+                                value={field.localidad}
+                                name="localidad"
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="localidad"
+                                label="Localidad"
+                                autoFocus
+                                onChange={handleChange}
+                                className={s.margin}
+                            />
+                            <TextField
+                                type='text'
+                                value={field.edad}
+                                name="edad"
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="edad"
+                                label="Edad"
+                                autoFocus
+                                onChange={handleChange}
+                                className={s.margin}
+                            />
+                            
+                                <p>Imagen de perfil: </p>
+                                <input type="file" name="imagen" />
+                            
+            	            
                             <Button
                                 type="submit"
                                 fullWidth
@@ -194,4 +257,4 @@ export default function Registrarse() {
             </div>
         </div>
     )
-}
+}       

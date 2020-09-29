@@ -150,7 +150,7 @@ export default function CrudAlumnos() {
                   <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                     <CloseIcon />
                   </IconButton>
-                  <TarjetaPP grupoPP={gruposPPdePm} cerrar={() => handleClose()} />
+                  <TarjetaPP grupoPP={gruposPPdePm} grupoId={grupo.id} cohorteId={grupo.cohorteId} cerrar={() => handleClose()} />
                 </Dialog>
               </TableRow>
             ))}
