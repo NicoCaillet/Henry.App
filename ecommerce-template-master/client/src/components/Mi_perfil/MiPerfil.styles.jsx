@@ -39,4 +39,12 @@ export default makeStyles((theme) => ({
         padding: theme.spacing(2),
     },
     /////////
+    /*     root: {
+            '& > *': {
+                margin: theme.spacing(1),
+            },
+        }, */
+    input: {
+        display: 'none',
+    },
 }));

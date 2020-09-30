@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import s from "./registrarse.module.css"
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+
+import { Button, CssBaseline, TextField, FormHelperText } from '@material-ui/core';
+
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
+
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { IconButton } from '@material-ui/core';
 import imagen from "../../images/check.png";
 import axios from 'axios';
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -48,6 +46,15 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    root: {
+        '& > *': {
+            margin: theme.spacing(1),
+        },
+    },
+    input: {
+        display: 'none',
+    },
+
 }));
 export default function Registrarse() {
     const classes = useStyles();
@@ -64,28 +71,28 @@ export default function Registrarse() {
     });
     const [image, setImage] = useState();
 
-//     const uploadImg = async (e) => {
-//     const files = e.target.files;
-//     var newImages = [];
+    //     const uploadImg = async (e) => {
+    //     const files = e.target.files;
+    //     var newImages = [];
 
-//     setImages(newImages);
+    //     setImages(newImages);
 
-//   };
+    //   };
 
-//   const convertBase64 = (file) => {
-//     return new Promise((resolve, reject) => {
-//       const fileReader = new FileReader();
-//       fileReader.readAsDataURL(file);
+    //   const convertBase64 = (file) => {
+    //     return new Promise((resolve, reject) => {
+    //       const fileReader = new FileReader();
+    //       fileReader.readAsDataURL(file);
 
-//       fileReader.onload = () => {
-//         resolve(fileReader.result);
-//       };
+    //       fileReader.onload = () => {
+    //         resolve(fileReader.result);
+    //       };
 
-//       fileReader.onerror = (error) => {
-//         reject(error);
-//       };
-//     });
-//   };
+    //       fileReader.onerror = (error) => {
+    //         reject(error);
+    //       };
+    //     });
+    //   };
 
 
     const handleChange = function (e) {
@@ -141,6 +148,7 @@ export default function Registrarse() {
                     </Typography>
                         <form className={classes.form} noValidate onSubmit={submitUser}>
                             <TextField
+                                color='secondary'
                                 type='text'
                                 value={field.nombre}
                                 name="nombre"
@@ -154,6 +162,7 @@ export default function Registrarse() {
                                 className={s.margin}
                             />
                             <TextField
+                                color='secondary'
                                 type="text"
                                 variant="outlined"
                                 value={field.apellido}
@@ -166,6 +175,7 @@ export default function Registrarse() {
                                 className={s.margin}
                             />
                             <TextField
+                                color='secondary'
                                 type="email"
                                 value={field.email}
                                 variant="outlined"
@@ -178,6 +188,7 @@ export default function Registrarse() {
                                 className={s.margin}
                             />
                             <TextField
+                                color='secondary'
                                 value={field.password}
                                 variant="outlined"
                                 required
@@ -191,6 +202,7 @@ export default function Registrarse() {
                                 className={s.margin}
                             />
                             <TextField
+                                color='secondary'
                                 value={field.repassword}
                                 variant="outlined"
                                 required
@@ -204,6 +216,7 @@ export default function Registrarse() {
                                 className={s.margin}
                             />
                             <TextField
+                                color='secondary'
                                 type='text'
                                 value={field.localidad}
                                 name="localidad"
@@ -217,6 +230,7 @@ export default function Registrarse() {
                                 className={s.margin}
                             />
                             <TextField
+                                color='secondary'
                                 type='text'
                                 value={field.edad}
                                 name="edad"
@@ -225,22 +239,30 @@ export default function Registrarse() {
                                 fullWidth
                                 id="edad"
                                 label="Edad"
-                                autoFocus
                                 onChange={handleChange}
                                 className={s.margin}
                             />
-                            
-                                <p>Imagen de perfil: </p>
-                                <input type="file" name="imagen" onChange={(e)=>{
+
+                            <div className={classes.root}>
+                                <input accept="image/*" className={classes.input} name="imagen" id="icon-button-file" type="file" onChange={(e) => {
                                     const input = e.target;
                                     const reader = new FileReader();
-                                    reader.onloadend = function(){
-                                         setImage(reader.result)
+                                    reader.onloadend = function () {
+                                        setImage(reader.result)
                                     }
                                     reader.readAsDataURL(input.files[0])
+                                    { console.log(input.files[0]) }
                                 }} />
-                            
-            	            
+                                <label htmlFor="icon-button-file">
+                                    <div>
+                                        <IconButton color="secondary" aria-label="upload picture" component="span">
+                                            <AddAPhotoIcon />
+                                        </IconButton>
+                                        <Typography>Agregar foto de perfil</Typography>
+                                    </div>
+                                </label>
+                            </div>
+
                             <Button
                                 type="submit"
                                 fullWidth
@@ -252,8 +274,9 @@ export default function Registrarse() {
                     </Button>
                             <FormHelperText error={error}> {helperText} </FormHelperText>
                             <Link href="http://localhost:3000" variant="body2">
-                                ¿Ya tiene una cuenta? Ingresar
-              </Link>
+                                <Typography color='secondary'> ¿Ya tiene una cuenta? Ingresar </Typography>
+
+                            </Link>
                         </form>
                     </div>
                     <Box mt={8}>
