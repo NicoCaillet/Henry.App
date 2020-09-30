@@ -181,6 +181,21 @@ export default function MiPerfil(props) {
                                         <TextField onChange={handleSubmit} value={putUsuario.edad} label="Edad" name="edad" autoFocus margin="dense" type="text" color='secondary' fullWidth />
                                         <TextField onChange={handleSubmit} value={putUsuario.localidad} label="Localidad" name="localidad" autoFocus margin="dense" color='secondary' type="text" fullWidth />
                                         <TextField onChange={handleSubmit} value={putUsuario.email} label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                        <input accept="image/*" className={classes.input} name="imagen" id="icon-button-file" type="file" onChange={(e) => {
+                                    const input = e.target;
+                                    const reader = new FileReader();
+                                    reader.onloadend = function () {
+                                        setImage(reader.result)
+                                    }
+                                    reader.readAsDataURL(input.files[0])
+                                }} />
+                                <label htmlFor="icon-button-file">
+                                    {/*   <div> */}
+                                    <IconButton color="secondary" aria-label="upload picture" component="span">
+                                        <AddAPhotoIcon />
+                                    </IconButton>
+                                    {/*     </div> */}
+                                </label>
                                     </DialogContent>
                                     <DialogActions>
                                         <Button onClick={handleCloseEdit} color="secondary">
@@ -188,7 +203,7 @@ export default function MiPerfil(props) {
                                         </Button>
                                         <Button onClick={() => {
                                             handleCloseEdit();
-                                            dispatch(putUser(putUsuario));
+                                            dispatch(putUser({...putUsuario, image}));
                                         }} color="secondary">
                                             Modificar
                                     </Button>
