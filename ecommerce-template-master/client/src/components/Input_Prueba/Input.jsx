@@ -88,8 +88,8 @@ function Input(props) {
             <form className={classes.form} noValidate onChange={(e) => handleChange(e)}>
               <TextField
                 variant="outlined"
-                color='secondary'
                 margin="normal"
+                color='secondary'
                 required
                 fullWidth
                 id="email"

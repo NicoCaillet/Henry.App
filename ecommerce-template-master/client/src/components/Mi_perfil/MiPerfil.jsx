@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Popover, Grid, Container, Card, CardMedia, CardActions, CardHeader, Typography, Divider, IconButton } from '@material-ui/core';
 import { Slide, Dialog, DialogActions, DialogContent, DialogTitle, Button } from "@material-ui/core";
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import EditIcon from '@material-ui/icons/Edit';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -91,7 +92,7 @@ export default function MiPerfil(props) {
 
     const handleCloseEdit = () => {
         setOpenEdit(false);
-        
+
     };
 
     let handlePassChange = (e) => {
@@ -100,15 +101,15 @@ export default function MiPerfil(props) {
             [e.target.name]: e.target.value
         })
     }
-    const submitNewPass = async() =>{
+    const submitNewPass = async () => {
         await dispatch(rePass(pass));
         setOpenPass(false);
         await dispatch(logOut());
         history.replace("/");
     }
-    //// Habria que conectar con Axios
 
-    //
+    // Modificar Imagen
+    const [image, setImage] = useState();
 
 
     return (
@@ -193,6 +194,7 @@ export default function MiPerfil(props) {
                                     </Button>
                                     </DialogActions>
                                 </Dialog>
+
                                 <IconButton onClick={handleClickOpenPass} color='secondary' aria-label="cambiar password" >
                                     <VpnKeyIcon />
                                 </IconButton>
@@ -202,7 +204,7 @@ export default function MiPerfil(props) {
                                     <DialogContent>
                                         <TextField onChange={handlePassChange} value={pass.password} label="Contraseña" name="password" autoFocus margin="dense" type="password" color='secondary' fullWidth />
                                         <TextField onChange={handlePassChange} value={pass.newPass} id="password" label="Nueva contraseña" name="newPass" autoFocus margin="dense" type="password" color='secondary' fullWidth />
-                                        <TextField onChange={handlePassChange} value={pass.repassword}  id="repassword" label="Confirme su nueva contraseña" name="repassword" autoFocus margin="password" type="password" color='secondary' fullWidth />
+                                        <TextField onChange={handlePassChange} value={pass.repassword} id="repassword" label="Confirme su nueva contraseña" name="repassword" autoFocus margin="password" type="password" color='secondary' fullWidth />
                                     </DialogContent>
                                     <DialogActions>
                                         <Button onClick={handleClosePass} color="secondary">
@@ -213,6 +215,24 @@ export default function MiPerfil(props) {
                                     </Button>
                                     </DialogActions>
                                 </Dialog>
+
+                                {/*  <div className={classes.root}> */}
+                                <input accept="image/*" className={classes.input} name="imagen" id="icon-button-file" type="file" onChange={(e) => {
+                                    const input = e.target;
+                                    const reader = new FileReader();
+                                    reader.onloadend = function () {
+                                        setImage(reader.result)
+                                    }
+                                    reader.readAsDataURL(input.files[0])
+                                }} />
+                                <label htmlFor="icon-button-file">
+                                    {/*   <div> */}
+                                    <IconButton color="secondary" aria-label="upload picture" component="span">
+                                        <AddAPhotoIcon />
+                                    </IconButton>
+                                    {/*     </div> */}
+                                </label>
+                                {/*    </div> */}
 
                             </Card>
                         </div>
