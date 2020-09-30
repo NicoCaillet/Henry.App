@@ -29,11 +29,11 @@ function createPromise(model, value) {
   })
 }
 async function initial() {
-  await db.Feedback.sync({force: true});
-  await db.Nota.sync({force: true});
+  await db.Feedback.sync({ force: true });
+  await db.Nota.sync({ force: true });
   const promises = {};
   for (let model in init) {
-    await db[model].sync({force:true});
+    await db[model].sync({ force: true });
     promises[model] = init[model].map(e => {
       if (model === "Grupo") {
         e.nombre = `web_ft${e.cohorteId}_(nombre del pm)`;

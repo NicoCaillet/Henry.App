@@ -18,8 +18,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function Reviews({ calificado }) {
 
-    const dispatch = useDispatch()
-    const calificacion = useSelector((state) => state.feedBack.feedback);
+    const dispatch = useDispatch();
     //feedback----------------------------------------------------------------
     const userReview = useSelector((state) => state.user.user.id);
     const alCalificar = calificado;
@@ -58,7 +57,7 @@ export default function Reviews({ calificado }) {
 
     return (
         <div>
-            <IconButton variant="outlined" color="secondary" onClick={handleClickOpen}>
+            <IconButton size='small' variant="outlined" color="secondary" onClick={handleClickOpen}>
                 <RateReviewIcon />
             </IconButton>
             <Dialog
