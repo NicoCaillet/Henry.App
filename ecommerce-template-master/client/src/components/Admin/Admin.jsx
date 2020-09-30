@@ -5,7 +5,7 @@ import NuevoCohorte from "./nuevocohorte/nuevocohorte"
 import GrupoPP from "./grupoPP/grupoPP"
 import GrupoPM from "./grupoPM/grupoPM"
 import Contenedor from './usuarios/contenedortabla.jsx'
-
+import Notas from "../Admin/Notas/notas"
 
 //material ui
 import ReceiptIcon from "@material-ui/icons/Receipt";
@@ -38,9 +38,13 @@ export default function AdminPage() {
       case "Administración_De_Usuarios": 
         element = <Contenedor /> 
         break;
+      case "Notas": 
+        element = <Notas /> 
+        break;
       default:
         element = <h2>Entro al default</h2>;
         break;
+      
     }
     return (element);
   };
@@ -51,7 +55,7 @@ export default function AdminPage() {
       </Breadcrumbs>
       <div className={s.aside}>
         <h3> Menu </h3>
-       <Link to={`${match.url}/Cohortes`} className={s.Link}>
+        <Link to={`${match.url}/Cohortes`} className={s.Link}>
         <label htmlFor="Cohortes">
           <ReceiptIcon className={s.icon} />
           Administracion de cohortes
@@ -83,6 +87,20 @@ export default function AdminPage() {
           Administracion de alumnos
         </label>
         </Link>
+        <Link to={`${match.url}/Notas`} className={s.Link}>
+        <label htmlFor="Notas">
+          <ReceiptIcon className={s.icon} />
+          Administracion de notas
+        </label>
+        </Link>
+        <input
+          type="radio"
+          onChange={(e) => renderComponent(e)}
+          id="Notas"
+          name="menu"
+          value="categories"
+          className={s.obeja}
+        />
       </div>
       <Route  path={`${match.path}/:componentes`} render={({match}) => {
         return (<div className={s.main}>{renderComponent(match.params.componentes)}</div>);

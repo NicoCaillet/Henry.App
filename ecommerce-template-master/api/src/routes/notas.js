@@ -1,7 +1,7 @@
 const server = require("express").Router();
 const {Nota, Usuario} = require("../db.js");
 const {Op} = require("sequelize");
-
+//crea una nota
 server.post("/nueva", async (req, res, next) => {
     try{
            const nota = await Nota.create({
@@ -18,4 +18,23 @@ server.post("/nueva", async (req, res, next) => {
         next(err);
     }
 });
+server.get("/alumnos", async(req, res, next) =>{
+    try{
+        const notas = await Nota.findAll({
+            include:[
+                {
+                    model: Usuario,
+                    as: "evaluado"
+                },
+                {
+                    model: Usuario,
+                    as: "corrector"
+                },
+            ]
+        })
+        res.json(notas);
+    }catch(err){
+        next(err)
+    }
+})
 module.exports = server;

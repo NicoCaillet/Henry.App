@@ -6,7 +6,7 @@ import { alumnosReducer } from "./alumnos";
 import { clasesReducer } from './clases'
 import { grupoPMReducer } from './grupoPM';
 import { feedbackReducer } from './feedback'
-
+import { notasReducer } from './notas'
 export const rootReducer = combineReducers({
     user: userReducer,
     cohorte: cohorteReducer,
@@ -14,5 +14,6 @@ export const rootReducer = combineReducers({
     alumnos: alumnosReducer,
     clases: clasesReducer,
     grupoPM: grupoPMReducer,
-    feedBack: feedbackReducer
+    feedBack: feedbackReducer,
+    notas : notasReducer
 });

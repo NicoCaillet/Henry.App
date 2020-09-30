@@ -24,6 +24,7 @@ export default function AddAlumno({id}) {
     }, [id])
 
 
+
     return (
         <div className={s.container}>
             <Nav cohorteId={id} />

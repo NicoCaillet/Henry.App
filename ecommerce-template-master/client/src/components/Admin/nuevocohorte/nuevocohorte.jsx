@@ -13,6 +13,8 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+
+
 export default function NuevoCohorte(props) {
   
 const cohorte = useSelector((state) => state.cohorte.cohorte)
