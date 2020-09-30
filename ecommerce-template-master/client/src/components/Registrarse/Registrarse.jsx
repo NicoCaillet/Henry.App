@@ -16,7 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import imagen from "../../images/check.png";
 import axios from 'axios';
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -64,28 +64,28 @@ export default function Registrarse() {
     });
     const [image, setImage] = useState();
 
-//     const uploadImg = async (e) => {
-//     const files = e.target.files;
-//     var newImages = [];
+    //     const uploadImg = async (e) => {
+    //     const files = e.target.files;
+    //     var newImages = [];
 
-//     setImages(newImages);
+    //     setImages(newImages);
 
-//   };
+    //   };
 
-//   const convertBase64 = (file) => {
-//     return new Promise((resolve, reject) => {
-//       const fileReader = new FileReader();
-//       fileReader.readAsDataURL(file);
+    //   const convertBase64 = (file) => {
+    //     return new Promise((resolve, reject) => {
+    //       const fileReader = new FileReader();
+    //       fileReader.readAsDataURL(file);
 
-//       fileReader.onload = () => {
-//         resolve(fileReader.result);
-//       };
+    //       fileReader.onload = () => {
+    //         resolve(fileReader.result);
+    //       };
 
-//       fileReader.onerror = (error) => {
-//         reject(error);
-//       };
-//     });
-//   };
+    //       fileReader.onerror = (error) => {
+    //         reject(error);
+    //       };
+    //     });
+    //   };
 
 
     const handleChange = function (e) {
@@ -143,6 +143,7 @@ export default function Registrarse() {
                             <TextField
                                 type='text'
                                 value={field.nombre}
+                                color='secondary'
                                 name="nombre"
                                 variant="outlined"
                                 required
@@ -157,6 +158,7 @@ export default function Registrarse() {
                                 type="text"
                                 variant="outlined"
                                 value={field.apellido}
+                                color='secondary'
                                 required
                                 fullWidth
                                 id="lastName"
@@ -169,6 +171,7 @@ export default function Registrarse() {
                                 type="email"
                                 value={field.email}
                                 variant="outlined"
+                                color='secondary'
                                 required
                                 fullWidth
                                 id="email"
@@ -180,6 +183,7 @@ export default function Registrarse() {
                             <TextField
                                 value={field.password}
                                 variant="outlined"
+                                color='secondary'
                                 required
                                 fullWidth
                                 name="password"
@@ -193,6 +197,7 @@ export default function Registrarse() {
                             <TextField
                                 value={field.repassword}
                                 variant="outlined"
+                                color='secondary'
                                 required
                                 fullWidth
                                 name="repassword"
@@ -208,6 +213,7 @@ export default function Registrarse() {
                                 value={field.localidad}
                                 name="localidad"
                                 variant="outlined"
+                                color='secondary'
                                 required
                                 fullWidth
                                 id="localidad"
@@ -221,6 +227,7 @@ export default function Registrarse() {
                                 value={field.edad}
                                 name="edad"
                                 variant="outlined"
+                                color='secondary'
                                 required
                                 fullWidth
                                 id="edad"
@@ -229,18 +236,18 @@ export default function Registrarse() {
                                 onChange={handleChange}
                                 className={s.margin}
                             />
-                            
-                                <p>Imagen de perfil: </p>
-                                <input type="file" name="imagen" onChange={(e)=>{
-                                    const input = e.target;
-                                    const reader = new FileReader();
-                                    reader.onloadend = function(){
-                                         setImage(reader.result)
-                                    }
-                                    reader.readAsDataURL(input.files[0])
-                                }} />
-                            
-            	            
+
+                            <p>Imagen de perfil: </p>
+                            <input type="file" name="imagen" onChange={(e) => {
+                                const input = e.target;
+                                const reader = new FileReader();
+                                reader.onloadend = function () {
+                                    setImage(reader.result)
+                                }
+                                reader.readAsDataURL(input.files[0])
+                            }} />
+
+
                             <Button
                                 type="submit"
                                 fullWidth

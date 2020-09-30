@@ -18,7 +18,7 @@ import { useState } from 'react';
 import Axios from 'axios';
 import { connect } from 'react-redux'
 import { setUser } from '../../store/actions/user'
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom"
 
 function Copyright() {
   return (
@@ -60,54 +60,57 @@ function Input(props) {
   });
   const classes = useStyles();
 
-  const handleChange = (e)=>{
+  const handleChange = (e) => {
     setFields({
       ...fields,
       [e.target.id]: e.target.value
     });
   }
-  const handleInput = function(e){
+  const handleInput = function (e) {
     e.preventDefault();
-    Axios.post("http://localhost:3006/user/login", fields,{ withCredentials: true })
-      .then(res => {props.setUser(res.data.user)
-      redirect.replace("/home")
+    Axios.post("http://localhost:3006/user/login", fields, { withCredentials: true })
+      .then(res => {
+        props.setUser(res.data.user)
+        redirect.replace("/home")
       })
       .catch(err => console.log(err.response));
   }
   return (
     <div>
       <div className={s.container}>
-          <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-              <img src={imagen} />
-              <Typography component="h1" variant="h5">
-                Ingresar
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div className={classes.paper}>
+            <img src={imagen} />
+            <Typography component="h1" variant="h5">
+              Ingresar
                     </Typography>
-              <form className={classes.form} noValidate onChange={(e) => handleChange(e)}>
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  autoFocus
-                />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
-                    {/* <TextField
+            <form className={classes.form} noValidate onChange={(e) => handleChange(e)}>
+              <TextField
+                variant="outlined"
+                color='secondary'
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                color='secondary'
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              {/* <TextField
                     variant="outlined"
                     margin="normal"
                     required
@@ -118,24 +121,24 @@ function Input(props) {
                     id="password"
                     autoComplete="current-password"
                     /> */}
-          
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={s.amarillo + " " + classes.submit + " " + s.color}
-                        onClick={handleInput}
-                    > 
-                     Ingresar
+
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={s.amarillo + " " + classes.submit + " " + s.color}
+                onClick={handleInput}
+              >
+                Ingresar
                     </Button>
 
-              </form>
-            </div>
-            <Box mt={8}>
-              <Copyright />
-            </Box>
-          </Container>
+            </form>
+          </div>
+          <Box mt={8}>
+            <Copyright />
+          </Box>
+        </Container>
       </div>
     </div>
   )

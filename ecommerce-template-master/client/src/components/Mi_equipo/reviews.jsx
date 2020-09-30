@@ -7,7 +7,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import RateReviewIcon from '@material-ui/icons/RateReview';
-import { IconButton, TextField, Typography } from '@material-ui/core';
+import { IconButton, TextField, Typography, Box } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import { useSelector, useDispatch } from 'react-redux'
 import { postFeedback } from "../../store/actions/feedback"
@@ -70,20 +70,28 @@ export default function Reviews({ calificado }) {
             >
                 <DialogTitle id="alert-dialog-slide-title"> Califica a tu compañero</DialogTitle>
                 <DialogContent>
-                    <Typography> Social Skills <Rating
-                        name="social"
-                        value={value.social}
-                        onChange={(e) => {
-                            handleCalificacion(e)
-                        }}
-                    /></Typography>
-                    <Typography> Technical Skills <Rating
-                        name="skill"
-                        value={value.skill}
-                        onChange={(e) => {
-                            handleCalificacion(e)
-                        }}
-                    /></Typography>
+                    <Typography> Social Skills
+                    <Box component="fieldset" borderColor="transparent">
+                            <Rating
+                                name="social"
+                                value={value.social}
+                                onChange={(e) => {
+                                    handleCalificacion(e)
+                                }}
+                            />
+                        </Box>
+                    </Typography>
+                    <Typography> Technical Skills
+                    <Box component="fieldset" borderColor="transparent">
+                            <Rating
+                                name="skill"
+                                value={value.skill}
+                                onChange={(e) => {
+                                    handleCalificacion(e)
+                                }}
+                            />
+                        </Box>
+                    </Typography>
                     <TextField name='comentario' value={value.comentario} onChange={(e) => {
                         handleCalificacion(e)
                     }} label="Deja tu Comentario" autoFocus margin="dense" type="text" color='secondary' fullWidth />
