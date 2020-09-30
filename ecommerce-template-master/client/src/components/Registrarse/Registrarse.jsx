@@ -151,6 +151,7 @@ export default function Registrarse() {
                                 color='secondary'
                                 type='text'
                                 value={field.nombre}
+                                color='secondary'
                                 name="nombre"
                                 variant="outlined"
                                 required
@@ -166,6 +167,7 @@ export default function Registrarse() {
                                 type="text"
                                 variant="outlined"
                                 value={field.apellido}
+                                color='secondary'
                                 required
                                 fullWidth
                                 id="lastName"
@@ -179,6 +181,7 @@ export default function Registrarse() {
                                 type="email"
                                 value={field.email}
                                 variant="outlined"
+                                color='secondary'
                                 required
                                 fullWidth
                                 id="email"
@@ -191,6 +194,7 @@ export default function Registrarse() {
                                 color='secondary'
                                 value={field.password}
                                 variant="outlined"
+                                color='secondary'
                                 required
                                 fullWidth
                                 name="password"
@@ -205,6 +209,7 @@ export default function Registrarse() {
                                 color='secondary'
                                 value={field.repassword}
                                 variant="outlined"
+                                color='secondary'
                                 required
                                 fullWidth
                                 name="repassword"
@@ -221,6 +226,7 @@ export default function Registrarse() {
                                 value={field.localidad}
                                 name="localidad"
                                 variant="outlined"
+                                color='secondary'
                                 required
                                 fullWidth
                                 id="localidad"
@@ -235,6 +241,7 @@ export default function Registrarse() {
                                 value={field.edad}
                                 name="edad"
                                 variant="outlined"
+                                color='secondary'
                                 required
                                 fullWidth
                                 id="edad"

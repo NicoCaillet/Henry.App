@@ -17,19 +17,14 @@ export default function MiEquipo(props) {
   useEffect(() => {
     // Cuando se abra el componente, dispachar la accion que va a hacer el get para que traiga el pp del usuario logeado
     dispatch(getpp())
-    console.log("Tu vieja")
-  }, [])
-
-  console.log("props afuera: " + JSON.stringify(props))
-  console.log("PP: " + pp)
-
+  }, []);
 
   return (
     <div className={s.container}>
       <Nav />
       <Title />
       {pp && pp.map((student) => (
-        <Student student={student} />
+        <Student key={student.id} student={student} />
       ))}
 
 

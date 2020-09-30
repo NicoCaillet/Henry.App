@@ -221,7 +221,7 @@ module.exports = {
         {
             //id: 1,
             alumnos: 6,
-            cohorteId:1,
+            cohorteId: 1,
             grupoId: 1,
         },
         {
@@ -289,6 +289,28 @@ module.exports = {
             cohorteId: 1,
             grupoId: 1,
             pairId: 1,
+        },
+        {
+            nombre: "Alumno3",
+            apellido: "Henry3",
+            edad: 21,
+            rol: "alumno",
+            localidad: "cuba",
+            active: true,
+            password: "1234",
+            email: "alumno44@henry.com",
+            proceso: 1,
+        },
+        {
+            nombre: "Alumno4",
+            apellido: "Henry4",
+            edad: 41,
+            rol: "alumno",
+            localidad: "neuquen",
+            active: true,
+            password: "1234",
+            email: "alumno32@henry.com",
+            proceso: 1,
         }
     ],
 
