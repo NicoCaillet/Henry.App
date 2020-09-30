@@ -21,6 +21,7 @@ export default function GrupoPm(props) {
     }, [])
 
     //const [RenderTable, setRenderTable] = useState(0);
+ 
 
     const renderCohort = function (id) {
         history.push(match.url + "/" + id)
@@ -33,11 +34,11 @@ export default function GrupoPm(props) {
                 <Nav />
                 <Title />
                 {cohorte && cohorte.map((cohorte) => (
-                    <Cohorte cohorte={cohorte} render={() => renderCohort(cohorte.id)} />
+                    <Cohorte  cohorte={cohorte} render={() => renderCohort(cohorte.id)} />
                 ))}
             </div>
             {/* RenderTable > 0 && <AddAlumno id={RenderTable} /> */}
-            {console.log(`${match.path}/:id`)}
+            
             <Route exact path={`${match.path}/:id`} render={({match}) => <AddAlumno id={match.params.id} />}/>
         </div>
     );

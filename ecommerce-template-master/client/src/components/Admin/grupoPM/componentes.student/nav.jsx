@@ -10,6 +10,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import ListIcon from '@material-ui/icons/List';
 import axios from 'axios';
 import CrudAlumnos from './crudAlumno';
+import { getAlumnosid } from "../../../../store/actions/alumnos"
+import {useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   
@@ -30,6 +32,7 @@ export default function ButtonAppBar({ cohorteId }) {
   const [openEdit, setOpenEdit] = useState(false);
   const [putUsuario, setPutUsuario] = useState('')
   const [Emails, setEmails] = useState([]);
+  const dispatch = useDispatch();
   const regex = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/gi;
   const handleClickOpenEdit = () => {
     setOpenEdit(true);
@@ -39,14 +42,17 @@ export default function ButtonAppBar({ cohorteId }) {
   };
   const handleConfirm = () => {
     setOpenEdit(false);
-      axios.post('http://localhost:3006/alumnos/agregar',
+      return axios.post('http://localhost:3006/alumnos/agregar',
         {
           emails: putUsuario.emails.match(regex),
           cohorteId,
         }, { withCredencials: true })
-        .then(res => console.log(res))
+        .then( () => dispatch (getAlumnosid(cohorteId)))
         .catch(err => console.log(err))
+        
   };
+
+
   //handleSubmit
   const handleSubmit = (e) => {
     setPutUsuario({
@@ -84,7 +90,7 @@ export default function ButtonAppBar({ cohorteId }) {
               <TextField onChange={handleSubmit} value={putUsuario.emails} label="E-mails" name="emails" autoFocus margin="dense" type="text" color='secondary' 
               fullWidth
               multiline
-               />
+              />
               {putUsuario.emails && putUsuario.emails.match(regex) && putUsuario.emails.match(regex).map(email =>
                 <Chip label={email} color="primary" onDelete={() =>{
                   const newEmails = putUsuario.emails.replace(email, "");
