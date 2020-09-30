@@ -42,7 +42,7 @@ async function initial() {
         e.salt = crypto.randomBytes(64).toString("hex");
         e.password = crypto.pbkdf2Sync(e.password, e.salt, 10000, 64, "sha512").toString("base64");
       }
-      return createPromise(db[model], e);
+      createPromise(db[model], e);
     });
     await Promise.all(promises[model]);
   }

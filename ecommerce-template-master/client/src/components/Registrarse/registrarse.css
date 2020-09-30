@@ -1,8 +1,8 @@
-.color {
+/* .color {
     background-color: rgb(255, 255, 1);
     margin: auto;
 
-}
+} */
 
 .container{
     margin-bottom: 100px;
@@ -17,4 +17,9 @@
 .inputs{
     display: flex;
     justify-content: flex-start;
+}
+
+.margin{
+    margin-top: 10px;
+
 }

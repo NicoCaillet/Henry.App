@@ -35,6 +35,7 @@ server.post("/random", async(req, res, next) =>{
             usuario.pairId = rndPair;
             let indexPair = pairs.findIndex(pair => pair.id === rndPair);
             pairs[indexPair].alumnos++;
+            await pairs[indexPair].save();
             return await usuario.save();
         })
         const values = await Promise.all(usuarios);

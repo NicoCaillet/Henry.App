@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import cx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
-import { Accordion, AccordionSummary, AccordionDetails, TableContainer, Paper, CardHeader, CardContent, TableBody, TableCell, TableRow, TableHead, Table, Card } from '@material-ui/core';
+import {Button, Accordion, AccordionSummary, AccordionDetails, TableContainer, Paper, CardHeader, CardContent, TableBody, TableCell, TableRow, TableHead, Table, Card } from '@material-ui/core';
 import { useContainedCardHeaderStyles } from '@mui-treasury/styles/cardHeader/contained';
 import { useSoftRiseShadowStyles } from '@mui-treasury/styles/shadow/softRise';
 import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import useStyles from './tarjetaPP.styles'
-
+import {createGrupoPp} from "../../../../store/actions/grupoPM"
+import {useDispatch} from "react-redux"
+import {useParams} from "react-router-dom";
+import { getPPdePM } from '../../../../store/actions/pairprogramming';
 //tabla de alumnos Estilos-----------------------------------------------------
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -28,16 +31,33 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 
-export default function TarjetaPP({ grupoPP }) {
+export default function TarjetaPP({ grupoPP, grupoId, cohorteId }) {
   const classes = useStyles();
   const cardHeaderStyles = useContainedCardHeaderStyles();
   const cardShadowStyles = useSoftRiseShadowStyles({ inactive: true });
   const cardHeaderShadowStyles = useFadedShadowStyles();
+  const dispatch = useDispatch();
+  const {cohorte} = useParams(); 
+  
+  
+
+  const handleSubmit = () =>{
+    dispatch(createGrupoPp({cohorteId, grupoId})).then(()=>{
+      dispatch(getPPdePM(cohorteId, grupoId))
+    })
+  }
+  
+
+  
 
   return (
     <Card className={cx(classes.card, cardShadowStyles.root)} >
+      
       < CardHeader className={cardHeaderShadowStyles.root} classes={cardHeaderStyles} title={'Grupo PP'} subheader={'Cohorte'} />
       < CardContent className={classes.content} >
+      <Button variant = "contained" onClick = { () => handleSubmit()}>
+        Crear grupo Pair Programming
+      </Button>
         <Table>
           <TableBody>
             {grupoPP && grupoPP.map(grupo => (

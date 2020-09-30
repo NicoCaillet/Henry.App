@@ -126,7 +126,7 @@ export default function MiPerfil(props) {
                                         title={user.nombre + ' ' + user.apellido}
                                     />
                                     <CardMedia className={classes.media}
-                                        image={perfil.foto} /* MODIFICAR */
+                                        image={user.image} /* MODIFICAR */
                                     ////////
                                     >
                                     </CardMedia>

@@ -6,7 +6,7 @@ export const ModuloActionTypes = {
 
 export const getClases = (modulo) => {
     return (dispatch) => {
-        axios.get(`http://localhost:3006/clase/${modulo}`, { withCredentials: true }).then((res) => {
+        return axios.get(`http://localhost:3006/clase/${modulo}`, { withCredentials: true }).then((res) => {
             return dispatch({
                 type: ModuloActionTypes.SET_MODULO,
                 payload: res.data
