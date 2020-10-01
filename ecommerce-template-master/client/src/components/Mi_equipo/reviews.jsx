@@ -47,12 +47,14 @@ export default function Reviews({ calificado }) {
         setOpen(false)
     }
 
-    const handleCalificacion = (e) => {
+    const handleCalificacion = (e, arepa) => {
         e.preventDefault();
         setValue({
             ...value,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            [arepa]: e.target.value
         })
+
     }
 
     return (
@@ -60,6 +62,7 @@ export default function Reviews({ calificado }) {
             <IconButton size='small' variant="outlined" color="secondary" onClick={handleClickOpen}>
                 <RateReviewIcon />
             </IconButton>
+
             <Dialog
                 open={open}
                 TransitionComponent={Transition}
@@ -68,43 +71,46 @@ export default function Reviews({ calificado }) {
                 aria-labelledby="alert-dialog-slide-title"
                 aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle id="alert-dialog-slide-title"> Califica a tu compañero</DialogTitle>
-                <DialogContent>
-                    <Typography> Social Skills
+                <div style={{ width: '400px' }}>
+                    <DialogTitle id="alert-dialog-slide-title"> Califica a tu compañero</DialogTitle>
+                    <DialogContent>
+                        <Typography> Social Skills
                     <Box component="fieldset" borderColor="transparent">
-                            <Rating
-                                name="social"
-                                value={value.social}
-                                onChange={(e) => {
-                                    handleCalificacion(e)
-                                }}
-                            />
-                        </Box>
-                    </Typography>
-                    <Typography> Technical Skills
+                                <Rating
+                                    name={"social" + alCalificar}
+                                    value={value['social' + alCalificar]}
+                                    onChange={(e) => {
+                                        handleCalificacion(e, 'social')
+                                    }}
+                                />
+                            </Box>
+                        </Typography>
+                        <Typography> Technical Skills
                     <Box component="fieldset" borderColor="transparent">
-                            <Rating
-                                name="skill"
-                                value={value.skill}
-                                onChange={(e) => {
-                                    handleCalificacion(e)
-                                }}
-                            />
-                        </Box>
-                    </Typography>
-                    <TextField name='comentario' value={value.comentario} onChange={(e) => {
-                        handleCalificacion(e)
-                    }} label="Deja tu Comentario" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                <Rating
+                                    name={"skill" + alCalificar}
+                                    value={value['skill' + alCalificar]}
+                                    onChange={(e) => {
+                                        handleCalificacion(e, 'skill')
+                                    }}
+                                />
+                            </Box>
+                        </Typography>
+                        <TextField name={'comentario' + alCalificar} value={value['comentario' + alCalificar]} onChange={(e) => {
+                            handleCalificacion(e, 'comentario')
+                        }} label="Deja tu Comentario" autoFocus margin="dense" type="text" color='secondary' fullWidth />
 
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="secondary">
-                        Cerrar
+                    </DialogContent>
+
+                    <DialogActions>
+                        <Button onClick={handleClose} color="secondary">
+                            Cerrar
           </Button>
-                    <Button onClick={(e) => { submitFeedback(e) }} color="secondary">
-                        Aceptar
+                        <Button onClick={(e) => { submitFeedback(e) }} color="secondary">
+                            Aceptar
           </Button>
-                </DialogActions>
+                    </DialogActions>
+                </div>
             </Dialog>
         </div>
     );
