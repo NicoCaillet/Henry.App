@@ -164,7 +164,6 @@ export default function CrudAlumnos() {
                                 })()}
                                 <Button component={TableCell} onClick={() => handleClickOpen(alumno.id)}><Edit /></Button>
                                 <Dialog open={edit.open} onClose={handleClose} aria-labelledby="form-dialog-title">
-
                                     <DialogTitle id="form-dialog-title">Editar Alumno</DialogTitle>
                                     <DialogContent>
                                         <DialogContentText>
@@ -178,7 +177,6 @@ export default function CrudAlumnos() {
                                             style={{ width: 300 }}
                                             renderInput={(params) => <TextField {...params} color='secondary' autoFocus margin="dense" label="Cohortes" variant="outlined" />}
                                         />
-
                                         <Autocomplete
                                             id="grupoId"
                                             options={gruposPM}
