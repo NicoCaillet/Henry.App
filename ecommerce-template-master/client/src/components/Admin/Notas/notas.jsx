@@ -109,3 +109,6 @@ const renderCohort = function (id) {
       <div>Espere...</div>
     );
 }
+
+
+//a casa petes
