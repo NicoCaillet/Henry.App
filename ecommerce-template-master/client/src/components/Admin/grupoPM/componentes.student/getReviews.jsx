@@ -54,41 +54,49 @@ export default function GetFeedBack({ alumno }) {
                 aria-labelledby="alert-dialog-slide-title"
                 aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle id="alert-dialog-slide-title">Feedback PP</DialogTitle>
-                <DialogContent>
-                    <TableContainer component={Paper}>
-                        <Table aria-label="customized table">
-                            <TableBody >
-                                <TableRow >
-                                    <TableCell component="th" scope="row">
-                                        Social Skills {<Box component="fieldset" borderColor="transparent">
-                                            <Rating name="read-only" value={promedioSocial} readOnly />
-                                        </Box>}
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell component="th" scope="row">
-                                        Technical Skills {<Box component="fieldset" borderColor="transparent">
-                                            <Rating name="read-only" value={promedioSkills} readOnly />
-                                        </Box>}
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    Comentarios: {
-                                        CheckFeedBack.length !== 0 && CheckFeedBack.map(e => {
-                                            return (<Typography>{e.comentarios}</Typography>)
-                                        })
-                                    }
-                                </TableRow>
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="secondary">
-                        Cerrar
+                <div style={{ width: '500px' }}>
+                    <DialogTitle id="alert-dialog-slide-title">Feedback PP</DialogTitle>
+                    <DialogContent>
+                        <TableContainer component={Paper}>
+                            <Table aria-label="customized table">
+                                <TableBody >
+                                    <TableRow >
+                                        <TableCell component="th" scope="row">
+                                            Social Skills {<Box component="fieldset" borderColor="transparent">
+                                                <Rating name="read-only" value={promedioSocial} readOnly />
+                                            </Box>}
+                                        </TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell component="th" scope="row">
+                                            Technical Skills {<Box component="fieldset" borderColor="transparent">
+                                                <Rating name="read-only" value={promedioSkills} readOnly />
+                                            </Box>}
+                                        </TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        {
+                                            CheckFeedBack.length !== 0 && CheckFeedBack.map(e => {
+                                                return (
+                                                    <Box component="fieldset" borderColor="transparent">
+                                                        <Typography>
+                                                            <Box fontWeight="fontWeightBold" m={1}>Comentario:</Box>
+                                                            {e.comentarios}
+                                                        </Typography>
+                                                    </Box>)
+                                            })
+                                        }
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose} color="secondary">
+                            Cerrar
           </Button>
-                </DialogActions>
+                    </DialogActions>
+                </div>
             </Dialog>
         </div>
     );
