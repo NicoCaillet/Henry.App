@@ -14,6 +14,8 @@ export default function Modulo(props) {
     const { modulo } = useParams();
     const dispatch = useDispatch();
     const modulos = useSelector((state) => state.clases.clases);
+
+    console.log(modulo)
     useEffect(() => {
         dispatch(getClases(modulo))
     }, [modulo])

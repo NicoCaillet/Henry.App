@@ -18,7 +18,16 @@ export default function GetFeedBack({ alumno }) {
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch();
     const CheckFeedBack = useSelector((state) => state.feedBack.getFeed);
-    console.log(CheckFeedBack && CheckFeedBack)
+
+    const avgSocial = CheckFeedBack.reduce((t, r) => {
+        return t + r.social_skills
+    }, 0)
+    const promedioSocial = avgSocial && avgSocial / CheckFeedBack.length
+
+    const avgSkills = CheckFeedBack.reduce((t, r) => {
+        return t + r.tecnical_skills
+    }, 0)
+    const promedioSkills = avgSkills && avgSkills / CheckFeedBack.length
 
 
     const handleClickOpen = () => {
@@ -50,31 +59,27 @@ export default function GetFeedBack({ alumno }) {
                     <TableContainer component={Paper}>
                         <Table aria-label="customized table">
                             <TableBody >
-                                {CheckFeedBack && CheckFeedBack.map((e) => (
-                                    <div >
-                                        <TableRow >
-                                            <TableCell component="th" scope="row">
-                                                Social Skills {<Box component="fieldset" borderColor="transparent">
-                                                    <Rating name="read-only" value={e.social_skills} readOnly />
-                                                </Box>}
-                                            </TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell component="th" scope="row">
-                                                Technical Skills {<Box component="fieldset" borderColor="transparent">
-                                                    <Rating name="read-only" value={e.tecnical_skills} readOnly />
-                                                </Box>}
-                                            </TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell component="th" scope="row">
-                                                Comentarios: {
-                                                    <Typography>{e.comentarios}</Typography>
-                                                }
-                                            </TableCell>
-                                        </TableRow>
-                                    </div>
-                                ))}
+                                <TableRow >
+                                    <TableCell component="th" scope="row">
+                                        Social Skills {<Box component="fieldset" borderColor="transparent">
+                                            <Rating name="read-only" value={promedioSocial} readOnly />
+                                        </Box>}
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell component="th" scope="row">
+                                        Technical Skills {<Box component="fieldset" borderColor="transparent">
+                                            <Rating name="read-only" value={promedioSkills} readOnly />
+                                        </Box>}
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    Comentarios: {
+                                        CheckFeedBack.length !== 0 && CheckFeedBack.map(e => {
+                                            return (<Typography>{e.comentarios}</Typography>)
+                                        })
+                                    }
+                                </TableRow>
                             </TableBody>
                         </Table>
                     </TableContainer>

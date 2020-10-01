@@ -18,16 +18,16 @@ import {
 
 // SETCOHORTE ES LA ACCION 
 
-export default function AddPM({onClose, cohorteid}) {
-  
-const cohorte = useSelector((state) => state.cohorte.cohorte)
-  
-  const [cohorteA, setCohorteA] = useState({cohorte})
+export default function AddPM({ onClose, cohorteid }) {
+
+  const cohorte = useSelector((state) => state.cohorte.cohorte)
+
+  const [cohorteA, setCohorteA] = useState({ cohorte })
   const dispatch = useDispatch()
   const handleDateChange = (date) => {
     setCohorteA({
       ...cohorteA,
-      "fecha":date
+      "fecha": date
     })
   }
   const handleInputChange = (e) => {
@@ -36,19 +36,19 @@ const cohorte = useSelector((state) => state.cohorte.cohorte)
       [e.target.name]: e.target.value
     });
   }
-  const handleSubmit = () =>{
-    dispatch(setPm(cohorteA.nombre, cohorteid)).then(()=>{
+  const handleSubmit = () => {
+    dispatch(setPm(cohorteA.nombre, cohorteid)).then(() => {
       dispatch(getGrupo(cohorteid))
     })
   }
   return (
     <div className={s.admin} >
       <div className={s.aside}>
-      <span> 
-        <h3> Agregar nuevo PM</h3> 
-        
-      </span>
-        
+        <span>
+          <h3> Agregar nuevo PM</h3>
+
+        </span>
+
         <div>
           <TextField
             variant="outlined"
@@ -60,29 +60,30 @@ const cohorte = useSelector((state) => state.cohorte.cohorte)
             name="nombre"
             value={cohorteA.nombre}
             onChange={handleInputChange}
+            color='secondary'
             autoFocus />
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            color="primary" 
+            color="primary"
 
             onClick={handleSubmit}
 
-            >
-            Agregar 
+          >
+            Agregar
           </Button>
           <div className={s.boton}>
             <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary" 
-                onClick={onClose}
-                >
-                Cancelar
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={onClose}
+            >
+              Cancelar
             </Button>
-           </div>
+          </div>
 
         </div>
       </div>
