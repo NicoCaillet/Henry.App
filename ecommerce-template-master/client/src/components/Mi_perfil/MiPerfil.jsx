@@ -185,7 +185,9 @@ export default function MiPerfil(props) {
                                             <div>
                                                 <IconButton color="secondary" aria-label="upload picture" component="span">
                                                     <AddAPhotoIcon />
+                                                    <div></div>
                                                 </IconButton>
+                                                <Typography> Modificar foto de perfil</Typography>
                                             </div>
                                         </label>
                                     </DialogContent>
