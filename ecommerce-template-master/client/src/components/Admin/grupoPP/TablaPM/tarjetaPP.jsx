@@ -44,8 +44,11 @@ export default function TarjetaPP({ grupoPP, grupoId, cohorteId }) {
   }, [])
 
   const handleSubmit = () => {
-    dispatch(createGrupoPp({ cohorteId, grupoId }))
-  }
+    dispatch(createGrupoPp({cohorteId, grupoId})).then(()=>{
+      dispatch(getPPdePM(cohorteId, grupoId))
+  })
+}
+
 
 
 

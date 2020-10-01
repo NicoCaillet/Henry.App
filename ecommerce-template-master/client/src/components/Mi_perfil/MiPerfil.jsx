@@ -122,8 +122,8 @@ export default function MiPerfil(props) {
                             <Grid xs={10} sm={10} md={7} lg={5}>
                                 <Card className={classes.card}>
                                     <CardHeader
-                                        action={<IconButton aria-label="settings">
-                                            <MoreVertIcon /></IconButton>}
+                                        /*    action={<IconButton aria-label="settings">
+                                               <MoreVertIcon /></IconButton>} */
                                         title={user.nombre + ' ' + user.apellido}
                                     />
                                     <CardMedia className={classes.media}
@@ -188,7 +188,7 @@ export default function MiPerfil(props) {
                                         </Button>
                                         <Button onClick={() => {
                                             handleCloseEdit();
-                                            dispatch(putUser(putUsuario));
+                                            dispatch(putUser({ ...putUsuario, image }));
                                         }} color="secondary">
                                             Modificar
                                     </Button>
@@ -216,23 +216,23 @@ export default function MiPerfil(props) {
                                     </DialogActions>
                                 </Dialog>
 
-                                {/*  <div className={classes.root}> */}
-                                <input accept="image/*" className={classes.input} name="imagen" id="icon-button-file" type="file" onChange={(e) => {
-                                    const input = e.target;
-                                    const reader = new FileReader();
-                                    reader.onloadend = function () {
-                                        setImage(reader.result)
-                                    }
-                                    reader.readAsDataURL(input.files[0])
-                                }} />
-                                <label htmlFor="icon-button-file">
-                                    {/*   <div> */}
-                                    <IconButton color="secondary" aria-label="upload picture" component="span">
-                                        <AddAPhotoIcon />
-                                    </IconButton>
-                                    {/*     </div> */}
-                                </label>
-                                {/*    </div> */}
+                                {/*          <div className={classes.root}>
+                                    <input accept="image/*" className={classes.input} name="imagen" id="icon-button-file" type="file" onChange={(e) => {
+                                        const input = e.target;
+                                        const reader = new FileReader();
+                                        reader.onloadend = function () {
+                                            setImage(reader.result)
+                                        }
+                                        reader.readAsDataURL(input.files[0])
+                                    }} />
+                                    <label htmlFor="icon-button-file">
+                                        <div>
+                                            <IconButton color="secondary" aria-label="upload picture" component="span">
+                                                <AddAPhotoIcon />
+                                            </IconButton>
+                                        </div>
+                                    </label>
+                                </div> */}
 
                             </Card>
                         </div>
