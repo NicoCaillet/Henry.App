@@ -89,7 +89,7 @@ server.put('/:id/rol', (req, res, next) => {
 //actualiza informacion del usuario
 server.put('/update/:id', (req, res) => {
 	var newEmail = req.body.email;
-	var {edad,localidad,nombre, apellido} = req.body;
+	var {edad,localidad,nombre, apellido, image} = req.body;
 	console.log(req.body);
 	Usuario.findOne({
 		where: {
@@ -103,6 +103,7 @@ server.put('/update/:id', (req, res) => {
 				email: newEmail,
 				localidad: localidad,
 				edad: edad,
+				image
 			});
 			res.status(200).send(user);
 		})

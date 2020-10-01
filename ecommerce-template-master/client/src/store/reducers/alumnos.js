@@ -3,7 +3,8 @@ import { alumnosActionTypes } from '../actions/alumnos.js';
 
 const initialState = {
     alumnos_cohorte: [],
-    alumnos: []
+    alumnos: [],
+    notas: []
 };
 
 export const alumnosReducer = (state = initialState, action) => {
@@ -31,6 +32,11 @@ export const alumnosReducer = (state = initialState, action) => {
                         return {
                             ...state,
                             alumnos:action.payload
+                        }
+                    case alumnosActionTypes.GET_NOTAS:
+                        return {
+                            ...state,
+                            notas: action.payload
                         }
         
         default:

@@ -15,7 +15,6 @@ export const notasReducer = (state = initialState, action) => {
         case NotasActionTypes.POST_NOTA:
             return {
                 ...state,
-                notas:action.payload
             }
         default:
             return state

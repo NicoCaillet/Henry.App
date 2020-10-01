@@ -24,7 +24,6 @@ export const postNota = (data) => {
         ).then((res) => {
             dispatch({
                 type: NotasActionTypes.POST_NOTA,
-                payload: res.data
             })
         }).catch(err => console.log(err))
     }
