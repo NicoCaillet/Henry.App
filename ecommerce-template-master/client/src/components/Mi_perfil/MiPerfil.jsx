@@ -2,20 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Popover, Grid, Container, Card, CardMedia, CardActions, CardHeader, Typography, Divider, IconButton } from '@material-ui/core';
 import { Slide, Dialog, DialogActions, DialogContent, DialogTitle, Button } from "@material-ui/core";
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import EditIcon from '@material-ui/icons/Edit';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import useStyles from './MiPerfil.styles';
 import Trayectoria from './Trayectoria'
 import Axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
 import { putUser, rePass, logOut } from "../../store/actions/user"
 import { useHistory } from 'react-router-dom';
-// Hardcodeo de la foto
-const perfil = {
-    foto: 'https://www.soyhenry.com/static/MANU-800a7fffdc31e8be6dddc7a9b573f5f9.png',
-}
 
 
 // Funcion para el efecto de slide en el dialogo
@@ -122,13 +117,10 @@ export default function MiPerfil(props) {
                             <Grid xs={10} sm={10} md={7} lg={5}>
                                 <Card className={classes.card}>
                                     <CardHeader
-                                        /*    action={<IconButton aria-label="settings">
-                                               <MoreVertIcon /></IconButton>} */
                                         title={user.nombre + ' ' + user.apellido}
                                     />
                                     <CardMedia className={classes.media}
-                                        image={user.image} /* MODIFICAR */
-                                    ////////
+                                        image={user.image}
                                     >
                                     </CardMedia>
                                     <CardActions disableSpacing>
@@ -181,6 +173,21 @@ export default function MiPerfil(props) {
                                         <TextField onChange={handleSubmit} value={putUsuario.edad} label="Edad" name="edad" autoFocus margin="dense" type="text" color='secondary' fullWidth />
                                         <TextField onChange={handleSubmit} value={putUsuario.localidad} label="Localidad" name="localidad" autoFocus margin="dense" color='secondary' type="text" fullWidth />
                                         <TextField onChange={handleSubmit} value={putUsuario.email} label="Email" name="email" autoFocus margin="dense" type="text" color='secondary' fullWidth />
+                                        <input accept="image/*" className={classes.input} name="imagen" id="icon-button-file" type="file" onChange={(e) => {
+                                            const input = e.target;
+                                            const reader = new FileReader();
+                                            reader.onloadend = function () {
+                                                setImage(reader.result)
+                                            }
+                                            reader.readAsDataURL(input.files[0])
+                                        }} />
+                                        <label htmlFor="icon-button-file">
+                                            <div>
+                                                <IconButton color="secondary" aria-label="upload picture" component="span">
+                                                    <AddAPhotoIcon />
+                                                </IconButton>
+                                            </div>
+                                        </label>
                                     </DialogContent>
                                     <DialogActions>
                                         <Button onClick={handleCloseEdit} color="secondary">
@@ -189,7 +196,7 @@ export default function MiPerfil(props) {
                                         <Button onClick={() => {
                                             handleCloseEdit();
 
-                                            dispatch(putUser({...putUsuario, image: image}));
+                                            dispatch(putUser({ ...putUsuario, image: image }));
 
                                         }} color="secondary">
                                             Modificar
