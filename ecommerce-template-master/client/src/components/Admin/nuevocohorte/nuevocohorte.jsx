@@ -16,15 +16,15 @@ import {
 
 
 export default function NuevoCohorte(props) {
-  
-const cohorte = useSelector((state) => state.cohorte.cohorte)
-  
-  const [cohorteA, setCohorteA] = useState({cohorte})
+
+  const cohorte = useSelector((state) => state.cohorte.cohorte)
+
+  const [cohorteA, setCohorteA] = useState({ cohorte })
   const dispatch = useDispatch()
   const handleDateChange = (date) => {
     setCohorteA({
       ...cohorteA,
-      "fecha":date
+      "fecha": date
     })
   }
   const handleInputChange = (e) => {
@@ -39,26 +39,29 @@ const cohorte = useSelector((state) => state.cohorte.cohorte)
       <div className={s.aside}>
         <h3> Crear nuevo cohorte</h3>
         <div>
-        <MuiPickersUtilsProvider locale={es} utils={DateFnsUtils}>
-      <Grid container justify="space-around">
-        <KeyboardDatePicker
-          margin="normal"
-          name="name"
-          label="Fecha de inicio"
-          format="dd/M/yyyy"
-          inputVariant="outlined"
-          variant="dialog"
-          orientation="portrait"
-          invalidDateMessage="Formato invalido"
-          value={cohorteA["fecha"]}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
-        />
-      </Grid>
-    </MuiPickersUtilsProvider>
+          <MuiPickersUtilsProvider locale={es} utils={DateFnsUtils}>
+            <Grid container justify="space-around">
+              <KeyboardDatePicker
+                margin="normal"
+                name="name"
+                color='secondary'
+                label="Fecha de inicio"
+                format="dd/M/yyyy"
+                inputVariant="outlined"
+                variant="dialog"
+                orientation="portrait"
+                invalidDateMessage="Formato invalido"
+                value={cohorteA["fecha"]}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+              />
+            </Grid>
+          </MuiPickersUtilsProvider>
+
           <TextField
+            color='secondary'
             variant="outlined"
             margin="normal"
             required
@@ -70,8 +73,6 @@ const cohorte = useSelector((state) => state.cohorte.cohorte)
             onChange={handleInputChange}
             autoFocus />
 
-            
-
           <Button
             type="submit"
             fullWidth
@@ -80,7 +81,6 @@ const cohorte = useSelector((state) => state.cohorte.cohorte)
             onClick={() => dispatch(setCohorte(cohorteA))}>
             Agregar cohorte
           </Button>
-
 
         </div>
       </div>
