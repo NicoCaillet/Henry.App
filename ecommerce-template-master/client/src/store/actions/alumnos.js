@@ -5,7 +5,8 @@ export const alumnosActionTypes = {
   GET_ALUMNOS_COHORTE: "GET_ALUMNOS_COHORTE",
   PUT_USER_GRUPO: "PUT_USER_GRUPO",
   PUT_USER_COHORTE: "PUT_USER_COHORTE",
-  PUT_USER_PP: "PUT_USER_PP"
+  PUT_USER_PP: "PUT_USER_PP",
+  GET_NOTA: "GET_NOTA"
 }
 
   export const getAlumnosid = (id) => {
@@ -60,6 +61,16 @@ export const putUsuarioGrupo = ({usuarioId, grupoId}) => {
       }, {withCredentials: true})
       .then((res) => dispatch ({type:alumnosActionTypes.PUT_USER_PP, payload:res.data}))
       .catch(err => console.log(err))
+    }
+  }
+
+  //trae alumnos con notas
+
+  export const getNotasPosta = () => {
+    return dispatch => {
+      return axios.get ("http://localhost:3006/alumnos/notas", {withCredentials: true}
+      ).then((res) =>dispatch({type: alumnosActionTypes.GET_NOTA, payload: res.data})
+        ).catch(err => console.log(err))
     }
   }
 

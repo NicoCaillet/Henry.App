@@ -19,8 +19,7 @@ export const dropUser =  (id) => {
             .then(() => dispatch({ type: UserActionTypes.DROP_USER}))
     }
 }
-export const putUser = ({nombre, apellido, email, localidad, edad, id}) => {
-    
+export const putUser = ({nombre, apellido, email, localidad, edad, id, image}) => {
     return (dispatch) => {
     axios
         .put(`http://localhost:3006/user/update/${id}`, {
@@ -28,7 +27,8 @@ export const putUser = ({nombre, apellido, email, localidad, edad, id}) => {
             apellido: apellido,
             email: email,
             localidad: localidad,
-            edad: edad
+            edad: edad,
+            image: image
         }, {withCredentials:true})
         .then(res => {
          dispatch({

@@ -203,7 +203,7 @@ export default function MiPerfil(props) {
                                         </Button>
                                         <Button onClick={() => {
                                             handleCloseEdit();
-                                            dispatch(putUser({...putUsuario, image}));
+                                            dispatch(putUser({...putUsuario, image: image}));
                                         }} color="secondary">
                                             Modificar
                                     </Button>
@@ -230,25 +230,6 @@ export default function MiPerfil(props) {
                                     </Button>
                                     </DialogActions>
                                 </Dialog>
-
-                                {/*  <div className={classes.root}> */}
-                                <input accept="image/*" className={classes.input} name="imagen" id="icon-button-file" type="file" onChange={(e) => {
-                                    const input = e.target;
-                                    const reader = new FileReader();
-                                    reader.onloadend = function () {
-                                        setImage(reader.result)
-                                    }
-                                    reader.readAsDataURL(input.files[0])
-                                }} />
-                                <label htmlFor="icon-button-file">
-                                    {/*   <div> */}
-                                    <IconButton color="secondary" aria-label="upload picture" component="span">
-                                        <AddAPhotoIcon />
-                                    </IconButton>
-                                    {/*     </div> */}
-                                </label>
-                                {/*    </div> */}
-
                             </Card>
                         </div>
                     </Grid>

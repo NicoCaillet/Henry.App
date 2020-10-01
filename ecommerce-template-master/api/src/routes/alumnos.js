@@ -1,6 +1,6 @@
 const server = require("express").Router();
 const {Usuario, Cohorte, Grupo} = require("../db");
-const {Op} = require("sequelize");
+const {Op, literal} = require("sequelize");
 var nodemailer = require('nodemailer');
 const {USER, PASS} = process.env;
 //get de todos los alumnos
@@ -57,6 +57,21 @@ server.put("/editar", (req, res, next) =>{
 return usuario.save()
 }).then(usuario => res.json(usuario))
     .catch(err => next(err));
+})
+server.get("/notas" , (req, res, next) => {
+    Usuario.findAll({
+        attributes:[
+            "id",
+            "nombre",
+            "apellido",
+            [literal(`(SELECT nota FROM nota WHERE modulo='M1' AND "evaluadoId"=usuario.id)`),"M1"],
+            [literal(`(SELECT nota FROM nota WHERE modulo='M2' AND "evaluadoId"=usuario.id)`),"M2"],
+            [literal(`(SELECT nota FROM nota WHERE modulo='M3' AND "evaluadoId"=usuario.id)`),"M3"],
+            [literal(`(SELECT nota FROM nota WHERE modulo='M4' AND "evaluadoId"=usuario.id)`),"M4"],
+        ]
+    })
+        .then(usuarios => res.json(usuarios))
+        .catch(err => next(err))
 })
 //actualiza el cohorte de un alumno
 /* server.put("/cohorte/agregar", (req, res, next) => {
