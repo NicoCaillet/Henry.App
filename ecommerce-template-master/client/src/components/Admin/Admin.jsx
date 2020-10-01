@@ -5,7 +5,7 @@ import NuevoCohorte from "./nuevocohorte/nuevocohorte"
 import GrupoPP from "./grupoPP/grupoPP"
 import GrupoPM from "./grupoPM/grupoPM"
 import Contenedor from './usuarios/contenedortabla.jsx'
-import Notas from "../Admin/Notas/notas"
+import Notas from "./Notas/notas"
 
 //material ui
 import ReceiptIcon from "@material-ui/icons/Receipt";

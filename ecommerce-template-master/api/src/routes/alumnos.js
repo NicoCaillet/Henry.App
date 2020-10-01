@@ -7,7 +7,7 @@ const {USER, PASS} = process.env;
 server.get("/", (req, res, next) =>{
     Usuario.findAll({
         attributes:{
-            exclude:["password", "provider", "providerId", "salt", "rol", "createdAt", "updatedAt", "pairId" ]
+            exclude:["password", "provider", "providerId", "salt", "rol", "createdAt", "updatedAt", "pairId","image" ]
         },
         where:{
             rol: "alumno"
