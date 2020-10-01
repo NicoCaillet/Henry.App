@@ -175,7 +175,7 @@ export default function CrudAlumnos() {
                                             getOptionLabel={(option) => option.nombre}
                                             onChange={handleCohorte}
                                             style={{ width: 300 }}
-                                            renderInput={(params) => <TextField {...params} label="Cohortes" variant="outlined" />}
+                                            renderInput={(params) => <TextField {...params} color='secondary' autoFocus margin="dense" label="Cohortes" variant="outlined" />}
                                         />
                                         <Autocomplete
                                             id="grupoId"
@@ -183,14 +183,14 @@ export default function CrudAlumnos() {
                                             getOptionLabel={(option) => option.nombre}
                                             onChange={handleGrupoPM}
                                             style={{ width: 300 }}
-                                            renderInput={(params) => <TextField {...params} label="Grupo PM" variant="outlined" />}
+                                            renderInput={(params) => <TextField {...params} color='secondary' autoFocus margin="dense" label="Grupo PM" variant="outlined" />}
                                         />
                                     </DialogContent>
                                     <DialogActions>
-                                        <Button onClick={handleClose} color="primary">
+                                        <Button onClick={handleClose} color="secondary">
                                             Cancelar
                             </Button>
-                                        <Button onClick={() => { handleEdit(); handleClose() }} color="primary">
+                                        <Button onClick={() => { handleEdit(); handleClose() }} color="secondary">
                                             Aceptar
                             </Button>
                                     </DialogActions>
@@ -211,10 +211,10 @@ export default function CrudAlumnos() {
                                 </DialogContentText>
                                     </DialogContent>
                                     <DialogActions>
-                                        <Button onClick={handleClosed} color="primary">
+                                        <Button onClick={handleClosed} color="secondary">
                                             Cancelar
                                 </Button>
-                                        <Button onClick={() => { handleDelete(dropped.alumnoId); handleClosed() }} color="primary">
+                                        <Button onClick={() => { handleDelete(dropped.alumnoId); handleClosed() }} color="secondary">
                                             Aceptar
                                 </Button>
                                     </DialogActions>
